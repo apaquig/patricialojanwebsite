@@ -1,0 +1,123 @@
+---
+interface Props {
+  lang?: 'es' | 'en' | 'pt';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const texts = {
+  es: {
+    label: "Contactar a Patricia Lojan por WhatsApp",
+    tooltip: "¿Cómo podemos ayudarte?"
+  },
+  en: {
+    label: "Contact Patricia Lojan via WhatsApp",
+    tooltip: "How can we help you?"
+  },
+  pt: {
+    label: "Contatar Patricia Lojan pelo WhatsApp",
+    tooltip: "Como podemos ajudar você?"
+  }
+};
+
+const t = texts[lang] || texts.es;
+---
+
+<a 
+  href="https://wa.me/19738203353" 
+  class="whatsapp-floating-button" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  aria-label={t.label}
+>
+  <span class="whatsapp-tooltip">{t.tooltip}</span>
+  <svg class="whatsapp-icon" viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+    <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.333 4.982L2 22l5.202-1.362a9.927 9.927 0 0 0 4.81 1.238h.005c5.507 0 9.99-4.478 9.99-9.984C22.007 6.478 17.518 2 12.012 2zm6.09 14.415c-.25.703-1.47 1.28-2.01 1.37-.48.08-.94.09-2.93-.73a11.83 11.83 0 0 1-5.11-4.49c-.77-1.04-1.23-2.26-1.23-3.51 0-1.42.75-2.11 1.02-2.38.21-.21.46-.26.65-.26h.46c.15 0 .35.01.5.38.17.41.6 1.48.65 1.58.05.11.09.23.01.38-.08.15-.15.25-.26.38-.11.13-.23.29-.33.39-.11.11-.23.23-.1.46.26.46.86 1.47 1.63 2.15.99.88 1.83 1.15 2.09 1.28.26.13.41.11.56-.05.15-.16.65-.75.82-1.01.17-.26.35-.22.59-.13.24.09 1.54.73 1.8.86.26.13.43.2.5.31.06.11.06.66-.19 1.36z"/>
+  </svg>
+</a>
+
+<style>
+  .whatsapp-floating-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    cursor: pointer;
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+    animation: pulse 2s infinite;
+    text-decoration: none;
+  }
+
+  .whatsapp-floating-button:hover {
+    background-color: #128C7E;
+    transform: scale(1.1);
+  }
+
+  .whatsapp-icon {
+    display: block;
+  }
+
+  /* Tooltip on Hover */
+  .whatsapp-tooltip {
+    position: absolute;
+    right: 75px;
+    background: var(--bg-dark);
+    color: var(--text-white);
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-md);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+    pointer-events: none;
+    font-family: var(--font-family-body);
+  }
+
+  .whatsapp-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -6px;
+    transform: translateY(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: var(--bg-dark);
+  }
+
+  .whatsapp-floating-button:hover .whatsapp-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 767px) {
+    .whatsapp-floating-button {
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+    }
+    
+    .whatsapp-floating-button svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .whatsapp-tooltip {
+      display: none; /* Hide tooltips on mobile to keep layout clean */
+    }
+  }
+</style>

@@ -1,0 +1,168 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { translations } from '../data/translations.js';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  canonicalUrl?: string;
+  lang?: 'es' | 'en' | 'pt';
+}
+
+const { lang = 'es' } = Astro.props;
+const t = translations[lang] || translations.es;
+
+const { 
+  title = t.meta.defaultTitle, 
+  description = t.meta.defaultDesc,
+  keywords = t.meta.keywords,
+  image = "/assets/images/patricia-lojan.jpg", // Default image path
+  canonicalUrl
+} = Astro.props;
+
+const skipLinkTexts = {
+  es: "Saltar al contenido",
+  en: "Skip to content",
+  pt: "Pular para o conteúdo"
+};
+const skipLinkText = skipLinkTexts[lang] || skipLinkTexts.es;
+
+const siteUrl = "https://enterprisescapital.com"; // Placeholder production domain
+const path = Astro.url.pathname;
+const cleanPath = path.replace(/^\/(es|en|pt)/, '');
+const currentUrl = canonicalUrl || siteUrl + path;
+
+const schemaAlternateNames = {
+  es: "Patricia Lojan - Estratega Financiera y Notaría Pública",
+  en: "Patricia Lojan - Financial Strategist & Public Notary",
+  pt: "Patricia Lojan - Estrategista Financeira e Notária Pública"
+};
+
+const schemaDescriptions = {
+  es: "Servicios financieros, seguros de vida y carro, preparación de impuestos, notaría pública, trámites migratorios y planes de retiro (401k, 403b, IRA Rollover) en Newark, NJ.",
+  en: "Financial services, life and car insurance, tax preparation, public notary, immigration procedures, and retirement plans (401k, 403b, IRA Rollover) in Newark, NJ.",
+  pt: "Serviços financeiros, seguros de vida e carro, preparação de impostos, notaria pública, trâmites de imigração e planos de aposentadoria (401k, 403b, IRA Rollover) em Newark, NJ."
+};
+
+// Schema JSON-LD LocalBusiness data
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "Enterprises Capital LLC",
+  "alternateName": schemaAlternateNames[lang] || schemaAlternateNames.es,
+  "image": siteUrl + "/assets/images/patricia-lojan.jpg",
+  "@id": siteUrl,
+  "url": siteUrl,
+  "telephone": "+19738203353",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "20 Bloomfield Place",
+    "addressLocality": "Newark",
+    "addressRegion": "NJ",
+    "postalCode": "07104",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.760233,
+    "longitude": -74.172909
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
+  "sameAs": [
+    "https://wa.me/19738203353"
+  ],
+  "description": schemaDescriptions[lang] || schemaDescriptions.es
+};
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={currentUrl} />
+    
+    <!-- SEO Multilingual hreflang alternate links -->
+    <link rel="alternate" hreflang="es" href={`${siteUrl}/es${cleanPath || '/'}`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en${cleanPath || '/'}`} />
+    <link rel="alternate" hreflang="pt" href={`${siteUrl}/pt${cleanPath || '/'}`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/es${cleanPath || '/'}`} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={currentUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <!-- Preconnect Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+  </head>
+  <body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="skip-link">{skipLinkText}</a>
+
+    <Header lang={lang} />
+    
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+    
+    <WhatsAppButton lang={lang} />
+
+    <style>
+      /* Accessibility Skip Link */
+      .skip-link {
+        position: absolute;
+        top: -100px;
+        left: 0;
+        background: var(--accent-color);
+        color: white;
+        padding: 8px 16px;
+        z-index: 9999;
+        transition: top var(--transition-fast);
+      }
+      .skip-link:focus {
+        top: 0;
+      }
+    </style>
+  </body>
+</html>

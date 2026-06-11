@@ -1,0 +1,859 @@
+---
+// Header.astro
+import { translations } from '../data/translations.js';
+import { services } from '../data/services.js';
+
+interface Props {
+  lang?: 'es' | 'en' | 'pt';
+}
+
+const { lang = 'es' } = Astro.props;
+const t = translations[lang] || translations.es;
+
+// Dynamic title finder for service titles
+const getServiceTitle = (id: string) => {
+  return services[lang]?.find(s => s.id === id)?.title || id;
+};
+
+// Submenu structural translations
+const submenuTranslations = {
+  es: {
+    finance: "Contabilidad y Finanzas",
+    life: "Seguros de Vida",
+    car: "Seguros de Carro",
+    company: "Seguros de Compañía",
+    others: "Otros Servicios",
+    logoSubtitle: "Patricia Lojan | Estratega Financiera"
+  },
+  en: {
+    finance: "Accounting & Finance",
+    life: "Life Insurance",
+    car: "Car Insurance",
+    company: "Company Insurance",
+    others: "Other Services",
+    logoSubtitle: "Patricia Lojan | Financial Strategist"
+  },
+  pt: {
+    finance: "Contabilidade e Finanças",
+    life: "Seguro de Vida",
+    car: "Seguro de Carro",
+    company: "Seguro Comercial",
+    others: "Outros Serviços",
+    logoSubtitle: "Patricia Lojan | Estrategista Financeira"
+  }
+};
+
+const subT = submenuTranslations[lang] || submenuTranslations.es;
+
+// Localized accessibility labels
+const accessibilityLabels = {
+  es: {
+    logo: "Enterprises Capital LLC - Inicio",
+    menuToggle: "Abrir menú"
+  },
+  en: {
+    logo: "Enterprises Capital LLC - Home",
+    menuToggle: "Open menu"
+  },
+  pt: {
+    logo: "Enterprises Capital LLC - Início",
+    menuToggle: "Abrir menu"
+  }
+};
+
+const a11y = accessibilityLabels[lang] || accessibilityLabels.es;
+---
+
+<header class="main-header">
+  <!-- Top Utility Bar -->
+  <div class="header-top-bar">
+    <div class="container top-bar-container">
+      <div class="top-bar-left">
+        <a href="mailto:Patricia70adm@gmail.com" class="top-bar-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>Patricia70adm@gmail.com</span>
+        </a>
+      </div>
+      <div class="top-bar-right">
+        <div class="top-bar-socials">
+          <a href="https://www.facebook.com/patricia.lojan" target="_blank" rel="noopener noreferrer" class="top-bar-social-btn fb" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/patricialojan_finanzas" target="_blank" rel="noopener noreferrer" class="top-bar-social-btn ig" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204 013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@patricialojan07" target="_blank" rel="noopener noreferrer" class="top-bar-social-btn tt" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.99-1.72-.28-.24-.53-.51-.76-.79v5.04c.09 2.28-1.02 4.55-2.93 5.75-1.9 1.2-4.41 1.35-6.44.38-2.03-.97-3.38-3.08-3.48-5.34-.1-2.26 1.09-4.49 2.99-5.69 1.66-1.05 3.75-1.29 5.6-.68v4.06c-1.15-.56-2.54-.42-3.57.38-.98.76-1.45 2.05-1.19 3.28.26 1.22 1.34 2.17 2.6 2.29 1.26.12 2.51-.61 2.99-1.77.21-.52.26-1.1.25-1.66V0l.01.02z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container header-container">
+    <!-- Logo/Branding -->
+    <a href={`/${lang}/`} class="logo" aria-label={a11y.logo}>
+      <span class="logo-title">ENTERPRISES CAPITAL</span>
+      <span class="logo-subtitle">{subT.logoSubtitle}</span>
+    </a>
+
+    <!-- Hamburger Toggle for Mobile -->
+    <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label={a11y.menuToggle}>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
+    <!-- Navigation Menu -->
+    <nav id="primary-navigation" class="nav-menu">
+      <ul class="nav-list">
+        <li><a href={`/${lang}/`} class="nav-link">{t.nav.home}</a></li>
+        
+        <!-- Dropdown Servicios -->
+        <li class="dropdown-item">
+          <a href={`/${lang}/servicios`} class="nav-link dropdown-toggle" aria-haspopup="true">
+            {t.nav.services}
+            <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          
+          <!-- Primer Nivel Dropdown -->
+          <ul class="dropdown-menu">
+            <li><a href={`/${lang}/servicios/notaria-publica`}>{getServiceTitle('notaria-publica')}</a></li>
+            <li><a href={`/${lang}/servicios/tramites-migratorios`}>{getServiceTitle('tramites-migratorios')}</a></li>
+            <li><a href={`/${lang}/servicios/aplicaciones-visa-estados-unidos`}>{getServiceTitle('aplicaciones-visa-estados-unidos')}</a></li>
+            <li><a href={`/${lang}/servicios/oficiante-bodas-new-jersey`}>{getServiceTitle('oficiante-bodas-new-jersey')}</a></li>
+            
+            <!-- Submenu Contabilidad y Finanzas -->
+            <li class="nested-dropdown-item">
+              <a href={`/${lang}/servicios/contabilidad-finanzas`} class="dropdown-link-nested">
+                {subT.finance}
+                <svg class="chevron-icon-right" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <ul class="nested-dropdown-menu">
+                <li><a href={`/${lang}/servicios/preparacion-impuestos`}>{getServiceTitle('preparacion-impuestos')}</a></li>
+                <li><a href={`/${lang}/servicios/creacion-patrimonio`}>{getServiceTitle('creacion-patrimonio')}</a></li>
+              </ul>
+            </li>
+
+            <li><a href={`/${lang}/servicios/seguros-salud`}>{getServiceTitle('seguros-salud')}</a></li>
+            
+            <!-- Submenu Seguros de Vida -->
+            <li class="nested-dropdown-item">
+              <a href={`/${lang}/servicios/seguros-vida`} class="dropdown-link-nested">
+                {subT.life}
+                <svg class="chevron-icon-right" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <ul class="nested-dropdown-menu">
+                <li><a href={`/${lang}/servicios/medicare`}>{getServiceTitle('medicare')}</a></li>
+              </ul>
+            </li>
+
+            <!-- Submenu Seguros de Carro -->
+            <li class="nested-dropdown-item">
+              <a href={`/${lang}/servicios/seguros-carro`} class="dropdown-link-nested">
+                {subT.car}
+                <svg class="chevron-icon-right" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <ul class="nested-dropdown-menu">
+                <li><a href={`/${lang}/servicios/seguros-carro#progressive`}>Progressive</a></li>
+                <li><a href={`/${lang}/servicios/seguros-carro#geico`}>GEICO</a></li>
+              </ul>
+            </li>
+
+            <!-- Submenu Seguros de Compañía -->
+            <li class="nested-dropdown-item">
+              <a href={`/${lang}/servicios/seguros-compania`} class="dropdown-link-nested">
+                {subT.company}
+                <svg class="chevron-icon-right" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <ul class="nested-dropdown-menu">
+                <li><a href={`/${lang}/servicios/seguros-compania#ethos`}>ETHOS</a></li>
+                <li><a href={`/${lang}/servicios/seguros-compania#corebridge`}>Corebridge</a></li>
+                <li><a href={`/${lang}/servicios/seguros-compania#augustar`}>AuguStar</a></li>
+              </ul>
+            </li>
+
+            <li><a href={`/${lang}/servicios/reparacion-credito`}>{getServiceTitle('reparacion-credito')}</a></li>
+            <li><a href={`/${lang}/servicios/asesoria-estrategica-empresarial`}>{getServiceTitle('asesoria-estrategica-empresarial')}</a></li>
+            <li><a href={`/${lang}/servicios/asesoria-proyectos-inmobiliarios`}>{getServiceTitle('asesoria-proyectos-inmobiliarios')}</a></li>
+            
+            <!-- Submenu Otros Servicios -->
+            <li class="nested-dropdown-item">
+              <a href={`/${lang}/servicios#otros`} class="dropdown-link-nested">
+                {subT.others}
+                <svg class="chevron-icon-right" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <ul class="nested-dropdown-menu">
+                <li><a href={`/${lang}/servicios/anualidades-indexadas`}>{getServiceTitle('anualidades-indexadas')}</a></li>
+                <li><a href={`/${lang}/servicios/401k-403b`}>{getServiceTitle('401k-403b')}</a></li>
+                <li><a href={`/${lang}/servicios/ira-rollover`}>{getServiceTitle('ira-rollover')}</a></li>
+                <li><a href={`/${lang}/servicios/cobertura-gastos-finales`}>{getServiceTitle('cobertura-gastos-finales')}</a></li>
+                <li><a href={`/${lang}/servicios/pensiones-privadas`}>{getServiceTitle('pensiones-privadas')}</a></li>
+                <li><a href={`/${lang}/servicios/fondos-universidad`}>{getServiceTitle('fondos-universidad')}</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        
+        <li><a href={`/${lang}/areas-de-servicio`} class="nav-link">{t.nav.areas}</a></li>
+        <li><a href={`/${lang}/galeria`} class="nav-link">{t.nav.gallery}</a></li>
+        <li><a href={`/${lang}/perfil-profesional`} class="nav-link">{t.nav.profile}</a></li>
+        <li><a href={`/${lang}/contacto`} class="nav-link">{t.nav.contact}</a></li>
+        <li><a href={`/${lang}/blog`} class="nav-link">{t.nav.blog}</a></li>
+
+        <!-- Language Selector Dropdown (Desktop) -->
+        <li class="dropdown-item lang-selector-desktop">
+          <button class="nav-link dropdown-toggle lang-btn" aria-haspopup="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            <span class="active-lang-label">{lang.toUpperCase()}</span>
+            <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <ul class="dropdown-menu lang-dropdown-menu">
+            <li><a href="#" data-lang-change="es">Español</a></li>
+            <li><a href="#" data-lang-change="en">English</a></li>
+            <li><a href="#" data-lang-change="pt">Português</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Mobile Contact & Socials -->
+      <div class="mobile-menu-footer">
+        <!-- Mobile Language Selector Row -->
+        <div class="mobile-lang-row">
+          <span class="mobile-lang-title">{t.nav.selectLanguage || 'Idioma'}:</span>
+          <div class="mobile-lang-buttons">
+            <a href="#" class={`mobile-lang-btn ${lang === 'es' ? 'active' : ''}`} data-lang-change="es">ES</a>
+            <a href="#" class={`mobile-lang-btn ${lang === 'en' ? 'active' : ''}`} data-lang-change="en">EN</a>
+            <a href="#" class={`mobile-lang-btn ${lang === 'pt' ? 'active' : ''}`} data-lang-change="pt">PT</a>
+          </div>
+        </div>
+
+        <a href="mailto:Patricia70adm@gmail.com" class="mobile-email">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>Patricia70adm@gmail.com</span>
+        </a>
+        <div class="mobile-socials">
+          <a href="https://www.facebook.com/patricia.lojan" target="_blank" rel="noopener noreferrer" class="mobile-social-btn fb" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/patricialojan_finanzas" target="_blank" rel="noopener noreferrer" class="mobile-social-btn ig" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204 013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@patricialojan07" target="_blank" rel="noopener noreferrer" class="mobile-social-btn tt" aria-label="TikTok">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.99-1.72-.28-.24-.53-.51-.76-.79v5.04c.09 2.28-1.02 4.55-2.93 5.75-1.9 1.2-4.41 1.35-6.44.38-2.03-.97-3.38-3.08-3.48-5.34-.1-2.26 1.09-4.49 2.99-5.69 1.66-1.05 3.75-1.29 5.6-.68v4.06c-1.15-.56-2.54-.42-3.57.38-.98.76-1.45 2.05-1.19 3.28.26 1.22 1.34 2.17 2.6 2.29 1.26.12 2.51-.61 2.99-1.77.21-.52.26-1.1.25-1.66V0l.01.02z"/></svg>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* Header Styles */
+  .main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(11, 34, 64, 0.95); /* Deep dark blue */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-white);
+    transition: background var(--transition-normal);
+  }
+
+  .header-top-bar {
+    background-color: rgba(6, 17, 33, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.85rem;
+    padding: 8px 0;
+    width: 100%;
+  }
+
+  .top-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top-bar-left, .top-bar-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .top-bar-link {
+    color: rgba(255, 255, 255, 0.75);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color var(--transition-fast);
+  }
+
+  .top-bar-link:hover {
+    color: var(--gold-color);
+  }
+
+  .top-bar-socials {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .top-bar-social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #ffffff !important;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, filter 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  .top-bar-social-btn.fb {
+    background-color: #1877F2;
+  }
+
+  .top-bar-social-btn.ig {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  }
+
+  .top-bar-social-btn.tt {
+    background-color: #000000;
+  }
+
+  .top-bar-social-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+  }
+
+  .top-bar-social-btn.tt:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 1.5px 1.5px 0px #00f2fe, -1.5px -1.5px 0px #fe0979;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px; /* Base navigation height on desktop */
+  }
+
+  /* Logo */
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-title {
+    font-family: var(--font-family-heading);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.05em;
+    color: var(--text-white);
+  }
+
+  .logo-subtitle {
+    font-size: 0.75rem;
+    color: var(--gold-color);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  /* Navigation */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    font-family: var(--font-family-heading);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    border-radius: var(--border-radius-sm);
+    transition: color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .nav-link:hover, .nav-link:focus {
+    color: var(--text-white);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .chevron-icon {
+    transition: transform var(--transition-fast);
+  }
+
+  /* Dropdown Menus */
+  .dropdown-item {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--primary-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--border-radius-sm);
+    width: 280px;
+    padding: 8px 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .dropdown-menu a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--gold-color);
+  }
+
+  /* Nesting Dropdowns (Second Level) */
+  .nested-dropdown-item {
+    position: relative;
+  }
+
+  .dropdown-link-nested {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chevron-icon-right {
+    color: var(--text-muted);
+  }
+
+  .nested-dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: var(--primary-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--border-radius-sm);
+    width: 240px;
+    padding: 8px 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+  }
+
+  /* Display Dropdowns on Hover (Desktop) */
+  @media (min-width: 1024px) {
+    .dropdown-item:hover > .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-item:hover .chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    .nested-dropdown-item:hover > .nested-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+  }
+
+  /* Hamburger Toggle button */
+  .mobile-nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 40px;
+    height: 40px;
+  }
+
+  .hamburger-bar {
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-white);
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  /* Language Selector custom styling */
+  .lang-selector-desktop {
+    margin-left: 8px;
+  }
+
+  .lang-btn {
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 8px 14px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .lang-btn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .lang-btn svg:first-of-type {
+    margin-right: 4px;
+  }
+
+  .lang-dropdown-menu {
+    width: 130px !important;
+    left: auto !important;
+    right: 0 !important;
+  }
+
+  .mobile-menu-footer {
+    display: none;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1023px) {
+    .header-top-bar {
+      display: block;
+      padding: 6px 0;
+    }
+
+    .top-bar-container {
+      padding: 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 479px) {
+      .top-bar-link span {
+        display: none;
+      }
+    }
+
+    .header-container {
+      height: 70px; /* Base navigation height on mobile */
+    }
+
+    .mobile-nav-toggle {
+      display: flex;
+    }
+
+    /* Mobile Menu Drawer */
+    .nav-menu {
+      position: fixed;
+      top: 106px;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 106px);
+      background: var(--primary-dark);
+      overflow-y: auto;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-20px);
+      transition: opacity var(--transition-normal), transform var(--transition-normal), visibility var(--transition-normal);
+      display: block; /* Override flex */
+    }
+
+    .nav-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-list {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .nav-list li {
+      width: 100%;
+    }
+
+    .nav-link {
+      font-size: 1.1rem;
+      padding: 12px 16px;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    /* Hide desktop lang selector in mobile */
+    .lang-selector-desktop {
+      display: none;
+    }
+
+    /* Mobile Accordion Dropdowns */
+    .dropdown-menu {
+      position: static;
+      width: 100%;
+      box-shadow: none;
+      border: none;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 0;
+      padding: 0;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      display: none; /* Toggle with JS */
+      margin-top: 4px;
+      border-left: 2px solid var(--gold-color);
+    }
+
+    .dropdown-menu.active {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      padding: 12px 24px;
+      font-size: 1rem;
+    }
+
+    .nested-dropdown-menu {
+      position: static;
+      width: 100%;
+      box-shadow: none;
+      border: none;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      display: none;
+      margin-top: 4px;
+      border-left: 2px solid var(--accent-color);
+    }
+
+    .nested-dropdown-menu.active {
+      display: block;
+    }
+
+    .dropdown-link-nested {
+      padding: 12px 24px !important;
+      font-size: 1rem;
+    }
+
+    .nested-dropdown-menu a {
+      padding: 12px 36px;
+      font-size: 0.95rem;
+    }
+
+    /* Transform Hamburguer into X when active */
+    .mobile-nav-toggle.active .hamburger-bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-nav-toggle.active .hamburger-bar:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-nav-toggle.active .hamburger-bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Mobile menu footer */
+    .mobile-menu-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      width: 100%;
+    }
+
+    /* Mobile Lang Switcher Row */
+    .mobile-lang-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .mobile-lang-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .mobile-lang-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .mobile-lang-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 34px;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.03);
+      transition: all var(--transition-fast);
+    }
+
+    .mobile-lang-btn.active {
+      color: var(--primary-dark);
+      background: var(--gold-color);
+      border-color: var(--gold-color);
+    }
+
+    .mobile-email {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.05rem;
+      transition: color var(--transition-fast);
+    }
+
+    .mobile-email:hover {
+      color: var(--gold-color);
+    }
+
+    .mobile-socials {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .mobile-social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: #ffffff !important;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, filter 0.2s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-social-btn.fb {
+      background-color: #1877F2;
+    }
+
+    .mobile-social-btn.ig {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+
+    .mobile-social-btn.tt {
+      background-color: #000000;
+    }
+
+    .mobile-social-btn:hover, .mobile-social-btn:active {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+      filter: brightness(1.1);
+    }
+
+    .mobile-social-btn.tt:hover, .mobile-social-btn.tt:active {
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3), 2px 2px 0px #00f2fe, -2px -2px 0px #fe0979;
+    }
+  }
+</style>
+
+<script>
+  // Mobile Navigation toggle
+  const toggleBtn = document.querySelector('.mobile-nav-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+  
+  if (toggleBtn && navMenu) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+      toggleBtn.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      document.body.style.overflow = isExpanded ? '' : 'hidden'; // Prevents scrolling on back
+    });
+  }
+
+  // Mobile Accordion functionality
+  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+  const nestedToggles = document.querySelectorAll('.dropdown-link-nested');
+
+  if (window.innerWidth < 1024) {
+    // Top-level services toggle
+    dropdownToggles.forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        // Only run toggle logic if it's not the language switcher button
+        if (toggle.closest('.lang-selector-desktop')) return;
+        
+        e.preventDefault();
+        const menu = toggle.nextElementSibling;
+        if (menu) {
+          menu.classList.toggle('active');
+          const chevron = toggle.querySelector('.chevron-icon');
+          if (chevron) {
+            chevron.style.transform = menu.classList.contains('active') ? 'rotate(180deg)' : '';
+          }
+        }
+      });
+    });
+
+    // Second-level items toggle
+    nestedToggles.forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const menu = toggle.nextElementSibling;
+        if (menu) {
+          menu.classList.toggle('active');
+          const chevron = toggle.querySelector('.chevron-icon-right');
+          if (chevron) {
+            chevron.style.transform = menu.classList.contains('active') ? 'rotate(90deg)' : '';
+          }
+        }
+      });
+    });
+  }
+
+  // Client-side Language Selection and Redirection
+  document.querySelectorAll('[data-lang-change]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetLang = el.getAttribute('data-lang-change');
+      
+      // Save language preference in localStorage
+      localStorage.setItem('preferred-language', targetLang);
+      
+      // Detect clean path (strip prefix /es, /en, or /pt)
+      const path = window.location.pathname;
+      const hasLangPrefix = /^\/(es|en|pt)(\/|$)/.test(path);
+      const cleanPath = hasLangPrefix ? path.replace(/^\/(es|en|pt)/, '') : path;
+      
+      // Redirect to the same clean path with the new language prefix
+      window.location.href = `/${targetLang}${cleanPath || '/'}`;
+    });
+  });
+</script>

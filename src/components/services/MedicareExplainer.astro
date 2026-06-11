@@ -1,0 +1,166 @@
+---
+const { lang = 'es' } = Astro.props;
+
+const content = {
+  es: {
+    title: "Entendiendo Medicare en Lenguaje Sencillo",
+    text: "Medicare es el programa nacional de seguro de salud de los Estados Unidos dirigido principalmente a personas mayores de 65 años o personas más jóvenes con ciertas discapacidades o condiciones de salud graves. Aunque es un gran beneficio, entender cómo se dividen sus partes y los plazos de inscripción puede resultar muy confuso.",
+    partAHeader: "Parte A",
+    partATitle: "Seguro de Hospital",
+    partADesc: "Cubre la hospitalización con internación, cuidados en un centro de enfermería especializada, cuidados de hospicio y asistencia médica a domicilio.",
+    partBHeader: "Parte B",
+    partBTitle: "Seguro Médico",
+    partBDesc: "Cubre las consultas con doctores, servicios de salud ambulatorios, equipos médicos de apoyo y servicios preventivos (como vacunas y chequeos anuales).",
+    partCHeader: "Parte C",
+    partCTitle: "Medicare Advantage",
+    partCDesc: "Planes privados aprobados por Medicare que agrupan las coberturas A y B, y que a menudo incluyen beneficios de la Parte D y cuidado dental o de visión.",
+    partDHeader: "Parte D",
+    partDTitle: "Planes de Medicamentos",
+    partDDesc: "Cubre el costo de los medicamentos recetados por tu doctor, ayudándote a pagar menos en la farmacia.",
+    penaltyTitle: "Evita penalidades por inscripción tardía",
+    penaltyText: "El momento de registrarte en Medicare es crucial. Si no te inscribes durante tu Periodo Inicial de Inscripción (que abarca los 3 meses anteriores a cumplir 65 años, el mes de tu cumpleaños y los 3 meses posteriores), el gobierno te cobrará una penalización permanente del 10% por cada año de retraso en tu prima de la Parte B.",
+    howWeHelpTitle: "¿Cómo te ayuda Patricia Lojan?",
+    howWeHelpText: "Te ayudamos a analizar tus recetas de medicamentos actuales y tus médicos de cabecera para comparar qué planes de la Parte C o suplementos de Medicare (Medigap) se ajustan mejor a tus necesidades particulares en New Jersey, evitando confusiones y pagos excesivos."
+  },
+  en: {
+    title: "Understanding Medicare in Simple Terms",
+    text: "Medicare is the national health insurance program in the United States directed primarily at individuals aged 65 and older or younger people with certain disabilities or severe health conditions. Although it is a great benefit, understanding how its parts are structured and its enrollment deadlines can be very confusing.",
+    partAHeader: "Part A",
+    partATitle: "Hospital Insurance",
+    partADesc: "Covers inpatient hospital stays, care in a specialized nursing facility, hospice care, and home health care services.",
+    partBHeader: "Part B",
+    partBTitle: "Medical Insurance",
+    partBDesc: "Covers doctor visits, outpatient medical services, medical equipment, and preventive care (like vaccines and annual checkups).",
+    partCHeader: "Part C",
+    partCTitle: "Medicare Advantage",
+    partCDesc: "Private plans approved by Medicare that bundle Parts A and B coverage, and often include Part D benefits along with dental and vision care.",
+    partDHeader: "Part D",
+    partDTitle: "Prescription Drug Plans",
+    partDDesc: "Covers the cost of prescription drugs prescribed by your doctor, helping you pay less at the pharmacy counter.",
+    penaltyTitle: "Avoid Late Enrollment Penalties",
+    penaltyText: "The timing of your Medicare enrollment is critical. If you fail to enroll during your Initial Enrollment Period (which covers the 3 months before you turn 65, the month of your birthday, and the 3 months after), the government will charge you a lifetime 10% penalty for each year of delay added to your Part B premium.",
+    howWeHelpTitle: "How Does Patricia Lojan Help You?",
+    howWeHelpText: "We help you analyze your current prescriptions and primary care doctors to compare which Part C plans or Medicare Supplements (Medigap) best fit your specific needs in New Jersey, avoiding confusion and overpayments."
+  },
+  pt: {
+    title: "Entendendo o Medicare de Forma Simples",
+    text: "O Medicare é o programa nacional de seguro de saúde dos Estados Unidos voltado principalmente para pessoas com 65 anos ou mais, ou pessoas mais jovens com certas deficiências ou condições graves de saúde. Embora seja um ótimo benefício, entender como suas partes se dividem e os prazos de inscrição pode ser muito confuso.",
+    partAHeader: "Parte A",
+    partATitle: "Seguro Hospitalar",
+    partADesc: "Cobre hospitalizações como paciente internado, cuidados em instalações especializadas de enfermagem, cuidados paliativos e serviços médicos domiciliares.",
+    partBHeader: "Parte B",
+    partBTitle: "Seguro Médico",
+    partBDesc: "Cobre consultas médicas, serviços ambulatoriais, equipamentos médicos de suporte e serviços de saúde preventivos (como vacinas e exames anuais).",
+    partCHeader: "Parte C",
+    partCTitle: "Medicare Advantage",
+    partCDesc: "Planos privados aprovados pelo Medicare que agrupam as coberturas das Partes A e B, e frequentemente incluem cobertura para a Parte D, odontologia e visão.",
+    partDHeader: "Parte D",
+    partDTitle: "Planos de Medicamentos",
+    partDDesc: "Cobre o custo de medicamentos prescritos pelo seu médico, ajudando você a pagar menos na farmácia.",
+    penaltyTitle: "Evite multas permanentes por inscrição tardia",
+    penaltyText: "O momento de inscrição no Medicare é fundamental. Se você não se inscrever durante seu Período de Inscrição Inicial (que compreende os 3 meses antes de completar 65 anos, o mês do aniversário e os 3 meses seguintes), o governo cobrará uma multa permanente de 10% por ano de atraso no valor da mensalidade da Parte B.",
+    howWeHelpTitle: "Como a Patricia Lojan ajuda você?",
+    howWeHelpText: "Ajudamos você a analisar suas receitas de remédios habituais e seus médicos de preferência para comparar quais planos da Parte C ou Suplementos do Medicare (Medigap) melhor se adaptam às suas necessidades em Nova Jersey, evitando erros e cobranças excessivas."
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<div class="custom-medicare-details">
+  <h3 class="custom-subtitle">{t.title}</h3>
+  <p>{t.text}</p>
+
+  <div class="medicare-parts-grid">
+    <div class="part-card card">
+      <div class="part-header">{t.partAHeader}</div>
+      <h4>{t.partATitle}</h4>
+      <p>{t.partADesc}</p>
+    </div>
+
+    <div class="part-card card">
+      <div class="part-header">{t.partBHeader}</div>
+      <h4>{t.partBTitle}</h4>
+      <p>{t.partBDesc}</p>
+    </div>
+
+    <div class="part-card card">
+      <div class="part-header">{t.partCHeader}</div>
+      <h4>{t.partCTitle}</h4>
+      <p>{t.partCDesc}</p>
+    </div>
+
+    <div class="part-card card">
+      <div class="part-header">{t.partDHeader}</div>
+      <h4>{t.partDTitle}</h4>
+      <p>{t.partDDesc}</p>
+    </div>
+  </div>
+
+  <h3 class="custom-subtitle">{t.penaltyTitle}</h3>
+  <p>{t.penaltyText}</p>
+
+  <h3 class="custom-subtitle">{t.howWeHelpTitle}</h3>
+  <p>{t.howWeHelpText}</p>
+</div>
+
+<style>
+  .custom-subtitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    margin-top: 28px;
+  }
+
+  .custom-subtitle:first-of-type {
+    margin-top: 0;
+  }
+
+  .medicare-parts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  @media (min-width: 640px) {
+    .medicare-parts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .part-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .part-header {
+    background: var(--primary-color);
+    color: var(--text-white);
+    font-family: var(--font-family-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .part-card h4 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+  }
+
+  .part-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+</style>

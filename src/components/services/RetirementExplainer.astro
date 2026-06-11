@@ -1,0 +1,221 @@
+---
+const { lang = 'es' } = Astro.props;
+
+const content = {
+  es: {
+    introTitle: "El Ahorro para el Retiro en Palabras Sencillas",
+    introText: "Si trabajas en una empresa o institución en los Estados Unidos, es muy probable que hayas escuchado los términos 401(k) o 403(b). A primera vista, parecen códigos matemáticos aburridos, pero la realidad es que son simplemente alcancías de ahorro especiales patrocinadas por tu empleador para ayudarte a preparar tu vejez y pagar menos impuestos al mismo tiempo.",
+    badgePrivate: "Para empresas privadas",
+    title401k: "¿Qué es un plan 401(k)?",
+    desc401k: "Es un plan de ahorro de jubilación creado por corporaciones con fines de lucro para sus trabajadores. El dinero se deduce automáticamente de tu cheque de pago bruto, es decir, antes de que el gobierno te descuente los impuestos sobre la renta.",
+    badgePublic: "Para servidores públicos",
+    title403b: "¿Qué es un plan 403(b)?",
+    desc403b: "Es un plan prácticamente idéntico al 401(k), pero diseñado para personas que trabajan en organizaciones exentas de impuestos, como escuelas públicas, universidades, hospitales gubernamentales, iglesias y organizaciones sin fines de lucro.",
+    matchTitle: "El \"Employer Match\" o Dinero Gratis de tu Empresa",
+    matchDesc: "Uno de los mayores beneficios de estas cuentas es que muchos jefes te ofrecen igualar lo que tú ahorras. Por ejemplo, si tú ahorras el 3% de tu salario, tu empresa deposita otro 3% gratis en tu cuenta. En Enterprises Capital LLC te ayudamos a revisar tu talonario de pago para asegurarnos de que estés recibiendo este dinero gratis y no lo dejes en la mesa.",
+    casesTitle: "Casos comunes donde necesitas revisar estas cuentas",
+    casesIntro: "Te sugerimos solicitar una orientación profesional gratuita si te identificas con alguna de estas situaciones:",
+    case1: "Tienes un trabajo nuevo y quieres saber qué porcentaje aportar.",
+    case2: "Dejaste un empleo anterior y tu dinero se quedó estancado en un 401(k) antiguo.",
+    case3: "No sabes en qué fondos de inversión está tu dinero ni cuánto te están cobrando en comisiones ocultas.",
+    case4: "Te asusta la volatilidad de la bolsa y prefieres mover tus fondos acumulados a vehículos financieros seguros que no sufran pérdidas.",
+    quote: "Trabajé 6 años en una constructora y al salir dejé mi 401(k) ahí. No entendía qué hacer con él. Patricia me explicó todo en español y me ayudó a transferirlo a una cuenta de retiro segura. Ahora sé exactamente cuánto dinero tengo y que está protegido de las caídas de la bolsa.",
+    author: "— Miguel C., Newark NJ"
+  },
+  en: {
+    introTitle: "Retirement Savings in Simple Words",
+    introText: "If you work for a company or institution in the United States, you've likely heard the terms 401(k) or 403(b). At first glance, they look like boring math codes, but in reality, they are simply special savings accounts sponsored by your employer to help you prepare for retirement and pay fewer taxes at the same time.",
+    badgePrivate: "For private companies",
+    title401k: "What is a 401(k) plan?",
+    desc401k: "It is a retirement savings plan created by for-profit corporations for their workers. The money is automatically deducted from your gross paycheck, meaning before the government takes out income taxes.",
+    badgePublic: "For public servants",
+    title403b: "What is a 403(b) plan?",
+    desc403b: "It is a plan virtually identical to a 401(k), but designed for people who work in tax-exempt organizations, such as public schools, universities, government hospitals, churches, and non-profits.",
+    matchTitle: "The \"Employer Match\" or Free Money from Your Company",
+    matchDesc: "One of the greatest benefits of these accounts is that many employers offer to match your savings. For example, if you save 3% of your salary, your company deposits another 3% for free into your account. At Enterprises Capital LLC, we help you review your pay stub to ensure you receive this free money and don't leave it behind.",
+    casesTitle: "Common Cases to Review Your Accounts",
+    casesIntro: "We suggest requesting a free professional consultation if you identify with any of these situations:",
+    case1: "You have a new job and want to know what percentage to contribute.",
+    case2: "You left a previous job and your money is stuck in an old 401(k).",
+    case3: "You don't know which investment funds your money is in or what hidden fees you are being charged.",
+    case4: "You are afraid of stock market volatility and prefer to move accumulated funds to safe vehicles with no risk of loss.",
+    quote: "I worked 6 years at a construction company and left my 401(k) there when I left. I didn't know what to do with it. Patricia explained everything in my language and helped me roll it over into a secure retirement account. Now I know exactly how much money I have and that it is protected from stock market crashes.",
+    author: "— Miguel C., Newark NJ"
+  },
+  pt: {
+    introTitle: "A Poupança para a Aposentadoria em Palavras Simples",
+    introText: "Se você trabalha em uma empresa ou instituição nos Estados Unidos, é provável que já tenha ouvido os termos 401(k) ou 403(b). À primeira vista, parecem códigos matemáticos chatos, mas na realidade são apenas contas de poupança especiais patrocinadas pelo seu empregador para ajudar você a se planejar para a velhice e pagar menos impostos ao mesmo tempo.",
+    badgePrivate: "Para empresas privadas",
+    title401k: "O que é um plano 401(k)?",
+    desc401k: "É um plano de poupança para a aposentadoria criado por corporações com fins lucrativos para seus funcionários. O dinheiro é deduzido automaticamente do seu contracheque bruto, ou seja, antes de o governo descontar os impostos de renda.",
+    badgePublic: "Para servidores públicos",
+    title403b: "O que é um plano 403(b)?",
+    desc403b: "É um plano praticamente idêntico ao 401(k), mas projetado para pessoas que trabalham em organizações isentas de impostos, como escolas públicas, universidades, hospitais governamentais, igrejas e organizações sem fins lucrativos.",
+    matchTitle: "O \"Employer Match\" ou Dinheiro Grátis da sua Empresa",
+    matchDesc: "Um dos maiores benefícios dessas contas é que muitos patrões se oferecem para igualar a sua economia. Por exemplo, se você poupa 3% do seu salário, sua empresa deposita mais 3% grátis na sua conta. Na Enterprises Capital LLC, ajudamos você a analisar seu contracheque para garantir que esteja recebendo esse dinheiro grátis e não o deixe de lado.",
+    casesTitle: "Situações comuns para revisar essas contas",
+    casesIntro: "Sugerimos que solicite uma orientação profissional gratuita se você se identificar com qualquer uma destas situações:",
+    case1: "Você tem um emprego novo e quer saber qual porcentagem contribuir.",
+    case2: "Você deixou um emprego anterior e seu dinheiro ficou parado em um 401(k) antigo.",
+    case3: "Você não sabe em quais fundos de investimento seu dinheiro está ou quanto pagando de taxas administrativas ocultas.",
+    case4: "Você tem medo da volatilidade da bolsa de valores e prefere transferir seus recursos para veículos financeiros seguros sem risco de perda.",
+    quote: "Trabalhei 6 anos em uma construtora e, ao sair, deixei meu 401(k) lá. Não entendia o que fazer com ele. A Patricia explicou tudo de forma compreensível e me ajudou a transferir para uma conta de aposentadoria segura. Agora sei exatamente quanto dinheiro tenho e que ele está protegido contra quedas da bolsa.",
+    author: "— Miguel C., Newark NJ"
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<div class="custom-retirement-details">
+  <h3 class="custom-subtitle">{t.introTitle}</h3>
+  <p>{t.introText}</p>
+
+  <div class="retirement-explainer-grid">
+    <div class="explainer-card card">
+      <span class="badge badge-primary">{t.badgePrivate}</span>
+      <h4>{t.title401k}</h4>
+      <p>{t.desc401k}</p>
+    </div>
+
+    <div class="explainer-card card">
+      <span class="badge badge-gold">{t.badgePublic}</span>
+      <h4>{t.title403b}</h4>
+      <p>{t.desc403b}</p>
+    </div>
+  </div>
+
+  <div class="employer-match-callout card">
+    <h4>{t.matchTitle}</h4>
+    <p>{t.matchDesc}</p>
+  </div>
+
+  <h3 class="custom-subtitle">{t.casesTitle}</h3>
+  <p>{t.casesIntro}</p>
+  <ul class="custom-checklist">
+    <li><strong>{t.case1.split(' ')[0]} {t.case1.split(' ')[1]} {t.case1.split(' ')[2]}</strong> {t.case1.split(' ').slice(3).join(' ')}</li>
+    <li><strong>{t.case2.split(' ')[0]} {t.case2.split(' ')[1]} {t.case2.split(' ')[2]}</strong> {t.case2.split(' ').slice(3).join(' ')}</li>
+    <li><strong>{t.case3.split(' ')[0]} {t.case3.split(' ')[1]} {t.case3.split(' ')[2]}</strong> {t.case3.split(' ').slice(3).join(' ')}</li>
+    <li><strong>{t.case4.split(' ')[0]} {t.case4.split(' ')[1]} {t.case4.split(' ')[2]}</strong> {t.case4.split(' ').slice(3).join(' ')}</li>
+  </ul>
+
+  <div class="retirement-testimonial card glass-card">
+    <p class="testimonial-quote">"{t.quote}"</p>
+    <span class="testimonial-author">{t.author}</span>
+  </div>
+</div>
+
+<style>
+  .custom-subtitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    margin-top: 28px;
+  }
+
+  .custom-subtitle:first-of-type {
+    margin-top: 0;
+  }
+
+  .retirement-explainer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  @media (min-width: 640px) {
+    .retirement-explainer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .explainer-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .explainer-card h4 {
+    font-size: 1.15rem;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+  }
+
+  .explainer-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .employer-match-callout {
+    background: rgba(26, 86, 219, 0.03);
+    border-left: 4px solid var(--accent-color);
+    padding: 24px;
+    margin: 24px 0;
+  }
+
+  .employer-match-callout h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+  }
+
+  .employer-match-callout p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .custom-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    padding-left: 0;
+  }
+
+  .custom-checklist li {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .custom-checklist li::before {
+    content: '✓';
+    color: var(--gold-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .retirement-testimonial {
+    margin: 32px 0 0 0;
+    padding: 24px;
+    border-color: rgba(11, 34, 64, 0.08);
+  }
+
+  .testimonial-quote {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .testimonial-author {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>

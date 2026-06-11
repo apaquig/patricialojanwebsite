@@ -1,0 +1,713 @@
+---
+// RealEstateExplainer.astro
+import { realEstateData } from '../../data/realEstate';
+
+const { lang = 'es' } = Astro.props;
+const t = realEstateData[lang] || realEstateData.es;
+---
+
+<div class="real-estate-explainer">
+  <!-- Intro Hero/Header -->
+  <div class="re-intro-section card glass-card">
+    <div class="badge badge-accent">{t.badgeAccent}</div>
+    <h3 class="re-section-title">{t.introTitle}</h3>
+    <p class="re-section-desc">{t.introText}</p>
+    
+    <div class="re-header-cta">
+      <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="btn-icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        {t.scheduleConsult}
+      </a>
+    </div>
+  </div>
+
+  <!-- Interactive Gallery Section -->
+  <div class="re-gallery-section">
+    <div class="gallery-header text-center">
+      <h3 class="custom-subtitle">{t.projectsTitle}</h3>
+      <p class="gallery-desc">{t.projectsSubtitle}</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs-container">
+      <button class="filter-tab active" data-filter="all">
+        {t.filterAll}
+      </button>
+      <button class="filter-tab" data-filter="ecuador">
+        {t.filterEcuador}
+      </button>
+      <button class="filter-tab" data-filter="usa">
+        {t.filterUsa}
+      </button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      {t.projects.map((project) => (
+        <div class="project-card card" data-country={project.country}>
+          <div class="project-image-wrapper">
+            <img src={project.image} alt={project.name} class="project-img" loading="lazy" />
+            <div class="project-country-badge">{project.country === 'ecuador' ? t.filterEcuador : t.filterUsa}</div>
+          </div>
+          
+          <div class="project-card-body">
+            <span class="project-type">{project.type}</span>
+            <h4 class="project-title">{project.name}</h4>
+            
+            <div class="project-location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="loc-icon"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>{project.location}</span>
+            </div>
+            
+            <p class="project-desc">{project.description}</p>
+            
+            <div class="project-benefits-box">
+              <ul class="project-benefits-list">
+                {project.benefits.map((benefit) => (
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <a href={`https://wa.me/19738203353?text=${encodeURIComponent(t.contactPreMessage + " " + project.name)}`} target="_blank" rel="noopener noreferrer" class="btn btn-accent btn-full">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="btn-icon"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              {t.requestInfo}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Educational Section -->
+  <div class="re-education-section card glass-card">
+    <div class="text-center">
+      <span class="badge badge-primary">{t.eduTitle}</span>
+      <h3 class="custom-subtitle" style="margin-top: 10px;">{t.eduSubtitle}</h3>
+    </div>
+
+    <!-- Country Overviews -->
+    <div class="grid grid-2 educational-country-grid">
+      <div class="edu-country-card">
+        <h4 class="edu-country-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="edu-title-icon"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          {t.howEcuadorTitle}
+        </h4>
+        <p>{t.howEcuadorText}</p>
+      </div>
+
+      <div class="edu-country-card">
+        <h4 class="edu-country-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="edu-title-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+          {t.howUsaTitle}
+        </h4>
+        <p>{t.howUsaText}</p>
+      </div>
+    </div>
+
+    <!-- Market Comparison Table -->
+    <div class="comparison-table-wrapper">
+      <h4 class="comparison-table-title text-center">{t.comparisonTitle}</h4>
+      <div class="table-responsive">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              {t.comparisonHeaders.map((header) => (
+                <th>{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {t.comparisonRows.map((row) => (
+              <tr>
+                <td class="feature-col"><strong>{row[0]}</strong></td>
+                <td>{row[1]}</td>
+                <td>{row[2]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Key Analysis Factors (Accordion/Grid) -->
+    <div class="factors-analysis-wrapper">
+      <h4 class="factors-title text-center">{t.beforeInvestingTitle}</h4>
+      <p class="factors-subtitle text-center">{t.beforeInvestingSubtitle}</p>
+      
+      <div class="grid grid-2 factors-grid">
+        {t.factors.map((factor, index) => (
+          <div class="factor-card">
+            <div class="factor-num">0{index + 1}</div>
+            <h5 class="factor-name">{factor.title}</h5>
+            <p class="factor-desc">{factor.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- How We Help Section -->
+    <div class="how-we-help-box">
+      <h4 class="help-title">{t.howWeHelpTitle}</h4>
+      <p class="help-desc">{t.howWeHelpText}</p>
+      
+      <ul class="help-steps-list">
+        {t.helpSteps.map((step) => (
+          <li>
+            <div class="step-bullet"></div>
+            <span>{step}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Final CTA Panel -->
+  <div class="re-cta-banner card glass-card text-center">
+    <h3>{t.ctaBannerTitle}</h3>
+    <p>{t.ctaBannerDesc}</p>
+    
+    <div class="cta-banner-actions">
+      <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="btn-icon"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.333 4.982L2 22l5.202-1.362a9.927 9.927 0 0 0 4.81 1.238h.005c5.507 0 9.99-4.478 9.99-9.984C22.007 6.478 17.518 2 12.012 2zm6.09 14.415c-.25.703-1.47 1.28-2.01 1.37-.48.08-.94.09-2.93-.73a11.83 11.83 0 0 1-5.11-4.49c-.77-1.04-1.23-2.26-1.23-3.51 0-1.42.75-2.11 1.02-2.38.21-.21.46-.26.65-.26h.46c.15 0 .35.01.5.38.17.41.6 1.48.65 1.58.05.11.09.23.01.38-.08.15-.15.25-.26.38-.11.13-.23.29-.33.39-.11.11-.23.23-.1.46.26.46.86 1.47 1.63 2.15.99.88 1.83 1.15 2.09 1.28.26.13.41.11.56-.05.15-.16.65-.75.82-1.01.17-.26.35-.22.59-.13.24.09 1.54.73 1.8.86.26.13.43.2.5.31.06.11.06.66-.19 1.36z"></path></svg>
+        {t.scheduleConsult}
+      </a>
+      
+      <a href="#projects" class="btn btn-secondary btn-large scroll-link" id="view-opp-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="btn-icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 12 12 16 14"></polyline></svg>
+        {t.viewOpportunities}
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple client-side filtering script for real estate gallery
+  const tabs = document.querySelectorAll('.filter-tab');
+  const cards = document.querySelectorAll('.project-card');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Set active class on clicked tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const filterValue = tab.getAttribute('data-filter');
+
+      // Filter cards
+      cards.forEach(card => {
+        const country = card.getAttribute('data-country');
+        
+        if (filterValue === 'all') {
+          card.classList.remove('hidden-card');
+        } else if (country === filterValue) {
+          card.classList.remove('hidden-card');
+        } else {
+          card.classList.add('hidden-card');
+        }
+      });
+    });
+  });
+
+  // Handle smooth scroll to projects when clicking 'Conocer oportunidades'
+  const viewOppBtn = document.getElementById('view-opp-btn');
+  if (viewOppBtn) {
+    viewOppBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const gallerySection = document.querySelector('.re-gallery-section');
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+</script>
+
+<style>
+  .real-estate-explainer {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .re-intro-section {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .re-section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+  }
+
+  .re-section-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .re-header-cta {
+    margin-top: 10px;
+  }
+
+  /* Gallery Styling */
+  .re-gallery-section {
+    padding-top: 10px;
+  }
+
+  .gallery-header {
+    margin-bottom: 30px;
+  }
+
+  .gallery-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: -10px;
+  }
+
+  .filter-tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+
+  .filter-tab {
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 50px;
+    border: 1px solid rgba(var(--primary-color-rgb), 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .filter-tab:hover {
+    background: rgba(var(--accent-color-rgb), 0.08);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+  }
+
+  .filter-tab.active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #0b132b; /* dark bg contrast */
+    box-shadow: 0 4px 15px rgba(var(--accent-color-rgb), 0.3);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  @media (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 1;
+    transform: scale(1);
+    height: 100%;
+  }
+
+  .project-card.hidden-card {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(var(--accent-color-rgb), 0.3);
+  }
+
+  .project-image-wrapper {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .project-card:hover .project-img {
+    transform: scale(1.05);
+  }
+
+  .project-country-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 20px;
+    background: rgba(11, 19, 43, 0.85);
+    backdrop-filter: blur(5px);
+    color: var(--accent-color);
+    border: 1px solid rgba(var(--accent-color-rgb), 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .project-card-body {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .project-type {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 8px;
+  }
+
+  .project-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+  }
+
+  .project-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .loc-icon {
+    color: var(--accent-color);
+  }
+
+  .project-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+  }
+
+  .project-benefits-box {
+    margin-bottom: 25px;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .project-benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .project-benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-color);
+  }
+
+  .check-icon {
+    color: var(--accent-color);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Educational Hub */
+  .re-education-section {
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .educational-country-grid {
+    gap: 30px;
+  }
+
+  .edu-country-card {
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+  }
+
+  .edu-country-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .edu-title-icon {
+    color: var(--accent-color);
+  }
+
+  .edu-country-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Comparison Table */
+  .comparison-table-wrapper {
+    margin-top: 10px;
+  }
+
+  .comparison-table-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--text-color);
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .comparison-table th {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--accent-color);
+    padding: 16px 20px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .comparison-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+
+  .comparison-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .comparison-table tr:hover td {
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  .feature-col {
+    color: var(--text-color) !important;
+    white-space: nowrap;
+  }
+
+  /* Factors Analysis Grid */
+  .factors-analysis-wrapper {
+    margin-top: 10px;
+  }
+
+  .factors-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-color);
+  }
+
+  .factors-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 35px;
+  }
+
+  .factors-grid {
+    gap: 24px;
+  }
+
+  .factor-card {
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .factor-num {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: rgba(var(--accent-color-rgb), 0.1);
+    line-height: 1;
+  }
+
+  .factor-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 0 0 10px 0;
+  }
+
+  .factor-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* How We Help */
+  .how-we-help-box {
+    margin-top: 10px;
+    padding: 30px;
+    background: rgba(var(--primary-color-rgb), 0.1);
+    border: 1px solid rgba(var(--primary-color-rgb), 0.15);
+    border-radius: 12px;
+  }
+
+  .help-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+  }
+
+  .help-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .help-steps-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .help-steps-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--text-color);
+  }
+
+  .step-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  /* Final CTA Banner */
+  .re-cta-banner {
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .re-cta-banner h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+  }
+
+  .re-cta-banner p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 650px;
+    margin: 0 0 10px 0;
+    line-height: 1.6;
+  }
+
+  .cta-banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    .re-intro-section, .re-education-section, .re-cta-banner {
+      padding: 24px;
+    }
+
+    .filter-tabs-container {
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .filter-tab {
+      width: 100%;
+      text-align: center;
+    }
+
+    .cta-banner-actions {
+      flex-direction: column;
+    }
+
+    .cta-banner-actions .btn {
+      width: 100%;
+    }
+  }
+</style>

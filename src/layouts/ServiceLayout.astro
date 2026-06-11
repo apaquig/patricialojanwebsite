@@ -1,0 +1,352 @@
+---
+import MainLayout from './MainLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { translations } from '../data/translations.js';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Service {
+  id: string;
+  title: string;
+  shortDescription: string;
+  category: string;
+  tagline: string;
+  longDescription: string;
+  benefits: string[];
+  process: string[];
+  faq: FAQItem[];
+}
+
+interface Props {
+  service: Service;
+  lang?: 'es' | 'en' | 'pt';
+}
+
+const { service, lang = 'es' } = Astro.props;
+const t = translations[lang] || translations.es;
+const sLayout = t.serviceLayout;
+
+// Localized WhatsApp message
+const whatsappMessages = {
+  es: `Hola Patricia, me gustaría solicitar información sobre el servicio de ${service.title}.`,
+  en: `Hello Patricia, I would like to request information about the service of ${service.title}.`,
+  pt: `Olá Patricia, gostaria de solicitar informações sobre o serviço de ${service.title}.`
+};
+
+const whatsappText = encodeURIComponent(whatsappMessages[lang] || whatsappMessages.es);
+---
+
+<MainLayout 
+  title={`${service.title} | ${t.meta.defaultTitle.split('|')[1] || 'Enterprises Capital LLC'}`}
+  description={service.shortDescription}
+  lang={lang}
+>
+  <!-- Service Page Hero Banner -->
+  <section class="service-hero">
+    <div class="container service-hero-container">
+      <div class="service-hero-content">
+        <span class="badge badge-gold">{service.category}</span>
+        <h1 class="service-hero-title">{service.title}</h1>
+        <p class="service-hero-subtitle">{service.tagline}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Main Content Grid -->
+  <section class="section">
+    <div class="container grid service-content-grid">
+      <!-- Main Content Column -->
+      <div class="service-main-col">
+        <!-- Overview -->
+        <div class="service-overview">
+          <h2 class="section-subtitle">{sLayout.descTitle}</h2>
+          <p class="description-text">{service.longDescription}</p>
+        </div>
+
+        <!-- Dynamic Slot for Custom content (Progressive logos, Medicare notes, Retirement descriptions, etc.) -->
+        <div class="service-custom-content">
+          <slot />
+        </div>
+
+        <!-- How It Works (Process) -->
+        {service.process && service.process.length > 0 && (
+          <div class="service-process">
+            <h2 class="section-subtitle">{sLayout.processTitle}</h2>
+            <div class="process-steps">
+              {service.process.map((step, idx) => (
+                <div class="process-step">
+                  <div class="step-number">{idx + 1}</div>
+                  <div class="step-text">
+                    <p>{step}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Service-specific FAQs -->
+        {service.faq && service.faq.length > 0 && (
+          <div class="service-faqs">
+            <h2 class="section-subtitle">{sLayout.faqsTitle}</h2>
+            <FAQ faqList={service.faq} />
+          </div>
+        )}
+      </div>
+
+      <!-- Sidebar Column (Sticky) -->
+      <aside class="service-sidebar-col">
+        <!-- Benefits List Card -->
+        <div class="sidebar-card card benefits-card">
+          <h3>{sLayout.sidebarTitle}</h3>
+          <ul class="sidebar-benefits-list">
+            {service.benefits.map(benefit => (
+              <li>
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Quick Contact Card -->
+        <div class="sidebar-card card contact-card text-center">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.333 4.982L2 22l5.202-1.362a9.927 9.927 0 0 0 4.81 1.238h.005c5.507 0 9.99-4.478 9.99-9.984C22.007 6.478 17.518 2 12.012 2zm6.09 14.415c-.25.703-1.47 1.28-2.01 1.37-.48.08-.94.09-2.93-.73a11.83 11.83 0 0 1-5.11-4.49c-.77-1.04-1.23-2.26-1.23-3.51 0-1.42.75-2.11 1.02-2.38.21-.21.46-.26.65-.26h.46c.15 0 .35.01.5.38.17.41.6 1.48.65 1.58.05.11.09.23.01.38-.08.15-.15.25-.26.38-.11.13-.23.29-.33.39-.11.11-.23.23-.1.46.26.46.86 1.47 1.63 2.15.99.88 1.83 1.15 2.09 1.28.26.13.41.11.56-.05.15-.16.65-.75.82-1.01.17-.26.35-.22.59-.13.24.09 1.54.73 1.8.86.26.13.43.2.5.31.06.11.06.66-.19 1.36z"/></svg>
+          </div>
+          <h3>{sLayout.ctaCardTitle}</h3>
+          <p>{sLayout.ctaCardDesc}</p>
+          <a 
+            href={`https://wa.me/19738203353?text=${whatsappText}`} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn-whatsapp btn-large btn-block"
+          >
+            {sLayout.ctaCardBtn}
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Final CTA Panel -->
+  <section class="section section-secondary text-center">
+    <div class="container service-cta-mini card glass-card">
+      <h2>{sLayout.ctaPanelTitle}</h2>
+      <p>{sLayout.ctaPanelDesc}</p>
+      <div class="cta-actions justify-center">
+        <a href={`/${lang}/contacto`} class="btn btn-primary">{sLayout.ctaPanelBook}</a>
+        <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+          {sLayout.ctaPanelWhatsapp}
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Service Page Hero Banner */
+  .service-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    padding: 160px 0 80px 0;
+    color: var(--text-white);
+  }
+
+  .service-hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    color: var(--text-white);
+  }
+
+  @media (min-width: 768px) {
+    .service-hero-title {
+      font-size: 3rem;
+    }
+  }
+
+  .service-hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--gold-color);
+    font-weight: 500;
+    max-width: 800px;
+  }
+
+  /* Content Grid */
+  .service-content-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: flex-start;
+  }
+
+  @media (min-width: 1024px) {
+    .service-content-grid {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .service-main-col {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .section-subtitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    position: relative;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .description-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  /* Process steps */
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .process-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px rgba(11, 34, 64, 0.1);
+  }
+
+  .step-text p {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* Sidebar styling */
+  .service-sidebar-col {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    position: sticky;
+    top: 120px;
+  }
+
+  .sidebar-card {
+    padding: 30px;
+    border-color: rgba(11, 34, 64, 0.08);
+  }
+
+  .sidebar-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 10px;
+  }
+
+  .sidebar-benefits-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sidebar-benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+  }
+
+  .check-icon {
+    color: var(--accent-color);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-card-icon {
+    width: 54px;
+    height: 54px;
+    background: #e8fbee;
+    color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+  }
+
+  .contact-card p {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  /* Final CTA mini card */
+  .service-cta-mini {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    border-color: rgba(11, 34, 64, 0.1);
+  }
+
+  .service-cta-mini h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .service-cta-mini p {
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    .cta-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .cta-actions .btn {
+      width: 100%;
+    }
+  }
+</style>

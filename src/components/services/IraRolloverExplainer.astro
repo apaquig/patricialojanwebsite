@@ -1,0 +1,169 @@
+---
+const { lang = 'es' } = Astro.props;
+
+const content = {
+  es: {
+    title: "¿Qué es un IRA Rollover?",
+    text: "El IRA Rollover (o traspaso de cuenta de retiro) es un procedimiento financiero totalmente legal y aprobado por el IRS que te permite transferir los fondos acumulados en un plan de jubilación empresarial (como un 401k o 403b) de un empleo anterior hacia una Cuenta de Retiro Individual (IRA) que tú controlas de forma 100% personal.",
+    warningTitle: "¡Cuidado con la Retención del 20%!",
+    warningText: "Si solicitas que te envíen el dinero de tu 401(k) viejo a tu nombre en un cheque, el administrador está obligado por ley a retener inmediatamente el 20% de tus ahorros para dárselos al gobierno en concepto de impuestos provisionales.",
+    solution: "La Solución: Nosotros te ayudamos a realizar un Direct Rollover (Traspaso Directo). Los fondos se envían directamente de la antigua institución financiera hacia tu nueva IRA, evitando que se retenga ningún impuesto y sin penalidades de ningún tipo.",
+    benefitsTitle: "Beneficios de consolidar tus cuentas antiguas",
+    benefitsIntro: "Tener tus fondos dispersos en empleos pasados suele ser perjudicial. Al transferirlos a una IRA obtienes:",
+    benefit1: "Control Absoluto: Ya no dependes de las reglas o fondos limitados que elija tu antigua empresa. Tú decides dónde colocar tu dinero.",
+    benefit2: "Ahorro en Comisiones: Muchos planes empresariales antiguos cobran costosas tarifas de mantenimiento administrativo que van mermando tus ahorros poco a poco.",
+    benefit3: "Protección de Capital: Puedes canalizar tus fondos a anualidades indexadas que garantizan que tus ahorros acumulados nunca disminuyan, incluso si hay crisis o caídas fuertes en la bolsa de valores.",
+    benefit4: "Claridad Financiera: Consolidar múltiples cuentas antiguas en un solo reporte mensual te da una visión clara de cuánto tienes y cómo crece tu patrimonio.",
+    quote: "Tenía tres cuentas de retiro diferentes de mis últimos trabajos en New Jersey. Me costaba seguirles el rastro y pagaba tarifas en cada una. Patricia me ayudó a consolidar todo en un solo IRA Rollover de forma limpia y transparente. Por fin tengo orden en mi retiro.",
+    author: "— Carlos V., Elizabeth NJ"
+  },
+  en: {
+    title: "What is an IRA Rollover?",
+    text: "An IRA Rollover (or retirement account transfer) is a fully legal, IRS-approved financial procedure that allows you to transfer accumulated funds from a corporate retirement plan (like a 401k or 403b) from a former employer into an Individual Retirement Account (IRA) that you manage 100% personally.",
+    warningTitle: "Beware of the 20% Withholding!",
+    warningText: "If you request the money from your old 401(k) to be sent directly to your name in a check, the plan administrator is required by law to immediately withhold 20% of your savings for provisional taxes sent to the government.",
+    solution: "The Solution: We help you perform a Direct Rollover. Funds are transferred directly from the former financial institution to your new IRA, preventing any tax withholding and avoiding penalties of any kind.",
+    benefitsTitle: "Benefits of Consolidating Your Former Accounts",
+    benefitsIntro: "Leaving your funds scattered in past jobs is usually disadvantageous. By transferring them to an IRA, you get:",
+    benefit1: "Absolute Control: You no longer depend on the rules or limited funds chosen by your former employer. You decide where to allocate your money.",
+    benefit2: "Fee Savings: Many old employer plans charge high administrative maintenance fees that slowly eat away at your savings over time.",
+    benefit3: "Capital Protection: You can channel your funds into indexed annuities that guarantee your accumulated savings never decrease, even during market drops or recessions.",
+    benefit4: "Financial Clarity: Consolidating multiple old accounts into a single monthly statement gives you a clear view of how much you have and how your wealth is growing.",
+    quote: "I had three different retirement accounts from my previous jobs in New Jersey. It was hard to track them down and I was paying fees on each one. Patricia helped me consolidate everything into a single IRA Rollover cleanly and transparently. Finally, I have order in my retirement.",
+    author: "— Carlos V., Elizabeth NJ"
+  },
+  pt: {
+    title: "O que é um IRA Rollover?",
+    text: "O IRA Rollover (ou transferência de conta de aposentadoria) é um procedimento financeiro totalmente legal e aprovado pelo IRS que permite a você transferir recursos acumulados em um plano de aposentadoria corporativo (como 401k ou 403b) de um emprego anterior para uma Conta Individual de Aposentadoria (IRA) que você administra 100% pessoalmente.",
+    warningTitle: "Cuidado com a Retenção de 20%!",
+    warningText: "Se você solicitar que enviem o dinheiro do seu 401(k) antigo no seu nome em cheque, o administrador do plano é obrigado por lei a reter imediatamente 20% das suas economias para repassar ao governo como impostos provisórios.",
+    solution: "A Solução: Ajudamos você a realizar um Rollover Direto (Direct Rollover). Os recursos são enviados diretamente da instituição financeira antiga para sua nova IRA, evitando qualquer retenção tributária e livre de multas ou taxas.",
+    benefitsTitle: "Benefícios de consolidar suas contas antigas",
+    benefitsIntro: "Deixar seus recursos dispersos em empregos antigos costuma ser prejudicial. Ao transferi-los para uma IRA, você obtém:",
+    benefit1: "Controle Absoluto: Você não depende mais das regras ou fundos limitados escolhidos pelo seu antigo empregador. Você decide onde colocar seu dinheiro.",
+    benefit2: "Economia de Tarifas: Muitos planos corporativos antigos cobram taxas altas de manutenção que consomem suas economias aos poucos.",
+    benefit3: "Proteção de Capital: Você pode canalizar seus recursos para anuidades indexadas que garantem que suas economias acumuladas nunca diminuam, mesmo durante quedas bruscas da bolsa de valores.",
+    benefit4: "Clareza Financeira: Consolidar várias contas antigas em um único relatório mensal dá uma visão clara de quanto você possui e como seu patrimônio está crescendo.",
+    quote: "Eu tinha três contas de aposentadoria diferentes dos meus últimos empregos em Nova Jersey. Era difícil rastrear e eu pagava taxas em cada uma delas. A Patricia me ajudou a consolidar tudo em um único IRA Rollover de forma limpa e transparente. Finalmente tenho ordem na minha aposentadoria.",
+    author: "— Carlos V., Elizabeth NJ"
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<div class="custom-rollover-details">
+  <h3 class="custom-subtitle">{t.title}</h3>
+  <p>{t.text}</p>
+
+  <div class="direct-vs-indirect-box card">
+    <h4>{t.warningTitle}</h4>
+    <p>{t.warningText}</p>
+    <p class="direct-solution">
+      <strong>{t.solution.split(':')[0]}:</strong> {t.solution.split(':').slice(1).join(':')}
+    </p>
+  </div>
+
+  <h3 class="custom-subtitle">{t.benefitsTitle}</h3>
+  <p>{t.benefitsIntro}</p>
+  <ul class="custom-checklist">
+    <li><strong>{t.benefit1.split(':')[0]}:</strong> {t.benefit1.split(':').slice(1).join(':')}</li>
+    <li><strong>{t.benefit2.split(':')[0]}:</strong> {t.benefit2.split(':').slice(1).join(':')}</li>
+    <li><strong>{t.benefit3.split(':')[0]}:</strong> {t.benefit3.split(':').slice(1).join(':')}</li>
+    <li><strong>{t.benefit4.split(':')[0]}:</strong> {t.benefit4.split(':').slice(1).join(':')}</li>
+  </ul>
+
+  <div class="retirement-testimonial card glass-card">
+    <p class="testimonial-quote">"{t.quote}"</p>
+    <span class="testimonial-author">{t.author}</span>
+  </div>
+</div>
+
+<style>
+  .custom-subtitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    margin-top: 28px;
+  }
+
+  .custom-subtitle:first-of-type {
+    margin-top: 0;
+  }
+
+  .direct-vs-indirect-box {
+    margin: 32px 0;
+    padding: 30px;
+    background: rgba(184, 144, 28, 0.03);
+    border-left: 4px solid var(--gold-color);
+    border-color: var(--gold-color);
+  }
+
+  .direct-vs-indirect-box h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #9a3412; /* Deep warning orange/red for tax warning */
+    margin-bottom: 8px;
+  }
+
+  .direct-vs-indirect-box p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .direct-solution {
+    margin-bottom: 0 !important;
+    border-top: 1px solid var(--border-color);
+    padding-top: 12px;
+    margin-top: 12px;
+  }
+
+  .custom-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    padding-left: 0;
+  }
+
+  .custom-checklist li {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .custom-checklist li::before {
+    content: '✓';
+    color: var(--gold-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .retirement-testimonial {
+    margin: 32px 0 0 0;
+    padding: 24px;
+    border-color: rgba(11, 34, 64, 0.08);
+  }
+
+  .testimonial-quote {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .testimonial-author {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>

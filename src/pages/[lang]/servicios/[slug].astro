@@ -1,0 +1,45 @@
+---
+import ServiceLayout from '../../../layouts/ServiceLayout.astro';
+import { services } from '../../../data/services';
+
+import RetirementExplainer from '../../../components/services/RetirementExplainer.astro';
+import IraRolloverExplainer from '../../../components/services/IraRolloverExplainer.astro';
+import MedicareExplainer from '../../../components/services/MedicareExplainer.astro';
+import CarInsuranceExplainer from '../../../components/services/CarInsuranceExplainer.astro';
+import CompanyInsuranceExplainer from '../../../components/services/CompanyInsuranceExplainer.astro';
+import LifeInsuranceExplainer from '../../../components/services/LifeInsuranceExplainer.astro';
+import RealEstateExplainer from '../../../components/services/RealEstateExplainer.astro';
+import VisaApplicationExplainer from '../../../components/services/VisaApplicationExplainer.astro';
+import WeddingOfficiantExplainer from '../../../components/services/WeddingOfficiantExplainer.astro';
+
+export async function getStaticPaths() {
+  const langs = ['es', 'en', 'pt'];
+  const paths = [];
+
+  langs.forEach(lang => {
+    const list = services[lang] || services.es;
+    list.forEach(service => {
+      paths.push({
+        params: { lang, slug: service.id },
+        props: { service, lang }
+      });
+    });
+  });
+
+  return paths;
+}
+
+const { service, lang = 'es' } = Astro.props;
+---
+
+<ServiceLayout service={service} lang={lang}>
+  {service.id === '401k-403b' && <RetirementExplainer lang={lang} />}
+  {service.id === 'ira-rollover' && <IraRolloverExplainer lang={lang} />}
+  {service.id === 'medicare' && <MedicareExplainer lang={lang} />}
+  {service.id === 'seguros-carro' && <CarInsuranceExplainer lang={lang} />}
+  {service.id === 'seguros-compania' && <CompanyInsuranceExplainer lang={lang} />}
+  {service.id === 'seguros-vida' && <LifeInsuranceExplainer lang={lang} />}
+  {service.id === 'asesoria-proyectos-inmobiliarios' && <RealEstateExplainer lang={lang} />}
+  {service.id === 'aplicaciones-visa-estados-unidos' && <VisaApplicationExplainer lang={lang} />}
+  {service.id === 'oficiante-bodas-new-jersey' && <WeddingOfficiantExplainer lang={lang} />}
+</ServiceLayout>

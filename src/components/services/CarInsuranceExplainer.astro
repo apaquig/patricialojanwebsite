@@ -1,0 +1,200 @@
+---
+const { lang = 'es' } = Astro.props;
+
+const content = {
+  es: {
+    partnersTitle: "Comparamos y Cotizamos con Compañías Líderes",
+    partnersText: "Para garantizarte las mejores coberturas a precios competitivos en New Jersey, trabajamos directamente cotizando con las aseguradoras más sólidas y prestigiosas del país.",
+    progressiveTitle: "Progressive",
+    progressiveDesc: "Una de las aseguradoras de auto más grandes del país, reconocida por sus opciones de ahorro y tarifas competitivas.",
+    geicoTitle: "GEICO",
+    geicoDesc: "Famosa por sus excelentes tarifas y una rápida respuesta en la gestión y resolución de reclamos en la vía.",
+    partnerBadge: "Socio Autorizado",
+    coverageTitle: "¿Por qué es importante tener una buena cobertura?",
+    coverageText: "En New Jersey, los límites mínimos de seguro exigidos por la ley a menudo se quedan cortos ante un accidente serio. Si causas un choque y los daños superan la cobertura de tu seguro, tus ahorros personales o incluso tu casa podrían verse comprometidos ante demandas de terceros. Una cobertura adecuada protege tu estabilidad financiera.",
+    docsTitle: "Documentos útiles para cotizar",
+    docsText: "Para acelerar tu cotización de seguro de auto y garantizarte el mejor precio, te sugerimos tener listos los siguientes datos:",
+    doc1: "Licencia de conducir vigente de todos los conductores del hogar.",
+    doc2: "Número de VIN (Número de identificación del vehículo) o registro del carro.",
+    doc3: "Historial de manejo (fechas de accidentes anteriores o multas, si aplica).",
+    doc4: "Página de declaraciones de tu seguro de carro actual (útil para buscar descuentos por continuidad)."
+  },
+  en: {
+    partnersTitle: "We Compare and Quote with Leading Companies",
+    partnersText: "To guarantee you the best coverages at competitive prices in New Jersey, we work directly by quoting with the most solid and prestigious insurers in the country.",
+    progressiveTitle: "Progressive",
+    progressiveDesc: "One of the largest auto insurers in the country, recognized for its savings options and competitive rates.",
+    geicoTitle: "GEICO",
+    geicoDesc: "Famous for its excellent rates and quick response in road claim handling and resolution.",
+    partnerBadge: "Authorized Partner",
+    coverageTitle: "Why is it Important to Have Good Coverage?",
+    coverageText: "In New Jersey, the minimum insurance limits required by law often fall short in a serious accident. If you cause a crash and the damages exceed your insurance coverage, your personal savings or even your home could be compromised by third-party lawsuits. Adequate coverage protects your financial stability.",
+    docsTitle: "Useful Documents to Get a Quote",
+    docsText: "To speed up your auto insurance quote and guarantee the best price, we suggest having the following details ready:",
+    doc1: "Valid driver's license for all drivers in the household.",
+    doc2: "VIN number (Vehicle Identification Number) or car registration.",
+    doc3: "Driving history (dates of past accidents or tickets, if applicable).",
+    doc4: "Declarations page of your current auto insurance (helpful to look for loyalty/continuity discounts)."
+  },
+  pt: {
+    partnersTitle: "Comparamos e Cotamos com Empresas Líderes",
+    partnersText: "Para garantir a você as melhores coberturas a preços competitivos em Nova Jersey, trabalhamos diretamente cotando com as seguradoras mais sólidas e prestigiadas do país.",
+    progressiveTitle: "Progressive",
+    progressiveDesc: "Uma das maiores seguradoras de automóveis do país, reconhecida por suas opções de economia e tarifas competitivas.",
+    geicoTitle: "GEICO",
+    geicoDesc: "Famosa por suas excelentes tarifas e resposta rápida no gerenciamento e resolução de sinistros nas vias.",
+    partnerBadge: "Parceiro Autorizado",
+    coverageTitle: "Por que é importante ter uma boa cobertura?",
+    coverageText: "Em Nova Jersey, os limites mínimos de seguro exigidos por lei frequentemente não cobrem totalmente acidentes graves. Se você causar uma colisão e os danos excederem a cobertura do seguro, suas economias pessoais ou até sua casa podem ser comprometidas em processos de terceiros. Uma cobertura adequada protege sua estabilidade financeira.",
+    docsTitle: "Documentos úteis para cotação",
+    docsText: "Para agilizar sua cotação de seguro de automóvel e garantir o melhor preço, sugerimos ter em mãos os seguintes dados:",
+    doc1: "Carteira de habilitação válida de todos os motoristas da residência.",
+    doc2: "Número do chassi (VIN) ou registro do veículo.",
+    doc3: "Histórico de direção (datas de acidentes anteriores ou multas, se aplicável).",
+    doc4: "Página de declarações do seu seguro de automóvel atual (útil para buscar descontos de fidelidade)."
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<div class="custom-partners-section">
+  <h3 class="custom-subtitle">{t.partnersTitle}</h3>
+  <p>{t.partnersText}</p>
+  
+  <div class="partners-logos-container">
+    <div class="partner-logo-card" id="progressive">
+      <div class="partner-branding progressive-brand">{t.progressiveTitle}</div>
+      <p class="partner-desc">{t.progressiveDesc}</p>
+      <span class="partner-badge">{t.partnerBadge}</span>
+    </div>
+
+    <div class="partner-logo-card" id="geico">
+      <div class="partner-branding geico-brand">{t.geicoTitle}</div>
+      <p class="partner-desc">{t.geicoDesc}</p>
+      <span class="partner-badge">{t.partnerBadge}</span>
+    </div>
+  </div>
+</div>
+
+<div class="custom-details-section">
+  <h3 class="custom-subtitle">{t.coverageTitle}</h3>
+  <p>{t.coverageText}</p>
+
+  <h3 class="custom-subtitle">{t.docsTitle}</h3>
+  <p>{t.docsText}</p>
+  <ul class="custom-checklist">
+    <li>{t.doc1}</li>
+    <li>{t.doc2}</li>
+    <li>{t.doc3}</li>
+    <li>{t.doc4}</li>
+  </ul>
+</div>
+
+<style>
+  .custom-partners-section {
+    margin: 32px 0;
+    padding: 30px;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+  }
+
+  .custom-subtitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    margin-top: 24px;
+  }
+
+  .custom-subtitle:first-of-type {
+    margin-top: 0;
+  }
+
+  .partners-logos-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .partners-logos-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .partner-logo-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .partner-branding {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .progressive-brand {
+    color: #005A9C;
+  }
+
+  .geico-brand {
+    color: #00875A;
+  }
+
+  .partner-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .partner-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: var(--accent-light);
+    color: var(--accent-color);
+    padding: 4px 10px;
+    border-radius: 9999px;
+  }
+
+  .custom-details-section {
+    margin-bottom: 32px;
+  }
+
+  .custom-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    padding-left: 0;
+  }
+
+  .custom-checklist li {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .custom-checklist li::before {
+    content: '✓';
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+</style>

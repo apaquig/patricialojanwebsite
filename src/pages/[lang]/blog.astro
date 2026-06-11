@@ -1,0 +1,443 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { blogPosts } from '../../data/blog';
+import { translations } from '../../data/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'pt' } }
+  ];
+}
+
+const { lang = 'es' } = Astro.params;
+const t = translations[lang] || translations.es;
+
+const categoriesMap = {
+  es: ["Todos", "Seguros", "Retiro", "Finanzas personales", "Crédito", "Trámites", "Bienes raíces"],
+  en: ["All", "Insurance", "Retirement", "Personal Finance", "Credit", "Procedures", "Real Estate"],
+  pt: ["Todos", "Seguros", "Aposentadoria", "Finanças Pessoais", "Crédito", "Procedimentos", "Imobiliário"]
+};
+
+const categories = categoriesMap[lang] || categoriesMap.es;
+const posts = blogPosts[lang] || blogPosts.es;
+
+const ctaTitle = {
+  es: "¿Tienes dudas sobre algún tema en particular?",
+  en: "Do you have questions about a specific topic?",
+  pt: "Tem dúvidas sobre algum tema em particular?"
+};
+
+const ctaDesc = {
+  es: "Nuestro equipo de Enterprises Capital LLC puede brindarte asesoría detallada y personalizada en español sobre cualquiera de estos temas.",
+  en: "Our team at Enterprises Capital LLC can provide you with detailed and personalized guidance on any of these topics.",
+  pt: "Nossa equipe da Enterprises Capital LLC pode fornecer assessoria detalhada e personalizada sobre qualquer um desses temas."
+};
+
+const ctaBtn = {
+  es: "Agendar una consulta",
+  en: "Schedule a consultation",
+  pt: "Agendar uma consulta"
+};
+
+const ctaWhatsapp = {
+  es: "Preguntar por WhatsApp",
+  en: "Ask on WhatsApp",
+  pt: "Perguntar no WhatsApp"
+};
+
+const searchPlaceholder = {
+  es: "Buscar artículos por título o descripción...",
+  en: "Search articles by title or description...",
+  pt: "Pesquisar artigos por título ou descrição..."
+};
+
+const noResultsText = {
+  es: "No se encontraron artículos que coincidan con tu búsqueda.",
+  en: "No articles found matching your search.",
+  pt: "Nenhum artigo encontrado correspondente à sua pesquisa."
+};
+
+const clearSearchBtnText = {
+  es: "Limpiar búsqueda",
+  en: "Clear search",
+  pt: "Limpar pesquisa"
+};
+---
+
+<MainLayout
+  title={`${t.blog.heroTitle} | Enterprises Capital LLC`}
+  description={t.blog.heroDesc}
+  lang={lang}
+>
+  <!-- Blog Hero -->
+  <section class="blog-hero">
+    <div class="container text-center">
+      <span class="badge badge-gold">{lang === 'es' ? 'Educación Financiera' : lang === 'en' ? 'Financial Education' : 'Educação Financeira'}</span>
+      <h1 class="blog-hero-title">{t.blog.heroTitle}</h1>
+      <p class="blog-hero-desc">
+        {t.blog.heroDesc}
+      </p>
+      
+      <!-- Category Filter Bar (Visual) -->
+      <div class="blog-categories-bar">
+        {categories.map((cat, idx) => (
+          <button class="category-tag-btn" data-category={cat}>{cat}</button>
+        ))}
+      </div>
+
+      <!-- Search Bar -->
+      <div class="blog-search-container">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="text" 
+            id="blog-search-input" 
+            placeholder={searchPlaceholder[lang] || searchPlaceholder.es} 
+            autocomplete="off"
+            aria-label={searchPlaceholder[lang] || searchPlaceholder.es}
+          />
+          <button id="clear-search-btn" class="clear-btn" aria-label={clearSearchBtnText[lang] || clearSearchBtnText.es} style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Posts Grid -->
+  <section class="section">
+    <div class="container">
+      <!-- No Results Message -->
+      <div id="no-results-message" class="no-results-container" style="display: none;">
+        <svg class="no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+        <p>{noResultsText[lang] || noResultsText.es}</p>
+      </div>
+
+      <div class="grid grid-2 grid-3 blog-grid">
+        {posts.map(post => (
+          <div class="blog-post-wrapper" data-cat={post.category}>
+            <BlogCard 
+              slug={post.slug}
+              title={post.title}
+              category={post.category}
+              date={post.date}
+              readTime={post.readTime}
+              excerpt={post.excerpt}
+              image={post.image}
+              objectPosition={post.objectPosition}
+              lang={lang}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-secondary text-center">
+    <div class="container cta-mini">
+      <h2>{ctaTitle[lang] || ctaTitle.es}</h2>
+      <p>{ctaDesc[lang] || ctaDesc.es}</p>
+      <div class="cta-mini-actions">
+        <a href={`/${lang}/contacto`} class="btn btn-primary">{ctaBtn[lang] || ctaBtn.es}</a>
+        <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+          {ctaWhatsapp[lang] || ctaWhatsapp.es}
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Blog Hero */
+  .blog-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    padding: 160px 0 80px 0;
+    color: var(--text-white);
+  }
+
+  .blog-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    color: var(--text-white);
+  }
+
+  .blog-hero-desc {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* Categories Bar */
+  .blog-categories-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .category-tag-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-white);
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-family: var(--font-family-heading);
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .category-tag-btn:hover, .category-tag-btn.active {
+    background: var(--gold-color);
+    border-color: var(--gold-color);
+    color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+
+  /* CTA Mini */
+  .cta-mini h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .cta-mini p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+  }
+
+  .cta-mini-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .cta-mini-actions {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .cta-mini-actions .btn {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+
+  /* Search Bar Styles */
+  .blog-search-container {
+    max-width: 500px;
+    margin: 32px auto 0 auto;
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--border-radius-sm);
+    padding: 0 16px;
+    transition: all var(--transition-fast);
+  }
+
+  .search-input-wrapper:focus-within {
+    border-color: var(--gold-color);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 12px rgba(184, 144, 28, 0.2);
+  }
+
+  .search-icon {
+    width: 18px;
+    height: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-right: 12px;
+    transition: color var(--transition-fast);
+  }
+
+  .search-input-wrapper:focus-within .search-icon {
+    color: var(--gold-color);
+  }
+
+  #blog-search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-white);
+    padding: 12px 0;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  #blog-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .clear-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--transition-fast);
+  }
+
+  .clear-btn:hover {
+    color: var(--text-white);
+  }
+
+  .clear-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* No Results Message Styles */
+  .no-results-container {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid rgba(11, 34, 64, 0.05);
+    border-radius: var(--border-radius-sm);
+    margin: 40px auto;
+    max-width: 600px;
+  }
+
+  .no-results-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .no-results-container p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  const filterButtons = document.querySelectorAll('.category-tag-btn');
+  const postWrappers = document.querySelectorAll('.blog-post-wrapper');
+  const searchInput = document.getElementById('blog-search-input') as HTMLInputElement;
+  const clearBtn = document.getElementById('clear-search-btn') as HTMLButtonElement;
+  const noResultsMessage = document.getElementById('no-results-message');
+  const blogGrid = document.querySelector('.blog-grid');
+
+  if (filterButtons.length > 0 && postWrappers.length > 0) {
+    // Set first button as active by default
+    filterButtons[0].classList.add('active');
+
+    let activeCategory = filterButtons[0].getAttribute('data-category') || 'Todos';
+    let searchQuery = '';
+
+    function filterPosts() {
+      let visibleCount = 0;
+
+      postWrappers.forEach(wrapper => {
+        const postCat = wrapper.getAttribute('data-cat') || '';
+        
+        // Find title, excerpt and category text to match search query against
+        const titleText = wrapper.querySelector('.blog-title')?.textContent?.toLowerCase() || '';
+        const excerptText = wrapper.querySelector('.blog-excerpt')?.textContent?.toLowerCase() || '';
+        const categoryText = wrapper.querySelector('.blog-category-badge')?.textContent?.toLowerCase() || '';
+
+        // Category filter matching
+        const categoryMatches = (
+          activeCategory === 'Todos' || 
+          activeCategory === 'All' || 
+          postCat === activeCategory ||
+          // Fallback if translations differ (e.g. Imobiliário vs Bienes raíces)
+          (activeCategory === 'Imobiliário' && postCat === 'Bienes raíces') ||
+          (activeCategory === 'Real Estate' && postCat === 'Bienes raíces')
+        );
+
+        // Search query matching
+        const searchMatches = searchQuery === '' || 
+          titleText.includes(searchQuery) || 
+          excerptText.includes(searchQuery) ||
+          categoryText.includes(searchQuery);
+
+        if (categoryMatches && searchMatches) {
+          (wrapper as HTMLElement).style.display = 'block';
+          visibleCount++;
+        } else {
+          (wrapper as HTMLElement).style.display = 'none';
+        }
+      });
+
+      // Update grid and no results message visibility
+      if (noResultsMessage && blogGrid) {
+        if (visibleCount === 0) {
+          (noResultsMessage as HTMLElement).style.display = 'block';
+          (blogGrid as HTMLElement).style.display = 'none';
+        } else {
+          (noResultsMessage as HTMLElement).style.display = 'none';
+          (blogGrid as HTMLElement).style.display = 'grid';
+        }
+      }
+    }
+
+    // Category Buttons Listeners
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        activeCategory = button.getAttribute('data-category') || 'Todos';
+        filterPosts();
+      });
+    });
+
+    // Search Input Listener
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = (e.target as HTMLInputElement).value.trim().toLowerCase();
+        
+        // Show/hide clear button
+        if (clearBtn) {
+          clearBtn.style.display = searchQuery ? 'flex' : 'none';
+        }
+        
+        filterPosts();
+      });
+    }
+
+    // Clear Button Listener
+    if (clearBtn && searchInput) {
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        clearBtn.style.display = 'none';
+        searchInput.focus();
+        filterPosts();
+      });
+    }
+  }
+</script>

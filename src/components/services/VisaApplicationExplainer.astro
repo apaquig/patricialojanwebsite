@@ -1,0 +1,1057 @@
+---
+// VisaApplicationExplainer.astro
+const { lang = 'es' } = Astro.props;
+
+const content = {
+  es: {
+    heroTitle: "Aplicaciones de Visa para Estados Unidos",
+    heroSubtitle: "Te ayudamos a entender mejor tus opciones, organizar tus documentos y prepararte con mayor claridad para tu proceso de visa en Estados Unidos.",
+    requestOrient: "Solicitar orientación",
+    whatsappLink: "Hablar por WhatsApp",
+    scheduleConsult: "Agendar consulta",
+    badgeAccent: "Orientación USCIS y Consular",
+    
+    // Intro
+    introTitle: "Orientación Clara y Profesional",
+    introText: "Sabemos que iniciar una aplicación de visa puede generar muchas dudas: qué formulario usar, qué documentos preparar, cómo organizar la información y qué pasos seguir. Por eso, ofrecemos orientación profesional para ayudarte a comprender mejor el proceso y prepararte de forma ordenada. Nuestro objetivo es acompañarte con información clara, atención personalizada y una guía sencilla para que puedas avanzar con mayor seguridad.",
+    disclaimerTitle: "Nota importante de responsabilidad",
+    disclaimerText: "No somos abogados de inmigración ni proveemos representación legal en cortes. No podemos ni garantizamos la aprobación de visas, ya que esa es decisión exclusiva de las autoridades consulares de EE.UU. Nuestro servicio es de orientación informativa, organización y revisión de documentos.",
+
+    // Subservices
+    subservicesTitle: "Subservicios de Orientación Disponibles",
+    subservices: [
+      {
+        title: "Visa de Turismo",
+        desc: "Orientación para personas que desean viajar a Estados Unidos por turismo, visita familiar, eventos o motivos temporales."
+      },
+      {
+        title: "Renovación de Visa",
+        desc: "Acompañamiento para quienes necesitan renovar una visa existente y desean preparar su documentación de forma organizada."
+      },
+      {
+        title: "Visa de Estudiante",
+        desc: "Orientación para personas interesadas en estudiar en Estados Unidos y conocer los pasos generales del proceso."
+      },
+      {
+        title: "Visa de Trabajo",
+        desc: "Información y orientación general para personas que desean entender opciones relacionadas con visas laborales."
+      },
+      {
+        title: "Visa Familiar",
+        desc: "Orientación para procesos relacionados con familiares, reunificación y preparación de documentos."
+      },
+      {
+        title: "Permisos de Trabajo",
+        desc: "Ayuda para entender requisitos generales, preparación de formularios y organización de documentos relacionados con permisos de trabajo."
+      },
+      {
+        title: "Ajuste de Estatus",
+        desc: "Orientación general para personas que desean entender mejor el proceso de ajuste de estatus dentro de Estados Unidos."
+      },
+      {
+        title: "Preparación de Formularios",
+        desc: "Asistencia en la preparación, revisión y organización de formularios migratorios, según la información proporcionada por el cliente."
+      },
+      {
+        title: "Orientación Migratoria",
+        desc: "Consulta personalizada para revisar el caso, explicar opciones generales y orientar al cliente sobre los próximos pasos."
+      }
+    ],
+    requestBtn: "Solicitar información",
+
+    // Why Us
+    whyTitle: "¿Por qué recibir orientación con nosotros?",
+    benefits: [
+      "Explicamos el proceso en lenguaje claro y sencillo",
+      "Ayudamos a organizar documentos importantes",
+      "Brindamos atención personalizada",
+      "Orientamos a la comunidad latina en español",
+      "Revisamos la información con cuidado",
+      "Acompañamos paso a paso de forma profesional",
+      "Evitamos confusión y desorganización durante el proceso",
+      "Ofrecemos un servicio humano, responsable y confiable"
+    ],
+
+    // Process
+    processTitle: "Cómo funciona el proceso",
+    steps: [
+      {
+        num: "Paso 1",
+        title: "Consulta inicial",
+        desc: "Escuchamos tu situación y entendemos qué tipo de orientación necesitas."
+      },
+      {
+        num: "Paso 2",
+        title: "Revisión de información",
+        desc: "Revisamos la información y documentos que tienes disponibles."
+      },
+      {
+        num: "Paso 3",
+        title: "Organización del proceso",
+        desc: "Te ayudamos a identificar qué documentos pueden ser necesarios y cómo ordenarlos."
+      },
+      {
+        num: "Paso 4",
+        title: "Preparación de formularios",
+        desc: "Te orientamos en la preparación de formularios y datos importantes."
+      },
+      {
+        num: "Paso 5",
+        title: "Acompañamiento y seguimiento",
+        desc: "Te guiamos durante el proceso para que tengas mayor claridad en cada etapa."
+      }
+    ],
+
+    // Required Documents
+    docsTitle: "Documentos que podrías necesitar",
+    docsText: "Los documentos pueden variar según el tipo de visa, la situación personal y los requisitos aplicables. Por eso, recomendamos una consulta personalizada antes de iniciar el proceso.",
+    docItems: [
+      "Pasaporte vigente",
+      "Identificación personal",
+      "Fotografías tipo pasaporte, si aplica",
+      "Información familiar",
+      "Información laboral o académica",
+      "Historial de viajes",
+      "Documentos financieros",
+      "Cartas o soportes relacionados al motivo de viaje",
+      "Documentos migratorios anteriores, si aplica"
+    ],
+
+    // Gallery
+    galleryTitle: "Galería de Preparación e Información",
+    gallery: [
+      {
+        img: "/assets/images/project_visa_documents.png",
+        alt: "Preparación de documentos migratorios en Newark New Jersey"
+      },
+      {
+        img: "/assets/images/project_visa_consultation.png",
+        alt: "Orientación para aplicaciones de visa en Estados Unidos"
+      },
+      {
+        img: "/assets/images/project_visa_passport.png",
+        alt: "Asesoría para visa de turismo en Estados Unidos"
+      }
+    ],
+
+    // FAQ
+    faqTitle: "Preguntas Frecuentes sobre Visas",
+    faqs: [
+      {
+        q: "¿Ustedes garantizan la aprobación de una visa?",
+        a: "No. Ningún servicio puede garantizar la aprobación de una visa. Nuestro trabajo es orientarte, ayudarte a organizar tu información y prepararte de manera clara y profesional."
+      },
+      {
+        q: "¿Me pueden ayudar con la renovación de visa?",
+        a: "Sí. Podemos orientarte en la organización de documentos y preparación general para el proceso de renovación."
+      },
+      {
+        q: "¿Puedo recibir orientación si no sé qué visa necesito?",
+        a: "Sí. Podemos revisar tu situación general y explicarte opciones comunes para que entiendas mejor qué camino podría aplicar a tu caso."
+      },
+      {
+        q: "¿Ayudan con formularios migratorios?",
+        a: "Sí. Podemos ayudarte con preparación, revisión y organización de formularios según la información que proporciones."
+      },
+      {
+        q: "¿Atienden en español?",
+        a: "Sí. Ofrecemos orientación en español para la comunidad latina."
+      },
+      {
+        q: "¿Dónde están ubicados?",
+        a: "La atención principal está enfocada en Newark, New Jersey, y también podemos orientar a personas de otras áreas según disponibilidad."
+      },
+      {
+        q: "¿Puedo hacer una consulta por WhatsApp?",
+        a: "Sí. Puedes comunicarte por WhatsApp para solicitar más información o agendar una consulta."
+      }
+    ],
+
+    // Final CTA
+    finalCtaTitle: "No empieces tu proceso con dudas",
+    finalCtaText: "Recibe orientación clara, organiza tus documentos y avanza con mayor confianza de la mano de profesionales comprometidos.",
+    whatsappCta: "Hablar por WhatsApp"
+  },
+  en: {
+    heroTitle: "US Visa Applications",
+    heroSubtitle: "We help you understand your options, organize your documents, and prepare clearly for your US visa process.",
+    requestOrient: "Request guidance",
+    whatsappLink: "Speak via WhatsApp",
+    scheduleConsult: "Book consultation",
+    badgeAccent: "USCIS & Consular Guidance",
+    
+    // Intro
+    introTitle: "Clear & Professional Guidance",
+    introText: "We know that starting a visa application can raise many questions: which form to use, which documents to prepare, how to organize information, and what steps to follow. That's why we offer professional guidance to help you better understand the process and prepare in an orderly manner. Our goal is to accompany you with clear information, personalized attention, and a simple guide so you can move forward with greater safety.",
+    disclaimerTitle: "Important Legal Disclaimer",
+    disclaimerText: "We are not immigration attorneys and do not provide legal representation in court. We cannot and do not guarantee visa approvals, as this is the sole authority of the US consular offices. Our service is informational guidance, document organization, and review.",
+
+    // Subservices
+    subservicesTitle: "Available Orientation Services",
+    subservices: [
+      {
+        title: "Tourist Visa",
+        desc: "Guidance for individuals who wish to travel to the United States for tourism, family visits, events, or temporary purposes."
+      },
+      {
+        title: "Visa Renewal",
+        desc: "Support for those who need to renew an existing visa and wish to prepare their documentation in an organized manner."
+      },
+      {
+        title: "Student Visa",
+        desc: "Guidance for people interested in studying in the United States and understanding the general steps of the process."
+      },
+      {
+        title: "Work Visa",
+        desc: "General information and guidance for individuals who want to understand options related to work visas."
+      },
+      {
+        title: "Family Visa",
+        desc: "Guidance for processes related to family members, reunification, and document preparation."
+      },
+      {
+        title: "Work Permits",
+        desc: "Help in understanding general requirements, preparing forms, and organizing documents related to work permits."
+      },
+      {
+        title: "Adjustment of Status",
+        desc: "General guidance for individuals wishing to better understand the process of adjustment of status within the United States."
+      },
+      {
+        title: "Form Preparation",
+        desc: "Assistance in preparing, reviewing, and organizing immigration forms, based on the information provided by the client."
+      },
+      {
+        title: "Immigration Orientation",
+        desc: "Personalized consultation to review the case, explain general options, and guide the client on the next steps."
+      }
+    ],
+    requestBtn: "Request details",
+
+    // Why Us
+    whyTitle: "Why receive orientation with us?",
+    benefits: [
+      "We explain the process in clear and simple language",
+      "We help organize important documents",
+      "We provide personalized attention",
+      "We guide the Latino community in Spanish",
+      "We review the information carefully",
+      "We accompany you step-by-step professionally",
+      "We prevent confusion and disorganization during the process",
+      "We offer a human, responsible, and reliable service"
+    ],
+
+    // Process
+    processTitle: "How the process works",
+    steps: [
+      {
+        num: "Step 1",
+        title: "Initial consultation",
+        desc: "We listen to your situation and understand what type of guidance you need."
+      },
+      {
+        num: "Step 2",
+        title: "Information review",
+        desc: "We review the information and documents you have available."
+      },
+      {
+        num: "Step 3",
+        title: "Process organization",
+        desc: "We help you identify which documents may be necessary and how to sort them."
+      },
+      {
+        num: "Step 4",
+        title: "Form preparation",
+        desc: "We guide you in preparing forms and key information."
+      },
+      {
+        num: "Step 5",
+        title: "Support and follow-up",
+        desc: "We guide you during the process so you have greater clarity at each stage."
+      }
+    ],
+
+    // Required Documents
+    docsTitle: "Documents you might need",
+    docsText: "Documents may vary based on the type of visa, personal situation, and applicable requirements. Therefore, we recommend a personalized consultation before starting the process.",
+    docItems: [
+      "Valid passport",
+      "Personal identification",
+      "Passport-style photographs, if applicable",
+      "Family information",
+      "Employment or academic information",
+      "Travel history",
+      "Financial documents",
+      "Letters or support related to the reason for travel",
+      "Previous immigration documents, if applicable"
+    ],
+
+    // Gallery
+    galleryTitle: "Preparation & Information Gallery",
+    gallery: [
+      {
+        img: "/assets/images/project_visa_documents.png",
+        alt: "Preparation of immigration documents in Newark New Jersey"
+      },
+      {
+        img: "/assets/images/project_visa_consultation.png",
+        alt: "Orientation for US visa applications"
+      },
+      {
+        img: "/assets/images/project_visa_passport.png",
+        alt: "Tourist visa advice for the United States"
+      }
+    ],
+
+    // FAQ
+    faqTitle: "Frequently Asked Questions about Visas",
+    faqs: [
+      {
+        q: "Do you guarantee visa approval?",
+        a: "No. No service can guarantee visa approval. Our job is to guide you, help you organize your information, and prepare you clearly and professionally."
+      },
+      {
+        q: "Can you help me with a visa renewal?",
+        a: "Yes. We can guide you in organizing documents and general preparation for the renewal process."
+      },
+      {
+        q: "Can I receive guidance if I don't know which visa I need?",
+        a: "Yes. We can review your general situation and explain common options so you better understand which path might apply to your case."
+      },
+      {
+        q: "Do you help with immigration forms?",
+        a: "Yes. We can help you with form preparation, review, and organization based on the information you provide."
+      },
+      {
+        q: "Do you serve in Spanish?",
+        a: "Yes. We offer orientation in Spanish for the Latino community."
+      },
+      {
+        q: "Where are you located?",
+        a: "Our main office is focused in Newark, New Jersey, and we can also guide clients from other areas depending on availability."
+      },
+      {
+        q: "Can I consult via WhatsApp?",
+        a: "Yes. You can contact us via WhatsApp to request more details or schedule a consultation."
+      }
+    ],
+
+    // Final CTA
+    finalCtaTitle: "Don't start your process with doubts",
+    finalCtaText: "Receive clear orientation, organize your documents, and move forward with greater confidence alongside committed professionals.",
+    whatsappCta: "Speak via WhatsApp"
+  },
+  pt: {
+    heroTitle: "Solicitações de Visto para os Estados Unidos",
+    heroSubtitle: "Ajudamos você a entender suas opções, organizar seus documentos e se preparar com clareza para o seu processo de visto americano.",
+    requestOrient: "Solicitar orientação",
+    whatsappLink: "Falar por WhatsApp",
+    scheduleConsult: "Agendar consulta",
+    badgeAccent: "Orientação USCIS e Consular",
+    
+    // Intro
+    introTitle: "Orientação Clara e Profissional",
+    introText: "Sabemos que iniciar uma solicitação de visto pode gerar muitas dúvidas: qual formulário preencher, quais documentos separar, como estruturar os dados e que etapas seguir. Por isso, oferecemos orientação profissional para ajudá-lo a compreender melhor o fluxo do processo e preparar-se de forma organizada. Nosso foco é acompanhá-lo com informações claras, atenção personalizada e um guia simples para que você possa avançar com mais segurança.",
+    disclaimerTitle: "Aviso Legal Importante",
+    disclaimerText: "Não somos advogados de imigração nem prestamos assessoria jurídica em tribunais. Não podemos e não garantimos aprovações de visto, pois essa decisão compete unicamente aos consulados dos EUA. Oferecemos serviços de orientação, estruturação e revisão documental.",
+
+    // Subservices
+    subservicesTitle: "Serviços de Orientação de Visto Disponíveis",
+    subservices: [
+      {
+        title: "Visto de Turismo",
+        desc: "Orientação para pessoas que pretendem viajar para os Estados Unidos a turismo, visitas familiares, eventos ou outros motivos temporários."
+      },
+      {
+        title: "Renovação de Visto",
+        desc: "Acompanhamento para quem precisa renovar um visto em vigor e deseja organizar a documentação de forma correta."
+      },
+      {
+        title: "Visto de Estudante",
+        desc: "Orientação para interessados em estudar nos Estados Unidos e conhecer os passos gerais desse tipo de aplicação."
+      },
+      {
+        title: "Visto de Trabalho",
+        desc: "Informações gerais e direcionamento sobre os caminhos relacionados a vistos de trabalho nos EUA."
+      },
+      {
+        title: "Visto Familiar",
+        desc: "Orientação para processos envolvendo familiares, reunificação de parentes e preparação de formulários."
+      },
+      {
+        title: "Permissões de Trabalho",
+        desc: "Auxílio para entender os requisitos, preparar formulários e organizar a documentação necessária para autorização de trabalho."
+      },
+      {
+        title: "Ajuste de Status",
+        desc: "Orientação geral para quem busca compreender as condições de ajuste de status imigratório em território americano."
+      },
+      {
+        title: "Preparação de Formulários",
+        desc: "Auxílio na elaboração, revisão técnica e organização de formulários oficiais, com base nas informações fornecidas pelo cliente."
+      },
+      {
+        title: "Orientação Imigratória",
+        desc: "Consulta personalizada para avaliar a situação, esclarecer caminhos gerais e direcionar o cliente sobre as próximas fases."
+      }
+    ],
+    requestBtn: "Solicitar informações",
+
+    // Why Us
+    whyTitle: "Por que obter orientação conosco?",
+    benefits: [
+      "Explicamos o processo em linguagem simples e clara",
+      "Ajudamos a organizar documentos importantes",
+      "Oferecemos atendimento personalizado",
+      "Orientamos a comunidade latina em espanhol/português",
+      "Analisamos as informações com rigor",
+      "Acompanhamos você passo a passo profissionalmente",
+      "Evitamos confusões e atrasos durante a montagem do processo",
+      "Prestamos um serviço humanizado, responsável e de confiança"
+    ],
+
+    // Process
+    processTitle: "Como funciona o processo",
+    steps: [
+      {
+        num: "Passo 1",
+        title: "Consulta inicial",
+        desc: "Ouvimos seu caso para entender quais necessidades de orientação você possui."
+      },
+      {
+        num: "Passo 2",
+        title: "Revisão de dados",
+        desc: "Analisamos as informações e documentos que você já tem em mãos."
+      },
+      {
+        num: "Passo 3",
+        title: "Organização do processo",
+        desc: "Identificamos os documentos fundamentais e estruturamos como organizá-los."
+      },
+      {
+        num: "Passo 4",
+        title: "Preenchimento de formulários",
+        desc: "Ajudamos na inserção de dados nos formulários e nas declarações chaves."
+      },
+      {
+        num: "Passo 5",
+        title: "Suporte contínuo",
+        desc: "Acompanhamos você em cada etapa para garantir o máximo de clareza antes do envio."
+      }
+    ],
+
+    // Required Documents
+    docsTitle: "Documentos que você poderá precisar",
+    docsText: "A lista documental varia com base no visto, histórico pessoal e exigências consulares. Por isso, recomendamos uma análise personalizada prévia.",
+    docItems: [
+      "Passaporte válido",
+      "Identidade oficial com foto",
+      "Fotos padrão passaporte, se aplicável",
+      "Dados familiares",
+      "Comprovantes acadêmicos ou profissionais",
+      "Histórico de viagens internacionais",
+      "Demonstrações financeiras",
+      "Cartas de suporte ligadas ao propósito da viagem",
+      "Documentação de vistos anteriores, se aplicável"
+    ],
+
+    // Gallery
+    galleryTitle: "Galeria de Preparação Documental",
+    gallery: [
+      {
+        img: "/assets/images/project_visa_documents.png",
+        alt: "Organização de documentos imigratórios em Newark Nova Jersey"
+      },
+      {
+        img: "/assets/images/project_visa_consultation.png",
+        alt: "Orientação para visto americano"
+      },
+      {
+        img: "/assets/images/project_visa_passport.png",
+        alt: "Consultoria de vistos de turismo para os Estados Unidos"
+      }
+    ],
+
+    // FAQ
+    faqTitle: "Perguntas Frequentes sobre Vistos",
+    faqs: [
+      {
+        q: "Vocês garantem a aprovação do visto?",
+        a: "Não. Nenhum serviço pode assegurar a aprovação de vistos. Nosso papel é orientar você, estruturar os documentos e dar clareza técnica ao processo."
+      },
+      {
+        q: "Podem me apoiar na renovação de visto?",
+        a: "Sim. Prestamos suporte integral na organização de certidões e na montagem do processo de renovação consular."
+      },
+      {
+        q: "Consigo orientação sem saber qual visto preciso?",
+        a: "Sim. Analisamos seu contexto atual para explicar as opções comuns e sugerir caminhos aplicáveis à sua necessidade."
+      },
+      {
+        q: "Ajudam a preencher formulários imigratórios?",
+        a: "Sim. Auxiliamos na digitação, preenchimento e formatação de formulários imigratórios oficiais com base nos dados fornecidos."
+      },
+      {
+        q: "O atendimento é feito em espanhol?",
+        a: "Sim. Realizamos atendimentos em espanhol e português para a comunidade latina local."
+      },
+      {
+        q: "Onde fica o escritório?",
+        a: "Nosso foco presencial está em Newark, Nova Jersey, prestando também consultoria remota conforme agendamento prévio."
+      },
+      {
+        q: "Posso tirar dúvidas pelo WhatsApp?",
+        a: "Sim, sinta-se à vontade para enviar mensagens no WhatsApp para tirar dúvidas gerais ou agendar sua orientação formal."
+      }
+    ],
+
+    // Final CTA
+    finalCtaTitle: "Não inicie seu processo com dúvidas",
+    finalCtaText: "Obtenha orientação clara, organize seus documentos e avance com muito mais confiança de forma transparente e estruturada.",
+    whatsappCta: "Falar por WhatsApp"
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<div class="visa-application-explainer">
+  <!-- Intro Hero & Disclaimer -->
+  <div class="visa-intro-section card glass-card">
+    <div class="badge badge-accent">{t.badgeAccent}</div>
+    <h3 class="visa-section-title">{t.introTitle}</h3>
+    <p class="visa-section-desc">{t.introText}</p>
+    
+    <div class="visa-disclaimer-box">
+      <div class="disclaimer-title-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="disclaimer-icon"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <strong>{t.disclaimerTitle}</strong>
+      </div>
+      <p>{t.disclaimerText}</p>
+    </div>
+  </div>
+
+  <!-- Subservices Cards -->
+  <div class="visa-subservices-section">
+    <div class="section-header text-center">
+      <h3 class="custom-subtitle">{t.subservicesTitle}</h3>
+    </div>
+
+    <div class="grid grid-2 grid-3 visa-subservices-grid">
+      {t.subservices.map((sub, index) => {
+        const images = [
+          "/assets/images/card_visa_turismo.png",
+          "/assets/images/card_visa_renovacion.png",
+          "/assets/images/card_visa_estudiante.png",
+          "/assets/images/card_visa_trabajo.png",
+          "/assets/images/card_visa_familiar.png",
+          "/assets/images/card_visa_permiso_trabajo.png",
+          "/assets/images/card_visa_ajuste_estatus.png",
+          "/assets/images/card_visa_formularios.png",
+          "/assets/images/card_visa_orientacion.png"
+        ];
+        const subImage = images[index];
+        return (
+          <div class="subservice-card card">
+            <div class="subservice-image-wrapper">
+              <img src={subImage} alt={sub.title} class="subservice-image" loading="lazy" />
+              <span class="subservice-number">0{index + 1}</span>
+            </div>
+            <div class="subservice-content">
+              <h4>{sub.title}</h4>
+              <p>{sub.desc}</p>
+              <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="subservice-link">
+                {t.requestBtn}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="link-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Why Receive Orientation -->
+  <div class="visa-benefits-section card glass-card">
+    <h3 class="custom-subtitle text-center">{t.whyTitle}</h3>
+    
+    <div class="grid grid-2 benefits-grid">
+      {t.benefits.map((benefit) => (
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <span>{benefit}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- How It Works (Process) -->
+  <div class="visa-process-section">
+    <h3 class="custom-subtitle text-center" style="margin-bottom: 35px;">{t.processTitle}</h3>
+    
+    <div class="process-timeline">
+      {t.steps.map((step, index) => (
+        <div class="process-step-item">
+          <div class="step-badge">{index + 1}</div>
+          <div class="step-card card">
+            <h4>{step.title}</h4>
+            <p>{step.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Required Documents -->
+  <div class="visa-docs-section card glass-card">
+    <div class="docs-header">
+      <h3 class="custom-subtitle">{t.docsTitle}</h3>
+      <p>{t.docsText}</p>
+    </div>
+
+    <div class="docs-grid">
+      {t.docItems.map((item) => (
+        <div class="doc-checklist-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="bullet-checkbox"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><polyline points="9 11 12 14 22 4"></polyline></svg>
+          <span>{item}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Visa Gallery -->
+  <div class="visa-gallery-box">
+    <h3 class="custom-subtitle text-center" style="margin-bottom: 35px;">{t.galleryTitle}</h3>
+    
+    <div class="grid grid-3 gallery-grid">
+      {t.gallery.map((item) => (
+        <div class="gallery-photo-card card">
+          <div class="gallery-photo-wrapper">
+            <img src={item.img} alt={item.alt} class="gallery-photo" loading="lazy" />
+          </div>
+          <p class="gallery-caption">{item.alt}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- FAQs Accordion -->
+  <div class="visa-faq-section card glass-card">
+    <h3 class="custom-subtitle text-center" style="margin-bottom: 35px;">{t.faqTitle}</h3>
+    
+    <div class="faq-accordion-box">
+      {t.faqs.map((faq) => (
+        <details class="faq-item" name="visa-faq-group">
+          <summary class="faq-question">
+            <span>{faq.q}</span>
+            <span class="faq-icon-wrapper">
+              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  <!-- Final CTA Panel -->
+  <div class="visa-final-cta card glass-card text-center">
+    <h3>{t.finalCtaTitle}</h3>
+    <p>{t.finalCtaText}</p>
+    
+    <div class="cta-actions">
+      <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="btn-icon"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.333 4.982L2 22l5.202-1.362a9.927 9.927 0 0 0 4.81 1.238h.005c5.507 0 9.99-4.478 9.99-9.984C22.007 6.478 17.518 2 12.012 2zm6.09 14.415c-.25.703-1.47 1.28-2.01 1.37-.48.08-.94.09-2.93-.73a11.83 11.83 0 0 1-5.11-4.49c-.77-1.04-1.23-2.26-1.23-3.51 0-1.42.75-2.11 1.02-2.38.21-.21.46-.26.65-.26h.46c.15 0 .35.01.5.38.17.41.6 1.48.65 1.58.05.11.09.23.01.38-.08.15-.15.25-.26.38-.11.13-.23.29-.33.39-.11.11-.23.23-.1.46.26.46.86 1.47 1.63 2.15.99.88 1.83 1.15 2.09 1.28.26.13.41.11.56-.05.15-.16.65-.75.82-1.01.17-.26.35-.22.59-.13.24.09 1.54.73 1.8.86.26.13.43.2.5.31.06.11.06.66-.19 1.36z"></path></svg>
+        {t.whatsappCta}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .visa-application-explainer {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .visa-intro-section {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .visa-section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+  }
+
+  .visa-section-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .visa-disclaimer-box {
+    padding: 20px;
+    background: rgba(239, 71, 111, 0.05); /* Soft caution pink/red */
+    border: 1px solid rgba(239, 71, 111, 0.2);
+    border-radius: 8px;
+    width: 100%;
+  }
+
+  .disclaimer-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ef476f;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .disclaimer-icon {
+    flex-shrink: 0;
+  }
+
+  .visa-disclaimer-box p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Subservices Cards */
+  .visa-subservices-grid {
+    gap: 25px;
+    margin-top: 25px;
+  }
+
+  .subservice-card {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    height: 100%;
+  }
+
+  .subservice-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(var(--accent-color-rgb), 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .subservice-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: var(--primary-dark);
+  }
+
+  .subservice-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+  }
+
+  .subservice-card:hover .subservice-image {
+    transform: scale(1.05);
+  }
+
+  .subservice-number {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.25);
+    line-height: 1;
+    z-index: 2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .subservice-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+  }
+
+  .subservice-card h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .subservice-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .subservice-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    margin-top: 5px;
+  }
+
+  .subservice-link:hover .link-arrow {
+    transform: translateX(4px);
+  }
+
+  .link-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  /* Benefits */
+  .visa-benefits-section {
+    padding: 40px;
+  }
+
+  .benefits-grid {
+    margin-top: 30px;
+    gap: 20px;
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+  }
+
+  .benefit-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(var(--accent-color-rgb), 0.1);
+    color: var(--accent-color);
+    flex-shrink: 0;
+  }
+
+  /* Process Timeline */
+  .process-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+  }
+
+  .process-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .process-step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    position: relative;
+  }
+
+  .step-badge {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: 2px solid var(--accent-color);
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    z-index: 2;
+    text-transform: uppercase;
+  }
+
+  .step-card {
+    padding: 24px;
+    flex-grow: 1;
+  }
+
+  .step-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent-color);
+  }
+
+  .step-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  /* Required Documents */
+  .visa-docs-section {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .docs-header p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 10px 0 0 0;
+  }
+
+  .docs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  @media (min-width: 768px) {
+    .docs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .doc-checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+  }
+
+  .bullet-checkbox {
+    color: var(--accent-color);
+    flex-shrink: 0;
+  }
+
+  /* Gallery */
+  .gallery-grid {
+    gap: 24px;
+  }
+
+  .gallery-photo-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gallery-photo-wrapper {
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .gallery-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery-caption {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--text-muted);
+    padding: 12px 15px;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.01);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  /* FAQs Accordion */
+  .visa-faq-section {
+    padding: 45px;
+  }
+
+  .faq-accordion-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  /* Final CTA */
+  .visa-final-cta {
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .visa-final-cta h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+  }
+
+  .visa-final-cta p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 650px;
+    margin: 0 0 10px 0;
+    line-height: 1.6;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    .visa-intro-section, .visa-benefits-section, .visa-docs-section, .visa-faq-section, .visa-final-cta {
+      padding: 24px;
+    }
+
+    .process-timeline::before {
+      left: 15px;
+    }
+
+    .process-step-item {
+      gap: 12px;
+    }
+
+    .step-badge {
+      width: 32px;
+      height: 32px;
+      font-size: 0.9rem;
+    }
+
+    .cta-actions .btn {
+      width: 100%;
+    }
+  }
+</style>

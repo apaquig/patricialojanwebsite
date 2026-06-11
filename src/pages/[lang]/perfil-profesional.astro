@@ -1,0 +1,543 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { translations } from '../../data/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'pt' } }
+  ];
+}
+
+const { lang = 'es' } = Astro.params;
+const t = translations[lang] || translations.es;
+
+const profileBadge = {
+  es: "Sobre Mí",
+  en: "About Me",
+  pt: "Sobre Mim"
+};
+
+const profileSubtitle = {
+  es: "Estratega Financiera | Empresaria | Notaria Pública en New Jersey",
+  en: "Financial Strategist | Entrepreneur | Public Notary in New Jersey",
+  pt: "Estrategista Financeira | Empresária | Tabeliã Pública em Nova Jersey"
+};
+
+const profileCtaBtn = {
+  es: "Agendar una cita",
+  en: "Schedule an appointment",
+  pt: "Agendar uma consulta"
+};
+
+const profileCtaWhatsapp = {
+  es: "Chatear por WhatsApp",
+  en: "Chat via WhatsApp",
+  pt: "Conversar por WhatsApp"
+};
+
+// Specialized bullet points for each language
+const specBullets = {
+  es: {
+    spec1: ["Notaría Pública", "Trámites Migratorios", "Contabilidad y Finanzas", "Oficiante de Bodas"],
+    spec2: ["Seguros de Salud", "Seguros de Vida", "Seguros de Carro", "Seguros de Compañía", "Cobertura para Gastos Finales"],
+    spec3: ["Anualidades Indexadas", "Planes 401(k) / 403(b)", "IRA Rollover", "Pensiones Privadas", "Fondos para la Universidad"],
+    spec4: ["Reparación de Crédito", "Asesoría Estratégica Empresarial", "Asesoría de Proyectos Inmobiliarios"]
+  },
+  en: {
+    spec1: ["Public Notary", "Immigration Paperwork", "Accounting & Finance", "Wedding Officiant"],
+    spec2: ["Health Insurance", "Life Insurance", "Auto Insurance", "Business Insurance", "Final Expense Coverage"],
+    spec3: ["Indexed Annuities", "401(k) / 403(b) Plans", "IRA Rollover", "Private Pensions", "College Funds"],
+    spec4: ["Credit Repair", "Strategic Business Consulting", "Real Estate Project Advisory"]
+  },
+  pt: {
+    spec1: ["Cartório Público", "Trâmites de Imigração", "Contabilidade e Finanças", "Oficiante de Casamentos"],
+    spec2: ["Seguro de Saúde", "Seguro de Vida", "Seguro de Carro", "Seguros de Empresa", "Cobertura de Despesas Finais"],
+    spec3: ["Anuidades Indexadas", "Planos 401(k) / 403(b)", "Rollover de IRA", "Pensões Privadas", "Fundos para Faculdade"],
+    spec4: ["Recuperação de Crédito", "Assessoria Empresarial Estratégica", "Assessoria em Projetos Imobiliários"]
+  }
+};
+
+const bullets = specBullets[lang] || specBullets.es;
+
+const licenseLabels = {
+  es: "Lic. No. 3003254666",
+  en: "License No. 3003254666",
+  pt: "Lic. Nº 3003254666"
+};
+---
+
+<MainLayout
+  title={`${t.perfil.heroTitle} | Patricia Lojan | Enterprises Capital LLC`}
+  description={t.perfil.heroDesc}
+  lang={lang}
+>
+  <!-- Banner / Hero de Perfil -->
+  <section class="profile-hero">
+    <div class="container profile-hero-container">
+      <div class="profile-hero-content">
+        <span class="badge badge-gold">{profileBadge[lang] || profileBadge.es}</span>
+        <h1 class="profile-hero-title">Patricia Lojan</h1>
+        <p class="profile-hero-subtitle">{profileSubtitle[lang] || profileSubtitle.es}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Biography Section -->
+  <section class="section">
+    <div class="container grid grid-2 bio-grid">
+      <!-- Profile Picture Column -->
+      <div class="bio-image-col">
+        <div class="bio-image-wrapper card">
+          <img src="/assets/images/patricia-lojan.jpg" alt="Patricia Lojan" class="bio-img" />
+          <div class="bio-image-caption">
+            <strong>{licenseLabels[lang] || licenseLabels.es}</strong>
+            <span>NJ Department of Banking & Insurance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Biography Text Column -->
+      <div class="bio-text-col">
+        <h2 class="bio-section-title">{t.perfil.aboutTitle}</h2>
+        
+        <p class="bio-paragraph">
+          {t.perfil.aboutText1}
+        </p>
+
+        <p class="bio-paragraph">
+          {t.perfil.aboutText2}
+        </p>
+
+        <p class="bio-paragraph">
+          {t.perfil.aboutText3}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Areas of Specialization -->
+  <section class="section section-secondary">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-primary">{t.perfil.specializationTitle}</span>
+        <h2 class="section-title">{t.perfil.specializationTitle}</h2>
+        <p class="section-desc">{t.perfil.heroDesc}</p>
+      </div>
+
+      <div class="grid grid-2 grid-4 specs-grid">
+        <!-- Spec 1: Servicios Profesionales -->
+        <div class="spec-card card">
+          <div class="spec-image-wrapper">
+            <img src="/assets/images/spec-prof-services.png" alt={t.perfil.spec1Title} class="spec-card-img" />
+          </div>
+          <div class="spec-card-body">
+            <h3>{t.perfil.spec1Title}</h3>
+            <p class="spec-card-desc-text">{t.perfil.spec1Desc}</p>
+            <ul>
+              {bullets.spec1.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Spec 2: Seguros -->
+        <div class="spec-card card">
+          <div class="spec-image-wrapper">
+            <img src="/assets/images/spec-insurance.png" alt={t.perfil.spec2Title} class="spec-card-img" />
+          </div>
+          <div class="spec-card-body">
+            <h3>{t.perfil.spec2Title}</h3>
+            <p class="spec-card-desc-text">{t.perfil.spec2Desc}</p>
+            <ul>
+              {bullets.spec2.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Spec 3: Retiro -->
+        <div class="spec-card card">
+          <div class="spec-image-wrapper">
+            <img src="/assets/images/spec-retirement.png" alt={t.perfil.spec3Title} class="spec-card-img" />
+          </div>
+          <div class="spec-card-body">
+            <h3>{t.perfil.spec3Title}</h3>
+            <p class="spec-card-desc-text">{t.perfil.spec3Desc}</p>
+            <ul>
+              {bullets.spec3.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Spec 4: Crecimiento -->
+        <div class="spec-card card">
+          <div class="spec-image-wrapper">
+            <img src="/assets/images/spec-wealth.png" alt={t.perfil.spec4Title} class="spec-card-img" />
+          </div>
+          <div class="spec-card-body">
+            <h3>{t.perfil.spec4Title}</h3>
+            <p class="spec-card-desc-text">{t.perfil.spec4Desc}</p>
+            <ul>
+              {bullets.spec4.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission, Vision & Values -->
+  <section class="section values-section">
+    <div class="container grid grid-2 values-grid">
+      <!-- Mision & Vision -->
+      <div class="values-text-block">
+        <div class="value-item">
+          <div class="value-header">
+            <span class="value-number">01</span>
+            <h2>{lang === 'es' ? 'Misión' : lang === 'en' ? 'Mission' : 'Missão'}</h2>
+          </div>
+          <p>
+            {lang === 'es' 
+              ? 'Orientar a la comunidad latina en Estados Unidos para que pueda tomar decisiones más informadas, seguras y estratégicas sobre su futuro financiero, familiar y empresarial.' 
+              : lang === 'en' 
+              ? 'Guide the Latino community in the United States so that they can make more informed, safe, and strategic decisions about their financial, family, and business future.' 
+              : 'Orientar a comunidade latina nos Estados Unidos para que possa tomar decisões mais informadas, seguras e estratégicas sobre seu futuro financeiro, familiar e empresarial.'}
+          </p>
+        </div>
+
+        <div class="value-item">
+          <div class="value-header">
+            <span class="value-number">02</span>
+            <h2>{lang === 'es' ? 'Visión' : lang === 'en' ? 'Vision' : 'Visão'}</h2>
+          </div>
+          <p>
+            {lang === 'es' 
+              ? 'Convertir a Enterprises Capital LLC en una empresa de referencia para la comunidad latina en New Jersey y otros estados, reconocida por su compromiso, confianza, profesionalismo y capacidad de brindar soluciones integrales.' 
+              : lang === 'en' 
+              ? 'To turn Enterprises Capital LLC into a reference company for the Latino community in New Jersey and other states, recognized for its commitment, trust, professionalism, and ability to provide comprehensive solutions.' 
+              : 'Tornar a Enterprises Capital LLC uma empresa de referência para a comunidade latina em Nova Jersey e outros estados, reconhecida por seu compromisso, confiança, profissionalismo e capacidade de oferecer soluções integrais.'}
+          </p>
+        </div>
+      </div>
+
+      <!-- Objetivos & Compromiso -->
+      <div class="values-text-block">
+        <div class="value-item">
+          <div class="value-header">
+            <span class="value-number">03</span>
+            <h2>{lang === 'es' ? 'Objetivos' : lang === 'en' ? 'Objectives' : 'Objetivos'}</h2>
+          </div>
+          <p>
+            {lang === 'es' 
+              ? 'Ayudar a los clientes a organizar, proteger y proyectar su vida financiera con una visión clara de futuro. Orientar a familias latinas, acompañar a emprendedores, educar sobre seguros, retiro, crédito y planificación financiera, y crear relaciones a largo plazo basadas en confianza, claridad y resultados.' 
+              : lang === 'en' 
+              ? 'Help clients organize, protect, and project their financial life with a clear vision of the future. Guide Latino families, support entrepreneurs, educate on insurance, retirement, credit, and financial planning, and create long-term relationships based on trust, clarity, and results.' 
+              : 'Ajudar os clientes a organizar, proteger e planejar sua vida financeira com uma visão clara do futuro. Orientar famílias latinas, apoiar empreendedores, educar sobre seguros, aposentadoria, crédito e planejamento financeiro, e criar relacionamentos de longo prazo baseados em confiança, clareza e resultados.'}
+          </p>
+        </div>
+
+        <div class="value-item">
+          <div class="value-header">
+            <span class="value-number">04</span>
+            <h2>{lang === 'es' ? 'Compromiso' : lang === 'en' ? 'Commitment' : 'Compromisso'}</h2>
+          </div>
+          <p>
+            {lang === 'es' 
+              ? 'Servir con responsabilidad, honestidad y dedicación. Cada persona que llega a Enterprises Capital LLC merece ser escuchada, orientada y acompañada con respeto.' 
+              : lang === 'en' 
+              ? 'Serve with responsibility, honesty, and dedication. Every person who comes to Enterprises Capital LLC deserves to be heard, guided, and accompanied with respect.' 
+              : 'Servir com responsabilidade, honestidade e dedicação. Cada pessoa que chega à Enterprises Capital LLC merece ser ouvida, orientada e acompanhada com respeito.'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA de contacto -->
+  <section class="section section-secondary text-center">
+    <div class="container cta-mini">
+      <h2>{t.perfil.ctaTitle}</h2>
+      <p>{t.perfil.ctaDesc}</p>
+      <div class="cta-mini-actions">
+        <a href={`/${lang}/contacto`} class="btn btn-primary">{profileCtaBtn[lang] || profileCtaBtn.es}</a>
+        <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+          {profileCtaWhatsapp[lang] || profileCtaWhatsapp.es}
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Profile Hero */
+  .profile-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    padding: 160px 0 80px 0;
+    color: var(--text-white);
+  }
+
+  .profile-hero-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-white);
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+
+  .profile-hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--gold-color);
+    font-weight: 500;
+  }
+
+  /* Bio grid */
+  .bio-grid {
+    align-items: flex-start;
+    gap: 60px;
+  }
+
+  .bio-image-col {
+    position: sticky;
+    top: 120px;
+  }
+
+  .bio-image-wrapper {
+    padding: 0;
+    overflow: hidden;
+    max-width: 440px;
+    margin: 0 auto;
+    border-color: var(--border-color);
+  }
+
+  .bio-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bio-image-caption {
+    background: var(--primary-color);
+    color: var(--text-white);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: var(--font-family-heading);
+  }
+
+  .bio-image-caption strong {
+    font-size: 1.1rem;
+    color: var(--gold-color);
+  }
+
+  .bio-image-caption span {
+    font-size: 0.8rem;
+    margin-top: 2px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .bio-section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .bio-paragraph {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  /* Specs Grid */
+  .section-header {
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .section-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+
+  .spec-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 !important; /* Override default card padding */
+    overflow: hidden;
+  }
+
+  .spec-image-wrapper {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .spec-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+  }
+
+  .spec-card:hover .spec-card-img {
+    transform: scale(1.05);
+  }
+
+  .spec-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    flex-grow: 1;
+  }
+
+  .spec-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+  }
+
+  .spec-card-desc-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .spec-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+  }
+
+  .spec-card ul li {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .spec-card ul li::before {
+    content: '•';
+    color: var(--gold-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  /* Mission, Vision & Values */
+  .values-section {
+    border-top: 1px solid var(--border-color);
+  }
+
+  .values-grid {
+    gap: 60px;
+  }
+
+  .values-text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .value-item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .value-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .value-number {
+    font-family: var(--font-family-heading);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--gold-color);
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .value-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .value-item p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  /* CTA Mini */
+  .cta-mini h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .cta-mini p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+  }
+
+  .cta-mini-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .cta-mini-actions {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .cta-mini-actions .btn {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>

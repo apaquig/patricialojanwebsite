@@ -1,0 +1,249 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { services } from '../../data/services';
+import { translations } from '../../data/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'pt' } }
+  ];
+}
+
+const { lang = 'es' } = Astro.params;
+const t = translations[lang] || translations.es;
+
+const categoriesMap = {
+  es: [
+    { key: "legal", name: "Trámites y Notaría", desc: "Asistencia confiable y legalizaciones oficiales para tus trámites importantes.", id: "profesionales" },
+    { key: "insurance", name: "Seguros y Salud", desc: "Planes de seguro médico, de vida, de auto y comerciales para resguardar lo que más valoras.", id: "seguros" },
+    { key: "retirement", name: "Retiro y Jubilación", desc: "Instrumentos de ahorro garantizados y asesoría para tu tranquilidad futura.", id: "retiro" },
+    { key: "financial", name: "Impuestos y Finanzas", desc: "Contabilidad, impuestos, reparación de crédito y consultoría estratégica empresarial.", id: "crecimiento" }
+  ],
+  en: [
+    { key: "legal", name: "Notary & Procedures", desc: "Reliable assistance and official legalizations for your important paperwork.", id: "profesionales" },
+    { key: "insurance", name: "Insurance & Health", desc: "Health, life, auto, and business insurance plans to protect what you value most.", id: "seguros" },
+    { key: "retirement", name: "Retirement Planning", desc: "Guaranteed savings instruments and advice for your future peace of mind.", id: "retiro" },
+    { key: "financial", name: "Taxes & Finance", desc: "Bookkeeping, taxes, credit repair, and strategic business consulting.", id: "crecimiento" }
+  ],
+  pt: [
+    { key: "legal", name: "Cartório e Trâmites", desc: "Assistência confiável e legalizações oficiais para seus trâmites importantes.", id: "profesionales" },
+    { key: "insurance", name: "Seguros e Saúde", desc: "Planos de seguro de saúde, de vida, de carro e comerciais para proteger o que você mais valoriza.", id: "seguros" },
+    { key: "retirement", name: "Aposentadoria e Previdência", desc: "Instrumentos de poupança garantidos e assessoria para sua tranquilidade futura.", id: "retiro" },
+    { key: "financial", name: "Impostos e Finanças", desc: "Contabilidade, impostos, recuperação de crédito e consultoria estratégica empresarial.", id: "crecimiento" }
+  ]
+};
+
+const langCategories = categoriesMap[lang] || categoriesMap.es;
+
+const categoriesWithItems = langCategories.map(cat => ({
+  ...cat,
+  items: (services[lang] || services.es).filter(s => s.categoryKey === cat.key)
+}));
+
+const ctaTitle = {
+  es: "¿No encuentras el trámite o cobertura que necesitas?",
+  en: "Can't find the procedure or coverage you need?",
+  pt: "Não encontra o trâmite ou cobertura que precisa?"
+};
+
+const ctaDesc = {
+  es: "Patricia Lojan te ofrece atención personalizada y bilingüe. Contáctanos y resolveremos tus dudas específicas de inmediato.",
+  en: "Patricia Lojan offers personalized and bilingual support. Contact us and we will resolve your specific questions immediately.",
+  pt: "Patricia Lojan oferece atendimento personalizado e bilíngue. Entre em contato e resolveremos suas dúvidas específicas imediatamente."
+};
+
+const ctaBtn = {
+  es: "Hablar con un asesor",
+  en: "Speak with an advisor",
+  pt: "Falar com um assessor"
+};
+
+const ctaWhatsapp = {
+  es: "WhatsApp Directo",
+  en: "Direct WhatsApp",
+  pt: "WhatsApp Direto"
+};
+---
+
+<MainLayout
+  title={`${t.servicios.heroTitle} | Enterprises Capital LLC | Patricia Lojan`}
+  description={t.servicios.heroDesc}
+  lang={lang}
+>
+  <!-- Services Hero -->
+  <section class="services-hero">
+    <div class="container text-center">
+      <span class="badge badge-gold">{t.index.servicesBadge}</span>
+      <h1 class="services-hero-title">{t.servicios.heroTitle}</h1>
+      <p class="services-hero-desc">
+        {t.servicios.heroDesc}
+      </p>
+      
+      <!-- Category Anchors -->
+      <div class="category-nav">
+        {categoriesWithItems.map(cat => (
+          <a href={`#${cat.id}`} class="category-nav-link">{cat.name}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorized Services Lists -->
+  {categoriesWithItems.map((cat, idx) => (
+    <section class={`section ${idx % 2 === 1 ? 'section-secondary' : ''}`} id={cat.id}>
+      <div class="container">
+        <div class="category-header">
+          <h2 class="category-title">{cat.name}</h2>
+          <p class="category-desc">{cat.desc}</p>
+        </div>
+
+        <div class="grid grid-2 grid-3">
+          {cat.items.map(service => (
+            <ServiceCard 
+              id={service.id}
+              title={service.title}
+              shortDescription={service.shortDescription}
+              href={`/${lang}/servicios/${service.id}`}
+              image={service.image}
+              category={service.category}
+              lang={lang}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Final CTA -->
+  <section class="section text-center final-cta-section" id="otros">
+    <div class="container final-cta-card card glass-card">
+      <h2>{ctaTitle[lang] || ctaTitle.es}</h2>
+      <p>
+        {ctaDesc[lang] || ctaDesc.es}
+      </p>
+      <div class="cta-actions">
+        <a href={`/${lang}/contacto`} class="btn btn-primary">{ctaBtn[lang] || ctaBtn.es}</a>
+        <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.333 4.982L2 22l5.202-1.362a9.927 9.927 0 0 0 4.81 1.238h.005c5.507 0 9.99-4.478 9.99-9.984C22.007 6.478 17.518 2 12.012 2zm6.09 14.415c-.25.703-1.47 1.28-2.01 1.37-.48.08-.94.09-2.93-.73a11.83 11.83 0 0 1-5.11-4.49c-.77-1.04-1.23-2.26-1.23-3.51 0-1.42.75-2.11 1.02-2.38.21-.21.46-.26.65-.26h.46c.15 0 .35.01.5.38.17.41.6 1.48.65 1.58.05.11.09.23.01.38-.08.15-.15.25-.26.38-.11.13-.23.29-.33.39-.11.11-.23.23-.1.46.26.46.86 1.47 1.63 2.15.99.88 1.83 1.15 2.09 1.28.26.13.41.11.56-.05.15-.16.65-.75.82-1.01.17-.26.35-.22.59-.13.24.09 1.54.73 1.8.86.26.13.43.2.5.31.06.11.06.66-.19 1.36z"/></svg>
+          {ctaWhatsapp[lang] || ctaWhatsapp.es}
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Services Hero */
+  .services-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    padding: 160px 0 80px 0;
+    color: var(--text-white);
+  }
+
+  .services-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    color: var(--text-white);
+  }
+
+  .services-hero-desc {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* Category Anchor Nav */
+  .category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .category-nav-link {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-white);
+    padding: 10px 20px;
+    font-family: var(--font-family-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--border-radius-sm);
+    transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .category-nav-link:hover {
+    background: var(--gold-color);
+    border-color: var(--gold-color);
+    color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+
+  /* Category Headers */
+  .category-header {
+    max-width: 800px;
+    margin-bottom: 48px;
+    border-left: 4px solid var(--accent-color);
+    padding-left: 20px;
+  }
+
+  .category-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .category-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+  }
+
+  /* Final CTA Card */
+  .final-cta-section {
+    padding-top: 60px;
+  }
+
+  .final-cta-card {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 48px 32px;
+    border-color: rgba(11, 34, 64, 0.1);
+  }
+
+  .final-cta-card h2 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .final-cta-card p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .cta-actions {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .cta-actions .btn {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>

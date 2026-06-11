@@ -1,0 +1,393 @@
+---
+// Footer.astro
+import { translations } from '../data/translations.js';
+import { services } from '../data/services.js';
+
+interface Props {
+  lang?: 'es' | 'en' | 'pt';
+}
+
+const { lang = 'es' } = Astro.props;
+const t = translations[lang] || translations.es;
+const f = t.footer;
+
+const currentYear = new Date().getFullYear();
+
+// Dynamic title finder for service titles
+const getServiceTitle = (id: string) => {
+  return services[lang]?.find(s => s.id === id)?.title || id;
+};
+
+// Localized about descriptions
+const aboutTexts = {
+  es: "Fundada por Patricia Lojan en 2025, Enterprises Capital LLC ofrece orientación financiera, seguros, notaría y soluciones de crecimiento para la comunidad latina en Estados Unidos.",
+  en: "Founded by Patricia Lojan in 2025, Enterprises Capital LLC offers financial guidance, insurance, notary, and growth solutions for the Latino community in the United States.",
+  pt: "Fundada por Patricia Lojan em 2025, a Enterprises Capital LLC oferece orientação financeira, seguros, serviços notariais e soluções de crescimento para a comunidade latina nos Estados Unidos."
+};
+
+const aboutText = aboutTexts[lang] || aboutTexts.es;
+
+// Localized credentials text
+const credentialsTexts = {
+  es: {
+    insuranceLabel: "Insurance Producer:",
+    insuranceLicense: "Licencia NJ No. 3003254666 (Seguro de Vida)",
+    notaryLabel: "Notaría Pública:",
+    notaryCommission: "Comisión NJ No. 50244994"
+  },
+  en: {
+    insuranceLabel: "Insurance Producer:",
+    insuranceLicense: "NJ License No. 3003254666 (Life Insurance)",
+    notaryLabel: "Public Notary:",
+    notaryCommission: "NJ Commission No. 50244994"
+  },
+  pt: {
+    insuranceLabel: "Insurance Producer:",
+    insuranceLicense: "Licença NJ Nº 3003254666 (Seguro de Vida)",
+    notaryLabel: "Notária Pública:",
+    notaryCommission: "Comissão NJ Nº 50244994"
+  }
+};
+
+const creds = credentialsTexts[lang] || credentialsTexts.es;
+
+// Localized social labels
+const socialLabels = {
+  es: {
+    fb: "Facebook de Patricia Lojan",
+    ig: "Instagram de Patricia Lojan",
+    tt: "TikTok de Patricia Lojan"
+  },
+  en: {
+    fb: "Patricia Lojan's Facebook",
+    ig: "Patricia Lojan's Instagram",
+    tt: "Patricia Lojan's TikTok"
+  },
+  pt: {
+    fb: "Facebook de Patricia Lojan",
+    ig: "Instagram de Patricia Lojan",
+    tt: "TikTok de Patricia Lojan"
+  }
+};
+
+const socials = socialLabels[lang] || socialLabels.es;
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <!-- Col 1: About & Licensing -->
+    <div class="footer-col brand-col">
+      <h3 class="footer-title">Enterprises Capital LLC</h3>
+      <p class="brand-desc">
+        {aboutText}
+      </p>
+      <div class="credentials">
+        <p class="credential-item">
+          <strong>{creds.insuranceLabel}</strong> {creds.insuranceLicense}
+        </p>
+        <p class="credential-item">
+          <strong>{creds.notaryLabel}</strong> {creds.notaryCommission}
+        </p>
+      </div>
+
+      <!-- Redes Sociales -->
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/patricia.lojan" target="_blank" rel="noopener noreferrer" class="social-icon fb" aria-label={socials.fb}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/patricialojan_finanzas" target="_blank" rel="noopener noreferrer" class="social-icon ig" aria-label={socials.ig}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204 013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@patricialojan07" target="_blank" rel="noopener noreferrer" class="social-icon tt" aria-label={socials.tt}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.99-1.72-.28-.24-.53-.51-.76-.79v5.04c.09 2.28-1.02 4.55-2.93 5.75-1.9 1.2-4.41 1.35-6.44.38-2.03-.97-3.38-3.08-3.48-5.34-.1-2.26 1.09-4.49 2.99-5.69 1.66-1.05 3.75-1.29 5.6-.68v4.06c-1.15-.56-2.54-.42-3.57.38-.98.76-1.45 2.05-1.19 3.28.26 1.22 1.34 2.17 2.6 2.29 1.26.12 2.51-.61 2.99-1.77.21-.52.26-1.1.25-1.66V0l.01.02z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Col 2: Quick Links -->
+    <div class="footer-col">
+      <h4 class="footer-heading">{f.quickLinks}</h4>
+      <ul class="footer-links">
+        <li><a href={`/${lang}/`}>{t.nav.home}</a></li>
+        <li><a href={`/${lang}/perfil-profesional`}>{t.nav.profile}</a></li>
+        <li><a href={`/${lang}/servicios`}>{t.nav.services}</a></li>
+        <li><a href={`/${lang}/areas-de-servicio`}>{t.nav.areas}</a></li>
+        <li><a href={`/${lang}/galeria`}>{t.nav.gallery}</a></li>
+        <li><a href={`/${lang}/blog`}>{t.nav.blog}</a></li>
+        <li><a href={`/${lang}/contacto`}>{t.nav.contact}</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Services categories -->
+    <div class="footer-col">
+      <h4 class="footer-heading">{f.servicesTitle}</h4>
+      <ul class="footer-links">
+        <li><a href={`/${lang}/servicios/notaria-publica`}>{getServiceTitle('notaria-publica')}</a></li>
+        <li><a href={`/${lang}/servicios/tramites-migratorios`}>{getServiceTitle('tramites-migratorios')}</a></li>
+        <li><a href={`/${lang}/servicios/seguros-carro`}>{getServiceTitle('seguros-carro')}</a></li>
+        <li><a href={`/${lang}/servicios/seguros-vida`}>{getServiceTitle('seguros-vida')}</a></li>
+        <li><a href={`/${lang}/servicios/ira-rollover`}>{getServiceTitle('ira-rollover')}</a></li>
+        <li><a href={`/${lang}/servicios/reparacion-credito`}>{getServiceTitle('reparacion-credito')}</a></li>
+        <li><a href={`/${lang}/servicios/asesoria-estrategica-empresarial`}>{getServiceTitle('asesoria-estrategica-empresarial')}</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Contact & Hours -->
+    <div class="footer-col contact-col">
+      <h4 class="footer-heading">{f.contactTitle}</h4>
+      <ul class="footer-contact-info">
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <a href="tel:9738203353">973-820-3353</a>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <a href="mailto:Patricia70adm@gmail.com" style="color: var(--text-white); font-weight: 500;">Patricia70adm@gmail.com</a>
+            <a href="mailto:info@enterprisescapital.com" style="font-size: 0.85em; opacity: 0.7;">info@enterprisescapital.com</a>
+          </div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span>20 Bloomfield Place, Newark, NJ 07104</span>
+        </li>
+      </ul>
+      <div class="hours">
+        <h5 class="hours-heading">{f.hoursTitle}</h5>
+        <p>{f.hoursWeek}</p>
+        <p>{f.hoursSat}</p>
+        <p>{f.hoursSun}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disclaimer and Legal Note -->
+  <div class="footer-disclaimer">
+    <div class="container">
+      <p class="disclaimer-text">
+        <strong>{f.disclaimerTitle}</strong> {f.disclaimerText}
+      </p>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+    <div class="container footer-bottom-container">
+      <p>&copy; {currentYear} Enterprises Capital LLC. {f.rights}</p>
+      <p>{f.tagline}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--primary-dark);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 80px 0 0 0;
+    border-top: 2px solid var(--gold-color);
+    font-size: 0.95rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    }
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-title {
+    color: var(--text-white);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .brand-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .credentials {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--gold-color);
+    padding: 12px 16px;
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+  }
+
+  .credential-item {
+    font-size: 0.85rem;
+    color: var(--text-white);
+    margin-bottom: 6px;
+  }
+
+  .credential-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .footer-heading {
+    color: var(--text-white);
+    font-size: 1.15rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  .footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent-color);
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color var(--transition-fast), padding-left var(--transition-fast);
+  }
+
+  .footer-links a:hover {
+    color: var(--gold-color);
+    padding-left: 4px;
+  }
+
+  .footer-contact-info {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-contact-info li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer-contact-info svg {
+    color: var(--accent-color);
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .footer-contact-info a:hover {
+    color: var(--text-white);
+  }
+
+  .hours-heading {
+    color: var(--text-white);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .hours p {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Disclaimer Panel */
+  .footer-disclaimer {
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 24px 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .disclaimer-text {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  /* Footer Bottom */
+  .footer-bottom {
+    background-color: var(--primary-dark);
+    padding: 24px 0;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .footer-bottom-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom-container {
+      flex-direction: row;
+      text-align: left;
+    }
+  }
+
+  /* Redes sociales en footer */
+  .footer-socials {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #ffffff !important;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, filter 0.25s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .social-icon.fb {
+    background-color: #1877F2;
+  }
+
+  .social-icon.ig {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  }
+
+  .social-icon.tt {
+    background-color: #000000;
+  }
+
+  .social-icon:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+    filter: brightness(1.1);
+  }
+
+  .social-icon.tt:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35), 2.5px 2.5px 0px #00f2fe, -2.5px -2.5px 0px #fe0979;
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Enterprises Capital LLC | Patricia Lojan</title>
+  <meta name="description" content="Orientación financiera, seguros, notaría pública, trámites migratorios y planificación de retiro para la comunidad latina en New Jersey." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <!-- SEO Alternate Multilingual Links -->
+  <link rel="alternate" hreflang="es" href="/es/" />
+  <link rel="alternate" hreflang="en" href="/en/" />
+  <link rel="alternate" hreflang="pt" href="/pt/" />
+  <link rel="alternate" hreflang="x-default" href="/es/" />
+  
+  <meta http-equiv="refresh" content="0;url=/es/" />
+  
+  <script is:inline>
+    (function() {
+      const supportedLangs = ['es', 'en', 'pt'];
+      const defaultLang = 'es';
+      
+      let lang = localStorage.getItem('preferred-language') || localStorage.getItem('user-language');
+      if (!lang) {
+        const browserLang = (navigator.language || navigator.userLanguage || '').substring(0, 2).toLowerCase();
+        if (supportedLangs.includes(browserLang)) {
+          lang = browserLang;
+        }
+      }
+      
+      if (!lang || !supportedLangs.includes(lang)) {
+        lang = defaultLang;
+      }
+      
+      window.location.replace('/' + lang + '/');
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting to / Redirigiendo a / Redirecionando para <a href="/es/">/es/</a>...</p>
+</body>
+</html>

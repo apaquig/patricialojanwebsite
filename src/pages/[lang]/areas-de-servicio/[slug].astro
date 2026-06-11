@@ -1,0 +1,488 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { locations } from '../../../data/locations';
+import { translations } from '../../../data/translations';
+
+export async function getStaticPaths() {
+  const langs = ['es', 'en', 'pt'];
+  const paths = [];
+  
+  langs.forEach(lang => {
+    const list = locations[lang] || locations.es;
+    list.forEach(loc => {
+      paths.push({
+        params: { lang, slug: loc.slug },
+        props: { loc, lang }
+      });
+    });
+  });
+  
+  return paths;
+}
+
+const { loc, lang = 'es' } = Astro.props;
+const t = translations[lang] || translations.es;
+
+// Localized strings
+const uiText = {
+  es: {
+    heroSubtitle: "Soluciones Financieras, Seguros y Notaría Pública",
+    localAttention: "Atención Local",
+    serviceCoverage: `Servicio y Cobertura en ${loc.name}`,
+    whyChoose: `¿Por qué elegir Enterprises Capital LLC en ${loc.name}?`,
+    featuredServices: `Servicios Destacados en ${loc.name}`,
+    portfolioIntro: `Ofrecemos un portafolio adaptado con asesoría profesional y bilingüe en ${loc.name}:`,
+    viewDetails: "Ver detalles del servicio",
+    consultWhatsapp: "Consultar por WhatsApp",
+    scheduleAppointment: "Agenda una Cita",
+    faqTitle: "Preguntas Frecuentes",
+    faqCommon: `Preguntas Comunes en ${loc.name}`,
+    faqDesc: `Resolvemos tus dudas sobre logística y servicios en el área de ${loc.name}.`,
+    ctaTitle: `¿Necesitas asesoría en ${loc.name}, NJ?`,
+    ctaDesc: `Agenda una consulta inicial de orientación sin compromisos. Te ayudamos con tu declaración de impuestos, seguros familiares o trámites notariales en ${loc.name} y condados cercanos.`,
+    directWhatsapp: "WhatsApp Directo",
+    contactForm: "Formulario de Contacto"
+  },
+  en: {
+    heroSubtitle: "Financial Solutions, Insurance & Public Notary",
+    localAttention: "Local Support",
+    serviceCoverage: `Service and Coverage in ${loc.name}`,
+    whyChoose: `Why choose Enterprises Capital LLC in ${loc.name}?`,
+    featuredServices: `Featured Services in ${loc.name}`,
+    portfolioIntro: `We offer a tailored portfolio with professional and bilingual guidance in ${loc.name}:`,
+    viewDetails: "View service details",
+    consultWhatsapp: "Inquire on WhatsApp",
+    scheduleAppointment: "Book an Appointment",
+    faqTitle: "Frequently Asked Questions",
+    faqCommon: `Common Questions in ${loc.name}`,
+    faqDesc: `We resolve your questions about logistics and services in the ${loc.name} area.`,
+    ctaTitle: `Need advice in ${loc.name}, NJ?`,
+    ctaDesc: `Schedule a free initial guidance consultation. We help you with your tax return, family insurance, or notary procedures in ${loc.name} and nearby counties.`,
+    directWhatsapp: "Direct WhatsApp",
+    contactForm: "Contact Form"
+  },
+  pt: {
+    heroSubtitle: "Soluções Financeiras, Seguros e Cartório Público",
+    localAttention: "Atendimento Local",
+    serviceCoverage: `Serviço e Cobertura em ${loc.name}`,
+    whyChoose: `Por que escolher a Enterprises Capital LLC em ${loc.name}?`,
+    featuredServices: `Serviços em Destaque em ${loc.name}`,
+    portfolioIntro: `Oferecemos um portfólio adaptado com assessoria profissional e bilíngue em ${loc.name}:`,
+    viewDetails: "Ver detalhes do serviço",
+    consultWhatsapp: "Consultar no WhatsApp",
+    scheduleAppointment: "Agendar uma Consulta",
+    faqTitle: "Perguntas Frequentes",
+    faqCommon: `Perguntas Comuns em ${loc.name}`,
+    faqDesc: `Resolvemos suas dúvidas sobre logística e serviços na área de ${loc.name}.`,
+    ctaTitle: `Precisa de assessoria em ${loc.name}, NJ?`,
+    ctaDesc: `Agende uma consulta inicial de orientação sem compromisso. Ajudamos você com sua declaração de impostos, seguros familiares ou trâmites de cartório em ${loc.name} e condados próximos.`,
+    directWhatsapp: "WhatsApp Direto",
+    contactForm: "Formulário de Contato"
+  }
+};
+
+const ui = uiText[lang] || uiText.es;
+---
+
+<MainLayout
+  title={loc.title}
+  description={loc.metaDescription}
+  lang={lang}
+>
+  <!-- City Hero -->
+  <section class="city-hero">
+    <div class="container text-center">
+      <span class="badge badge-gold">{loc.county}</span>
+      <h1 class="city-hero-title">{loc.name}, NJ</h1>
+      <p class="city-hero-subtitle">{ui.heroSubtitle}</p>
+    </div>
+  </section>
+
+  <!-- City Content & Description -->
+  <section class="section">
+    <div class="container grid grid-2 city-grid">
+      <!-- Left Column: Description & Benefits -->
+      <div class="city-info-col">
+        <span class="badge badge-primary">{ui.localAttention}</span>
+        <h2 class="section-title">{ui.serviceCoverage}</h2>
+        <p class="city-desc-text">{loc.localDescription}</p>
+
+        <div class="local-benefits-box">
+          <h3>{ui.whyChoose}</h3>
+          <ul class="benefits-list">
+            {loc.benefits.map(benefit => (
+              <li>
+                <div class="benefit-check">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Column: Services & Action -->
+      <div class="city-services-col card">
+        <h3>{ui.featuredServices}</h3>
+        <p class="services-intro">{ui.portfolioIntro}</p>
+        
+        <div class="local-services-list">
+          {loc.featuredServices.map(service => (
+            <a href={`/${lang}/servicios/${service.id}`} class="local-service-item">
+              <div class="service-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </div>
+              <div class="service-details">
+                <strong>{service.title}</strong>
+                <span>{ui.viewDetails} &rarr;</span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="city-action-box">
+          <a href={`https://wa.me/19738203353?text=Hola%20Patricia%20Lojan,%20necesito%20asesor%C3%ADa%20en%20${loc.name}`} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+            {ui.consultWhatsapp}
+          </a>
+          <a href={`/${lang}/contacto`} class="btn btn-secondary">{ui.scheduleAppointment}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- City FAQs Section -->
+  {loc.faq && loc.faq.length > 0 && (
+    <section class="section section-secondary">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-primary">{ui.faqTitle}</span>
+          <h2 class="section-title">{ui.faqCommon}</h2>
+          <p class="section-desc">{ui.faqDesc}</p>
+        </div>
+
+        <div class="faq-container">
+          {loc.faq.map(item => (
+            <details class="faq-item card">
+              <summary class="faq-summary">
+                <h4>{item.question}</h4>
+                <span class="faq-icon-wrapper">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </span>
+              </summary>
+              <div class="faq-content">
+                <p>{item.answer}</p>
+              </div>
+            </</details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Local CTA Block -->
+  <section class="section city-cta-section text-center">
+    <div class="container city-cta-card card glass-card animate-glow">
+      <h2>{ui.ctaTitle}</h2>
+      <p>
+        {ui.ctaDesc}
+      </p>
+      <div class="cta-actions-group">
+        <a href={`https://wa.me/19738203353?text=Hola%20Patricia%20Lojan,%20necesito%20asesor%C3%ADa%20en%20${loc.name}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+          {ui.directWhatsapp}
+        </a>
+        <a href={`/${lang}/contacto`} class="btn btn-secondary btn-large">
+          {ui.contactForm}
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* City Hero */
+  .city-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    padding: 160px 0 80px 0;
+    color: var(--text-white);
+  }
+
+  .city-hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    color: var(--text-white);
+  }
+
+  .city-hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--gold-color);
+    font-weight: 500;
+  }
+
+  /* Grid Layout */
+  .city-grid {
+    align-items: flex-start;
+    gap: 60px;
+  }
+
+  .city-desc-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+  }
+
+  .local-benefits-box h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .benefits-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .benefit-check {
+    width: 24px;
+    height: 24px;
+    background: var(--accent-light);
+    color: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Right column services list */
+  .city-services-col {
+    padding: 40px !important;
+    border-color: rgba(11, 34, 64, 0.08);
+  }
+
+  .city-services-col h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .services-intro {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .local-services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .local-service-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .local-service-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .service-icon-box {
+    width: 36px;
+    height: 36px;
+    background: var(--primary-color);
+    color: var(--text-white);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .local-service-item:hover .service-icon-box {
+    background: var(--accent-color);
+  }
+
+  .service-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-details strong {
+    font-size: 1rem;
+    color: var(--primary-color);
+  }
+
+  .service-details span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .city-action-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .city-action-box .btn {
+    width: 100%;
+  }
+
+  /* FAQs Accordion */
+  .section-header {
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+  }
+
+  .section-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .faq-item {
+    padding: 0 !important;
+    border-color: var(--border-color);
+    overflow: hidden;
+  }
+
+  .faq-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 30px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-summary h4 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding-right: 20px;
+  }
+
+  .faq-icon-wrapper {
+    width: 32px;
+    height: 32px;
+    background: var(--bg-secondary);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-normal), background-color var(--transition-fast), color var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .faq-item:hover .faq-icon-wrapper {
+    background: var(--accent-light);
+    color: var(--accent-color);
+  }
+
+  .faq-content {
+    padding: 0 30px 24px 30px;
+    border-top: 1px solid transparent;
+  }
+
+  .faq-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .faq-item[open] .faq-icon-wrapper {
+    transform: rotate(45deg);
+    background: var(--primary-color);
+    color: var(--text-white);
+  }
+
+  .faq-item[open] .faq-content {
+    border-top-color: var(--border-light);
+  }
+
+  /* Local CTA */
+  .city-cta-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    padding: 90px 0;
+    color: var(--text-white);
+  }
+
+  .city-cta-card {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 40px;
+  }
+
+  .city-cta-card h2 {
+    font-size: 2.25rem;
+    color: var(--text-white);
+    margin-bottom: 16px;
+  }
+
+  .city-cta-card p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 32px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-actions-group {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .cta-actions-group {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .cta-actions-group .btn {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>

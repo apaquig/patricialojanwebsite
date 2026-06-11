@@ -1,0 +1,141 @@
+---
+const { lang = 'es' } = Astro.props;
+
+const content = {
+  es: {
+    familyTitle: "Protección Integral para Tu Familia",
+    familyText: "Un seguro de vida es la base de un plan financiero sólido en Estados Unidos. No se trata simplemente de un beneficio por fallecimiento; representa la garantía de que tus hijos podrán ir a la universidad, que tu hipoteca estará pagada y que tu pareja no tendrá que cargar sola con deudas acumuladas ante un evento imprevisto.",
+    livingBadge1: "Exclusivo",
+    livingBadge2: "Muy Importante",
+    livingTitle: "Beneficios en Vida: Cobertura que usas tú mismo",
+    livingText: "Muchas personas creen que un seguro de vida solo ayuda a la familia cuando el asegurado fallece. Sin embargo, nuestras pólizas modernas incluyen Beneficios en Vida. Esto significa que si eres diagnosticado con una enfermedad crítica, crónica o grave (como cáncer, ataque cardíaco o derrame cerebral), puedes recibir en vida una porción considerable de tu beneficio por muerte. Este dinero en efectivo te ayudará a pagar tratamientos médicos avanzados o cubrir tus ingresos mientras no puedas trabajar.",
+    considerTitle: "¿Cuándo deberías considerar contratar un seguro de vida?",
+    considerIntro: "Cualquier momento es adecuado, pero es especialmente urgente si te encuentras en alguna de estas situaciones:",
+    consider1: "Tienes dependientes: Hijos pequeños, cónyuge o padres que dependen de tus ingresos mensuales.",
+    consider2: "Tienes deudas activas: Una hipoteca en New Jersey, préstamos personales o tarjetas de crédito.",
+    consider3: "Eres dueño de negocio: Para asegurar la continuidad de tu empresa y liquidar socios comerciales de forma legal.",
+    consider4: "Deseas ahorrar con ventajas fiscales: Ciertos seguros permanentes acumulan valor en efectivo al que puedes acceder libre de impuestos.",
+    licenseTitle: "Asesoría autorizada en New Jersey",
+    licenseText: "Patricia Lojan está oficialmente licenciada en el Estado de New Jersey por el Department of Banking and Insurance como Insurance Producer bajo la Licencia No. 3003254666. Esto te garantiza una asesoría transparente, profesional y alineada estrictamente con las leyes y protecciones al consumidor del estado."
+  },
+  en: {
+    familyTitle: "Comprehensive Protection for Your Family",
+    familyText: "Life insurance is the foundation of a solid financial plan in the United States. It is not simply a death benefit; it represents the guarantee that your children can attend college, your mortgage will be paid, and your partner will not have to bear accumulated debts alone in the face of an unforeseen event.",
+    livingBadge1: "Exclusive",
+    livingBadge2: "Very Important",
+    livingTitle: "Living Benefits: Coverage you use yourself",
+    livingText: "Many people believe that life insurance only helps the family when the insured passes away. However, our modern policies include Living Benefits. This means that if you are diagnosed with a critical, chronic, or severe illness (like cancer, a heart attack, or a stroke), you can receive a significant portion of your death benefit while you are still alive. This cash will help you pay for advanced medical treatments or replace your income while you cannot work.",
+    considerTitle: "When Should You Consider Getting Life Insurance?",
+    considerIntro: "Any time is suitable, but it is especially urgent if you find yourself in any of these situations:",
+    consider1: "You have dependents: Young children, a spouse, or parents who depend on your monthly income.",
+    consider2: "You have active debts: A mortgage in New Jersey, personal loans, or credit cards.",
+    consider3: "You are a business owner: To ensure your company's continuity and legally buy out business partners.",
+    consider4: "You wish to save with tax advantages: Certain permanent insurance policies accumulate cash value that you can access tax-free.",
+    licenseTitle: "Licensed Advisory in New Jersey",
+    licenseText: "Patricia Lojan is officially licensed in the State of New Jersey by the Department of Banking and Insurance as an Insurance Producer under License No. 3003254666. This guarantees you a transparent, professional consultation strictly aligned with the state's consumer protection laws."
+  },
+  pt: {
+    familyTitle: "Proteção Integral para a Sua Família",
+    familyText: "O seguro de vida é a base de um planejamento financeiro sólido nos Estados Unidos. Não se trata simplesmente de um benefício por morte; representa a garantia de que seus filhos poderão ir à faculdade, que sua hipoteca será quitada e que seu cônjuge não terá que arcar sozinho com as dívidas em caso de imprevisto.",
+    livingBadge1: "Exclusivo",
+    livingBadge2: "Muito Importante",
+    livingTitle: "Benefícios em Vida: Cobertura que você mesmo utiliza",
+    livingText: "Muitas pessoas acreditam que o seguro de vida só ajuda a família quando o segurado falece. No entanto, nossas apólices modernas incluem Benefícios em Vida. Isso significa que se você for diagnosticado com uma doença crítica, crônica ou grave (como câncer, infarto ou derrame), você pode receber uma parte significativa da sua indenização de morte ainda em vida. Esse valor em dinheiro ajudará você a pagar tratamentos médicos avançados ou cobrir sua renda enquanto estiver incapacitado para o trabalho.",
+    considerTitle: "Quando você deve considerar contratar um seguro de vida?",
+    considerIntro: "Qualquer momento é oportuno, mas é especialmente urgente se você se encontrar em alguma destas situações:",
+    consider1: "Você tem dependentes: Filhos pequenos, cônjuge ou pais que dependem da sua renda mensal.",
+    consider2: "Você tem dívidas ativas: Hipoteca em Nova Jersey, empréstimos pessoais ou cartões de crédito.",
+    consider3: "Você é dono de negócio: Para garantir a continuidade da sua empresa e liquidar sócios comerciais legalmente.",
+    consider4: "Deseja poupar com vantagens fiscais: Certos seguros permanentes acumulam valor em dinheiro (cash value) que você pode acessar livre de impostos.",
+    licenseTitle: "Assessoria autorizada em Nova Jersey",
+    licenseText: "A Patricia Lojan é oficialmente licenciada no Estado de Nova Jersey pelo Department of Banking and Insurance como Insurance Producer sob a Licença Nº 3003254666. Isso garante a você uma assessoria transparente, profissional e rigorosamente alinhada com as leis de proteção ao consumidor do estado."
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<div class="custom-insurance-details">
+  <h3 class="custom-subtitle">{t.familyTitle}</h3>
+  <p>{t.familyText}</p>
+
+  <div class="living-benefits-box card">
+    <div class="badge-row">
+      <span class="badge badge-gold">{t.livingBadge1}</span>
+      <span class="badge badge-primary">{t.livingBadge2}</span>
+    </div>
+    <h4>{t.livingTitle}</h4>
+    <p>{t.livingText}</p>
+  </div>
+
+  <h3 class="custom-subtitle">{t.considerTitle}</h3>
+  <p>{t.considerIntro}</p>
+  <ul class="custom-checklist">
+    <li><strong>{t.consider1.split(':')[0]}:</strong> {t.consider1.split(':').slice(1).join(':')}</li>
+    <li><strong>{t.consider2.split(':')[0]}:</strong> {t.consider2.split(':').slice(1).join(':')}</li>
+    <li><strong>{t.consider3.split(':')[0]}:</strong> {t.consider3.split(':').slice(1).join(':')}</li>
+    <li><strong>{t.consider4.split(':')[0]}:</strong> {t.consider4.split(':').slice(1).join(':')}</li>
+  </ul>
+
+  <h3 class="custom-subtitle">{t.licenseTitle}</h3>
+  <p>{t.licenseText}</p>
+</div>
+
+<style>
+  .custom-subtitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    margin-top: 28px;
+  }
+
+  .custom-subtitle:first-of-type {
+    margin-top: 0;
+  }
+
+  .living-benefits-box {
+    margin: 32px 0;
+    padding: 30px;
+    background: rgba(212, 175, 55, 0.05);
+    border: 1.5px solid var(--gold-color);
+    border-radius: var(--border-radius-sm);
+  }
+
+  .living-benefits-box h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .custom-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    padding-left: 0;
+  }
+
+  .custom-checklist li {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .custom-checklist li::before {
+    content: '✓';
+    color: var(--gold-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+</style>

@@ -1,0 +1,237 @@
+---
+// Gallery.astro
+import { translations } from '../data/translations';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = translations[lang] || translations.es;
+
+const pLojanDesc = {
+  es: "Fundadora de Enterprises Capital LLC, Ingeniera en Administración de Empresas y Asesora Financiera Licenciada.",
+  en: "Founder of Enterprises Capital LLC, Degree in Business Administration and Licensed Financial Advisor.",
+  pt: "Fundadora da Enterprises Capital LLC, Engenheira em Administração de Empresas e Assessora Financeira Licenciada."
+};
+
+const badgePrincipal = {
+  es: "Estratega Principal",
+  en: "Principal Strategist",
+  pt: "Estrategista Principal"
+};
+---
+
+<div class="gallery-container">
+  <div class="gallery-grid">
+    <!-- Featured: Patricia Lojan Real Image -->
+    <div class="gallery-item featured">
+      <img src="/assets/images/patricia-lojan.jpg" alt="Patricia Lojan" class="gallery-img" />
+      <div class="gallery-info">
+        <span class="gallery-badge">{badgePrincipal[lang] || badgePrincipal.es}</span>
+        <h3 class="gallery-title">Patricia Lojan</h3>
+        <p class="gallery-desc">{pLojanDesc[lang] || pLojanDesc.es}</p>
+      </div>
+    </div>
+
+    <!-- Newark Office Card -->
+    <div class="gallery-item text-card office">
+      <div class="gallery-overlay-gradient blue"></div>
+      <div class="gallery-card-content">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 18h12"/><path d="M6 14h12"/><path d="M6 10h12"/><path d="M6 6h12"/></svg>
+        <span class="gallery-badge">{t.galeria.badgeOffice}</span>
+        <h3 class="gallery-title">{t.galeria.cardOfficeTitle}</h3>
+        <p class="gallery-desc">{t.galeria.cardOfficeDesc}</p>
+      </div>
+    </div>
+
+    <!-- Client Advice Card -->
+    <div class="gallery-item text-card advice">
+      <div class="gallery-overlay-gradient gold"></div>
+      <div class="gallery-card-content">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="gallery-badge">{t.galeria.badgeAdvice}</span>
+        <h3 class="gallery-title">{t.galeria.cardAdviceTitle}</h3>
+        <p class="gallery-desc">{t.galeria.cardAdviceDesc}</p>
+      </div>
+    </div>
+
+    <!-- Retirement Planning Card -->
+    <div class="gallery-item text-card retirement">
+      <div class="gallery-overlay-gradient tech"></div>
+      <div class="gallery-card-content">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="gallery-badge">{t.galeria.badgeRetirement}</span>
+        <h3 class="gallery-title">{t.galeria.cardRetirementTitle}</h3>
+        <p class="gallery-desc">{t.galeria.cardRetirementDesc}</p>
+      </div>
+    </div>
+
+    <!-- Notary & Services Card -->
+    <div class="gallery-item text-card notary">
+      <div class="gallery-overlay-gradient slate"></div>
+      <div class="gallery-card-content">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="gallery-badge">{t.galeria.badgeNotary}</span>
+        <h3 class="gallery-title">{t.galeria.cardNotaryTitle}</h3>
+        <p class="gallery-desc">{t.galeria.cardNotaryDesc}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .gallery-container {
+    width: 100%;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 260px;
+    }
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    min-height: 280px;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Image card specific */
+  .gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%; /* Position focus on face */
+    transition: transform var(--transition-slow);
+  }
+
+  .gallery-item:hover .gallery-img {
+    transform: scale(1.05);
+  }
+
+  /* Featured details */
+  @media (min-width: 1024px) {
+    .gallery-item.featured {
+      grid-row: span 2;
+      grid-column: span 1;
+      min-height: auto;
+    }
+  }
+
+  /* Info card overlay */
+  .gallery-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(11, 34, 64, 0.95) 0%, rgba(11, 34, 64, 0.4) 70%, transparent 100%);
+    padding: 30px 24px 24px 24px;
+    color: var(--text-white);
+  }
+
+  /* Text-based visual cards (no broken stock photos) */
+  .gallery-item.text-card {
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+    color: var(--text-white);
+    background-color: var(--primary-color);
+  }
+
+  .gallery-overlay-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.85;
+    transition: opacity var(--transition-normal);
+  }
+
+  .gallery-item:hover .gallery-overlay-gradient {
+    opacity: 0.95;
+  }
+
+  /* Different colored templates for depth */
+  .gallery-overlay-gradient.blue {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  }
+
+  .gallery-overlay-gradient.gold {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--gold-dark) 100%);
+  }
+
+  .gallery-overlay-gradient.tech {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  }
+
+  .gallery-overlay-gradient.slate {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+  }
+
+  .gallery-card-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .gallery-card-content svg {
+    color: var(--gold-color);
+    margin-bottom: 16px;
+    opacity: 0.85;
+    transition: transform var(--transition-normal);
+  }
+
+  .gallery-item:hover svg {
+    transform: scale(1.1);
+  }
+
+  .gallery-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 2px 8px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 12px;
+    color: var(--text-white);
+  }
+
+  .gallery-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 8px;
+  }
+
+  .gallery-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+  }
+</style>

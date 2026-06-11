@@ -1,0 +1,149 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Gallery from '../../components/Gallery.astro';
+import { translations } from '../../data/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'pt' } }
+  ];
+}
+
+const { lang = 'es' } = Astro.params;
+const t = translations[lang] || translations.es;
+
+const ctaTitle = {
+  es: "¿Quieres visitarnos en Newark?",
+  en: "Do you want to visit us in Newark?",
+  pt: "Deseja nos visitar em Newark?"
+};
+
+const ctaDesc = {
+  es: "Nuestra oficina está abierta para atenderte en persona en un ambiente profesional y seguro. Agenda una cita previa.",
+  en: "Our office is open to assist you in person in a professional and safe environment. Please book an appointment in advance.",
+  pt: "Nosso escritório está aberto para atendê-lo pessoalmente em um ambiente profissional e seguro. Agende um horário com antecedência."
+};
+
+const ctaBtn = {
+  es: "Ver ubicación y horarios",
+  en: "View location and hours",
+  pt: "Ver localização e horários"
+};
+
+const ctaWhatsapp = {
+  es: "Chatear por WhatsApp",
+  en: "Chat via WhatsApp",
+  pt: "Conversar por WhatsApp"
+};
+---
+
+<MainLayout
+  title={`${t.galeria.heroTitle} | Patricia Lojan | Enterprises Capital LLC`}
+  description={t.galeria.heroDesc}
+  lang={lang}
+>
+  <!-- Gallery Hero -->
+  <section class="gallery-hero">
+    <div class="container text-center">
+      <span class="badge badge-gold">{t.galeria.badgeOffice}</span>
+      <h1 class="gallery-hero-title">{t.galeria.heroTitle}</h1>
+      <p class="gallery-hero-desc">
+        {t.galeria.heroDesc}
+      </p>
+    </div>
+  </section>
+
+  <!-- Gallery Grid Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header text-center" style="max-width:700px; margin:0 auto 48px auto;">
+        <h2 class="section-title">{t.galeria.sectionTitle}</h2>
+        <p class="section-desc">{t.galeria.sectionDesc}</p>
+      </div>
+      <Gallery lang={lang} />
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section-secondary text-center">
+    <div class="container cta-mini">
+      <h2>{ctaTitle[lang] || ctaTitle.es}</h2>
+      <p>{ctaDesc[lang] || ctaDesc.es}</p>
+      <div class="cta-mini-actions">
+        <a href={`/${lang}/contacto`} class="btn btn-primary">{ctaBtn[lang] || ctaBtn.es}</a>
+        <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+          {ctaWhatsapp[lang] || ctaWhatsapp.es}
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Gallery Hero */
+  .gallery-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    padding: 160px 0 80px 0;
+    color: var(--text-white);
+  }
+
+  .gallery-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    color: var(--text-white);
+  }
+
+  .gallery-hero-desc {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .section-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+
+  /* CTA Mini */
+  .cta-mini h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .cta-mini p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+  }
+
+  .cta-mini-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .cta-mini-actions {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .cta-mini-actions .btn {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>

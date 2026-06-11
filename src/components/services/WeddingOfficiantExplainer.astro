@@ -1,0 +1,1035 @@
+---
+// WeddingOfficiantExplainer.astro
+const { lang = 'es' } = Astro.props;
+
+const content = {
+  es: {
+    heroTitle: "Oficiante de Bodas en New Jersey",
+    heroSubtitle: "Patricia Lojan ofrece servicios como oficiante de bodas en New Jersey, ayudando a parejas a celebrar su unión con orientación clara, respeto y profesionalismo.",
+    requestOrient: "Agendar ceremonia",
+    whatsappLink: "Hablar por WhatsApp",
+    badgeAccent: "Oficiante Registrada en el Estado de NJ",
+    
+    // Intro
+    introTitle: "Servicio Profesional y Cercano",
+    introText: "El matrimonio es uno de los momentos más importantes en la vida de una pareja. Como oficiante de bodas certificada en New Jersey, Patricia Lojan ofrece un servicio profesional, respetuoso y cercano para parejas que desean realizar una ceremonia civil organizada, significativa y conforme a los requisitos del estado. Nuestro objetivo es brindar una experiencia clara, humana y confiable, acompañando a la pareja en este momento especial con atención personalizada y cuidado en cada detalle.",
+    disclaimerTitle: "Acreditación Oficial",
+    disclaimerText: "Patricia Lojan está registrada y certificada en el Estado de New Jersey para oficiar y autorizar ceremonias de matrimonio de forma legal.",
+
+    // Subservices
+    subservicesTitle: "Servicios de Ceremonia Disponibles",
+    subservices: [
+      {
+        title: "Ceremonia Civil",
+        desc: "Realización de la ceremonia civil para parejas que desean formalizar su unión legal en el estado de New Jersey."
+      },
+      {
+        title: "Ceremonia Personalizada",
+        desc: "Orientación y colaboración para crear una ceremonia más cercana, emotiva y adaptada al estilo y la historia de la pareja."
+      },
+      {
+        title: "Ceremonia Bilingüe",
+        desc: "Opción de realizar la ceremonia completamente en español o de manera bilingüe, ideal para familias latinas y multiculturales."
+      },
+      {
+        title: "Firma y Orientación",
+        desc: "Orientación general sobre los documentos y pasos necesarios para la firma legal de la licencia matrimonial."
+      },
+      {
+        title: "Ceremonias Íntimas",
+        desc: "Servicio diseñado para parejas que desean una ceremonia sencilla, privada, rápida y con un significado profundo."
+      },
+      {
+        title: "Ceremonias Familiares",
+        desc: "Servicio completo para parejas que desean compartir su unión rodeados de sus familiares y seres queridos en una celebración cálida."
+      }
+    ],
+    requestBtn: "Solicitar información",
+
+    // Why Us
+    whyTitle: "¿Por qué elegir a Patricia Lojan como oficiante de bodas?",
+    benefits: [
+      "Certificación autorizada en el Estado de New Jersey",
+      "Atención personalizada completamente en español",
+      "Servicio profesional, respetuoso y cercano",
+      "Experiencia trabajando de cerca con la comunidad latina",
+      "Ceremonias claras, organizadas y con alto significado",
+      "Orientación paso a paso en el proceso documental",
+      "Trato humano, de confianza y confidencialidad total",
+      "Cuidado minucioso en cada detalle de la ceremonia civil"
+    ],
+
+    // Process
+    processTitle: "Cómo funciona el proceso",
+    steps: [
+      {
+        num: "Paso 1",
+        title: "Consulta Inicial",
+        desc: "La pareja se comunica para solicitar información, verificar la fecha disponible y acordar el tipo de ceremonia."
+      },
+      {
+        num: "Paso 2",
+        title: "Revisión de Detalles",
+        desc: "Se revisa la información básica de la ceremonia, lugar, horario, idioma de preferencia y gustos particulares."
+      },
+      {
+        num: "Paso 3",
+        title: "Organización de la Ceremonia",
+        desc: "Coordinamos la estructura de la ceremonia, duración, lecturas, participación familiar y detalles especiales."
+      },
+      {
+        num: "Paso 4",
+        title: "Realización de la Ceremonia",
+        desc: "Patricia Lojan oficia la boda de manera profesional, respetuosa, legal y con una gran calidez humana."
+      },
+      {
+        num: "Paso 5",
+        title: "Orientación Posterior",
+        desc: "Se brinda orientación sobre la entrega de la licencia firmada y los pasos a seguir con la documentación matrimonial."
+      }
+    ],
+
+    // Required Documents
+    docsTitle: "Información y documentos que podrías necesitar",
+    docsText: "Es muy importante contar con todos los requisitos listos antes del día de la ceremonia civil. Los requisitos principales en New Jersey incluyen:",
+    docItems: [
+      "Licencia de matrimonio vigente emitida por el estado o municipio correspondiente",
+      "Identificación oficial válida y con foto de ambos contrayentes (Pasaporte, Licencia, etc.)",
+      "Fecha, hora y lugar físico de la ceremonia confirmados",
+      "Presencia de dos testigos mayores de 18 años el día de la firma",
+      "Preferencia de idioma seleccionada (Español, Inglés o Bilingüe)",
+      "Definición previa del tipo de ceremonia (Civil, Íntima, Familiar o Personalizada)"
+    ],
+    docsNotice: "Nota importante: Los requisitos específicos y tiempos de espera de la licencia pueden variar según el municipio. Se recomienda confirmar con la oficina municipal correspondiente con anticipación.",
+
+    // Gallery
+    galleryTitle: "Sección Visual y Momentos Especiales",
+    gallery: [
+      {
+        img: "/assets/images/oficiante-anillos.png",
+        alt: "Ceremonia civil en New Jersey en español"
+      },
+      {
+        img: "/assets/images/oficiante-firma.png",
+        alt: "Servicio de oficiante de bodas para comunidad latina"
+      },
+      {
+        img: "/assets/images/card-oficiante-bodas.png",
+        alt: "Patricia Lojan oficiante de bodas certificada en New Jersey"
+      }
+    ],
+
+    // FAQ
+    faqTitle: "Preguntas Frecuentes sobre el Servicio",
+    faqs: [
+      {
+        q: "¿Patricia Lojan puede oficiar bodas en New Jersey?",
+        a: "Sí. Patricia Lojan cuenta con la certificación y el registro oficial en el Estado de New Jersey para ofrecer servicios como oficiante de bodas civiles."
+      },
+      {
+        q: "¿La ceremonia puede ser en español?",
+        a: "Sí. Se puede realizar la ceremonia completamente en español, lo cual es ideal para que las parejas y sus familias se sientan cómodas."
+      },
+      {
+        q: "¿También puede ser una ceremonia bilingüe?",
+        a: "Sí. Dependiendo de los contrayentes e invitados, la ceremonia se puede planificar en español, en inglés o de forma bilingüe."
+      },
+      {
+        q: "¿Necesitamos una licencia de matrimonio?",
+        a: "Sí, absolutamente. La pareja debe obtener una Licencia de Matrimonio física y vigente en la alcaldía o municipio correspondiente de New Jersey antes de que se pueda celebrar el matrimonio civil."
+      },
+      {
+        q: "¿La ceremonia puede ser sencilla e íntima?",
+        a: "Sí. Ofrecemos opciones flexibles que van desde ceremonias íntimas muy sencillas (solo con los contrayentes y testigos en la oficina o lugar acordado) hasta celebraciones familiares más amplias."
+      },
+      {
+        q: "¿Puedo solicitar información por WhatsApp?",
+        a: "Sí. Puedes escribirnos directamente por WhatsApp para consultar disponibilidad de fechas libres, aclarar dudas o agendar tu cita de orientación."
+      }
+    ],
+
+    // Final CTA
+    finalCtaTitle: "Tu unión merece ser celebrada con respeto y profesionalismo",
+    finalCtaText: "Consulta la disponibilidad de tu fecha especial y recibe asesoría clara sobre los pasos para formalizar tu casamiento civil.",
+    whatsappCta: "Hablar por WhatsApp"
+  },
+  en: {
+    heroTitle: "Wedding Officiant in New Jersey",
+    heroSubtitle: "Patricia Lojan offers wedding officiant services in New Jersey, helping couples celebrate their union with clear guidance, respect, and professionalism.",
+    requestOrient: "Schedule ceremony",
+    whatsappLink: "Speak via WhatsApp",
+    badgeAccent: "NJ State Registered Officiant",
+    
+    // Intro
+    introTitle: "Professional & Heartfelt Service",
+    introText: "Marriage is one of the most significant moments in a couple's life. As a certified wedding officiant in New Jersey, Patricia Lojan offers a professional, respectful, and close service for couples who wish to have an organized, meaningful civil ceremony in compliance with state requirements. Our goal is to provide a clear, human, and reliable experience, accompanying the couple in this special moment with personalized attention and care in every detail.",
+    disclaimerTitle: "Official Certification",
+    disclaimerText: "Patricia Lojan is officially registered and certified in the State of New Jersey to legally perform and authorize wedding ceremonies.",
+
+    // Subservices
+    subservicesTitle: "Available Ceremony Services",
+    subservices: [
+      {
+        title: "Civil Ceremony",
+        desc: "Execution of the civil ceremony for couples who wish to legalize and formalize their union in the state of New Jersey."
+      },
+      {
+        title: "Custom Ceremony",
+        desc: "Guidance and collaboration to create a closer, emotional ceremony adapted to the couple's style and unique story."
+      },
+      {
+        title: "Bilingual Ceremony",
+        desc: "Option to conduct the ceremony entirely in Spanish or in a bilingual format, ideal for Latino and multicultural families."
+      },
+      {
+        title: "Signing & Guidance",
+        desc: "General guidance on the required documents and steps for the legal signing of the marriage license."
+      },
+      {
+        title: "Intimate Ceremonies",
+        desc: "A service designed for couples who want a simple, private, quick, yet deeply meaningful ceremony."
+      },
+      {
+        title: "Family Ceremonies",
+        desc: "A full service for couples who wish to share their union surrounded by family members and loved ones in a warm celebration."
+      }
+    ],
+    requestBtn: "Request details",
+
+    // Why Us
+    whyTitle: "Why choose Patricia Lojan as your wedding officiant?",
+    benefits: [
+      "Authorized certification in the State of New Jersey",
+      "Personalized attention in Spanish and English",
+      "Professional, respectful, and caring service",
+      "Experience working closely with the Latino community",
+      "Clear, organized, and meaningful ceremonies",
+      "Step-by-step guidance in the document process",
+      "Human touch, trust, and complete confidentiality",
+      "Meticulous care in every detail of the civil ceremony"
+    ],
+
+    // Process
+    processTitle: "How the process works",
+    steps: [
+      {
+        num: "Step 1",
+        title: "Initial Consultation",
+        desc: "The couple contacts us to request details, verify date availability, and discuss the type of ceremony."
+      },
+      {
+        num: "Step 2",
+        title: "Review of Details",
+        desc: "We review the basic details of the ceremony, location, scheduling, language preference, and special requests."
+      },
+      {
+        num: "Step 3",
+        title: "Ceremony Organization",
+        desc: "We coordinate the structure of the ceremony, duration, readings, family involvement, and special elements."
+      },
+      {
+        num: "Step 4",
+        title: "Ceremony Officiation",
+        desc: "Patricia Lojan officiates the wedding in a professional, respectful, legal, and warm manner."
+      },
+      {
+        num: "Step 5",
+        title: "Post-Ceremony Guidance",
+        desc: "We provide advice on submitting the signed marriage license and the next steps regarding documentation."
+      }
+    ],
+
+    // Required Documents
+    docsTitle: "Information and documents you might need",
+    docsText: "It is crucial to have all the legal requirements ready before the day of the civil ceremony. The main requirements in New Jersey are:",
+    docItems: [
+      "Valid marriage license issued by the corresponding state or municipal office",
+      "Valid government-issued photo ID of both partners (Passport, Driver's License, etc.)",
+      "Confirmed date, time, and physical location of the ceremony",
+      "Presence of two witnesses over 18 years old on the signing day",
+      "Selected language preference (Spanish, English, or Bilingual)",
+      "Pre-selected ceremony type (Civil, Intimate, Family, or Customized)"
+    ],
+    docsNotice: "Important Note: Specific requirements and waiting times for the license may vary by municipality. It is highly recommended to check with the corresponding local municipal clerk in advance.",
+
+    // Gallery
+    galleryTitle: "Visual Showcase & Special Moments",
+    gallery: [
+      {
+        img: "/assets/images/oficiante-anillos.png",
+        alt: "Civil wedding ceremony in New Jersey in Spanish"
+      },
+      {
+        img: "/assets/images/oficiante-firma.png",
+        alt: "Wedding officiant service for the Latino community"
+      },
+      {
+        img: "/assets/images/card-oficiante-bodas.png",
+        alt: "Patricia Lojan certified wedding officiant in New Jersey"
+      }
+    ],
+
+    // FAQ
+    faqTitle: "Frequently Asked Questions",
+    faqs: [
+      {
+        q: "Can Patricia Lojan officiate weddings in New Jersey?",
+        a: "Yes. Patricia Lojan is fully certified and registered in the State of New Jersey to offer civil wedding officiant services."
+      },
+      {
+        q: "Can the ceremony be in Spanish?",
+        a: "Yes. The ceremony can be performed completely in Spanish, which is ideal for couples and families who prefer their native language."
+      },
+      {
+        q: "Can it also be a bilingual ceremony?",
+        a: "Yes. Depending on the couple and their guests, the ceremony can be scheduled in Spanish, English, or in a bilingual format."
+      },
+      {
+        q: "Do we need a marriage license?",
+        a: "Yes, absolutely. The couple must obtain a physical, valid Marriage License from their local municipal office in New Jersey before the ceremony can take place."
+      },
+      {
+        q: "Can the ceremony be simple and intimate?",
+        a: "Yes. We offer flexible options ranging from very simple intimate ceremonies (just the couple and witnesses at the office or chosen location) to larger family celebrations."
+      },
+      {
+        q: "Can I request information via WhatsApp?",
+        a: "Yes. You can message us directly on WhatsApp to check date availability, clarify doubts, or schedule your orientation session."
+      }
+    ],
+
+    // Final CTA
+    finalCtaTitle: "Your union deserves to be celebrated with respect and professionalism",
+    finalCtaText: "Check availability for your special date and receive clear guidance on the steps to formalize your civil marriage.",
+    whatsappCta: "Speak via WhatsApp"
+  },
+  pt: {
+    heroTitle: "Oficiante de Casamentos em New Jersey",
+    heroSubtitle: "Patricia Lojan oferece serviços como oficiante de casamentos em New Jersey, ajudando casais a celebrar sua união com orientação clara, respeito e profissionalismo.",
+    requestOrient: "Agendar cerimônia",
+    whatsappLink: "Falar por WhatsApp",
+    badgeAccent: "Oficiante Registrada no Estado de NJ",
+    
+    // Intro
+    introTitle: "Serviço Profissional e Acolhedor",
+    introText: "O casamento é um dos momentos mais importantes na vida de um casal. Como oficiante de casamentos certificada em New Jersey, Patricia Lojan oferece um serviço profissional, respeitoso e próximo para casais que desejam realizar uma cerimônia civil organizada, significativa e em conformidade com as exigências do estado. Nosso objetivo é proporcionar uma experiência clara, humana e confiável, acompanhando o casal neste momento especial com atendimento personalizado e cuidado em cada detalhe.",
+    disclaimerTitle: "Credenciamento Oficial",
+    disclaimerText: "Patricia Lojan está devidamente registrada e certificada no Estado de New Jersey para celebrar e validar casamentos civis legalmente.",
+
+    // Subservices
+    subservicesTitle: "Serviços de Cerimônia Disponíveis",
+    subservices: [
+      {
+        title: "Cerimônia Civil",
+        desc: "Realização do casamento civil para casais que desejam formalizar e legalizar sua união no estado de New Jersey."
+      },
+      {
+        title: "Cerimônia Personalizada",
+        desc: "Direcionamento e colaboração para criar uma celebração mais íntima, emotiva e adaptada ao estilo e à história do casal."
+      },
+      {
+        title: "Cerimônia Bilíngue",
+        desc: "Opção de realizar a cerimônia totalmente em espanhol ou de forma bilíngue, ideal para famílias latinas e multiculturais."
+      },
+      {
+        title: "Firma e Orientação",
+        desc: "Orientação geral sobre a documentação e os trâmites necessários para a assinatura legal da licença matrimonial."
+      },
+      {
+        title: "Cerimônias Íntimas",
+        desc: "Serviço sob medida para casais que preferem uma cerimônia simples, privada, rápida e com um significado profundo."
+      },
+      {
+        title: "Cerimônias Familiares",
+        desc: "Serviço completo para casais que desejam compartilhar sua união cercados por seus familiares e entes queridos em um momento caloroso."
+      }
+    ],
+    requestBtn: "Solicitar detalhes",
+
+    // Why Us
+    whyTitle: "Por que escolher Patricia Lojan como sua oficiante de casamento?",
+    benefits: [
+      "Certificação oficial autorizada no Estado de New Jersey",
+      "Atendimento personalizado em espanhol e inglês",
+      "Serviço altamente profissional, respeitoso e próximo",
+      "Experiência de trabalho próxima com a comunidade latina",
+      "Cerimônias organizadas, claras e com alto significado",
+      "Orientação passo a passo em toda a fase documental",
+      "Tratamento humano, confiável e total confidencialidade",
+      "Cuidado rigoroso com cada detalhe da cerimônia civil"
+    ],
+
+    // Process
+    processTitle: "Como funciona o processo",
+    steps: [
+      {
+        num: "Passo 1",
+        title: "Consulta Inicial",
+        desc: "O casal entra em contato para solicitar informações, verificar datas livres e escolher o tipo de cerimônia."
+      },
+      {
+        num: "Passo 2",
+        title: "Revisão de Detalhes",
+        desc: "Analisamos os detalhes básicos da cerimônia, local, horários, idioma de preferência e desejos especiais."
+      },
+      {
+        num: "Passo 3",
+        title: "Organização da Cerimônia",
+        desc: "Definimos juntos a estrutura da cerimônia, duração, leituras, participação da família e rituais."
+      },
+      {
+        num: "Passo 4",
+        title: "Realização da Cerimônia",
+        desc: "Patricia Lojan celebra o casamento de forma profissional, solene, legal e com profunda empatia humana."
+      },
+      {
+        num: "Passo 5",
+        title: "Suporte Pós-Cerimônia",
+        desc: "Oferecemos orientação sobre o envio da licença assinada e as etapas seguintes relacionadas ao registro do casamento."
+      }
+    ],
+
+    // Required Documents
+    docsTitle: "Informações e documentos necessários",
+    docsText: "É muito importante providenciar todas as exigências legais antes do dia da cerimônia. Os itens essenciais em New Jersey são:",
+    docItems: [
+      "Licença de casamento física e válida emitida pela prefeitura ou município correspondente",
+      "Documento de identidade oficial com foto válido dos noivos (Passaporte, Carteira de Motorista, etc.)",
+      "Confirmação da data, horário e endereço da cerimônia",
+      "Presença de duas testemunhas maiores de 18 anos no dia da assinatura",
+      "Seleção do idioma de preferência (Espanhol, Inglês ou Bilíngue)",
+      "Escolha prévia do formato da cerimônia (Civil, Íntima, Familiar ou Customizada)"
+    ],
+    docsNotice: "Aviso Importante: As regras específicas e os prazos de emissão da licença de casamento podem variar entre os municípios. Recomendamos contatar a prefeitura local com bastante antecedência.",
+
+    // Gallery
+    galleryTitle: "Galeria Visual & Momentos Especiais",
+    gallery: [
+      {
+        img: "/assets/images/oficiante-anillos.png",
+        alt: "Cerimônia civil de casamento em New Jersey em espanhol"
+      },
+      {
+        img: "/assets/images/oficiante-firma.png",
+        alt: "Serviço de oficiante de casamentos para a comunidade latina"
+      },
+      {
+        img: "/assets/images/card-oficiante-bodas.png",
+        alt: "Patricia Lojan oficiante de casamentos registrada em New Jersey"
+      }
+    ],
+
+    // FAQ
+    faqTitle: "Perguntas Frequentes",
+    faqs: [
+      {
+        q: "A Patricia Lojan pode celebrar casamentos em New Jersey?",
+        a: "Sim. Patricia Lojan possui registro oficial no Estado de New Jersey para atuar como oficiante em casamentos civis."
+      },
+      {
+        q: "A cerimônia pode ser celebrada em espanhol?",
+        a: "Sim. A cerimônia pode ser realizada totalmente em espanhol, proporcionando conforto para os noivos e suas famílias."
+      },
+      {
+        q: "Também pode ser uma cerimônia bilíngue?",
+        a: "Sim. De acordo com as necessidades do casal e dos convidados, a cerimônia pode ser feita em espanhol, inglês ou em formato bilíngue."
+      },
+      {
+        q: "Precisamos obter uma licença de casamento?",
+        a: "Sim, com certeza. O casal deve obter a Licença de Casamento física na prefeitura (Municipal Clerk) antes de realizarmos o casamento civil."
+      },
+      {
+        q: "A cerimônia pode ser simples e reservada?",
+        a: "Sim. Oferecemos opções desde cerimônias íntimas simplificadas (apenas os noivos e testemunhas no escritório ou local combinado) até eventos familiares completos."
+      },
+      {
+        q: "Posso tirar dúvidas ou agendar pelo WhatsApp?",
+        a: "Sim. Você pode enviar uma mensagem diretamente no WhatsApp para checar datas disponíveis, solicitar informações ou agendar uma conversa inicial."
+      }
+    ],
+
+    // Final CTA
+    finalCtaTitle: "Sua união merece ser celebrada com respeito, clareza e profissionalismo",
+    finalCtaText: "Verifique a disponibilidade para sua data especial e receba orientações claras sobre como oficializar seu casamento civil.",
+    whatsappCta: "Falar por WhatsApp"
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<div class="wedding-officiant-explainer">
+  <!-- Intro Block with Badge & Disclaimer -->
+  <div class="wedding-intro-section card glass-card">
+    <div class="badge badge-accent">{t.badgeAccent}</div>
+    <h3 class="wedding-section-title">{t.introTitle}</h3>
+    <p class="wedding-section-desc">{t.introText}</p>
+    
+    <div class="wedding-accreditation-box">
+      <div class="accreditation-title-row">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="accreditation-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <strong>{t.disclaimerTitle}</strong>
+      </div>
+      <p>{t.disclaimerText}</p>
+    </div>
+  </div>
+
+  <!-- Subservices Cards -->
+  <div class="wedding-subservices-section">
+    <div class="section-header text-center">
+      <h3 class="custom-subtitle">{t.subservicesTitle}</h3>
+    </div>
+
+    <div class="grid grid-2 grid-3 wedding-subservices-grid">
+      {t.subservices.map((sub, index) => {
+        const images = [
+          "/assets/images/card-oficiante-bodas.png",
+          "/assets/images/project_visa_consultation.png", // fallback or specific
+          "/assets/images/card-notaria.png",
+          "/assets/images/project_visa_documents.png",
+          "/assets/images/oficiante-anillos.png",
+          "/assets/images/oficiante-firma.png"
+        ];
+        const subImage = images[index] || "/assets/images/card-oficiante-bodas.png";
+        return (
+          <div class="subservice-card card">
+            <div class="subservice-image-wrapper">
+              <img src={subImage} alt={sub.title} class="subservice-image" loading="lazy" />
+              <span class="subservice-number">0{index + 1}</span>
+            </div>
+            <div class="subservice-content">
+              <h4>{sub.title}</h4>
+              <p>{sub.desc}</p>
+              <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="subservice-link">
+                {t.requestBtn}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="link-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Why Patricia Lojan -->
+  <div class="wedding-benefits-section card glass-card">
+    <h3 class="custom-subtitle text-center">{t.whyTitle}</h3>
+    
+    <div class="grid grid-2 benefits-grid">
+      {t.benefits.map((benefit) => (
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <span>{benefit}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Process Steps -->
+  <div class="wedding-process-section">
+    <h3 class="custom-subtitle text-center" style="margin-bottom: 35px;">{t.processTitle}</h3>
+    
+    <div class="process-timeline">
+      {t.steps.map((step, index) => (
+        <div class="process-step-item">
+          <div class="step-badge">{index + 1}</div>
+          <div class="step-card card">
+            <h4>{step.title}</h4>
+            <p>{step.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Required Documents Checklist -->
+  <div class="wedding-docs-section card glass-card">
+    <div class="docs-header">
+      <h3 class="custom-subtitle">{t.docsTitle}</h3>
+      <p>{t.docsText}</p>
+    </div>
+
+    <div class="docs-grid">
+      {t.docItems.map((item) => (
+        <div class="doc-checklist-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="bullet-checkbox"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><polyline points="9 11 12 14 22 4"></polyline></svg>
+          <span>{item}</span>
+        </div>
+      ))}
+    </div>
+    
+    <p class="docs-notice-text">
+      <strong>{t.docsNotice.split(':')[0]}:</strong>{t.docsNotice.split(':')[1]}
+    </p>
+  </div>
+
+  <!-- visual gallery section -->
+  <div class="wedding-gallery-box">
+    <h3 class="custom-subtitle text-center" style="margin-bottom: 35px;">{t.galleryTitle}</h3>
+    
+    <div class="grid grid-3 gallery-grid">
+      {t.gallery.map((item) => (
+        <div class="gallery-photo-card card">
+          <div class="gallery-photo-wrapper">
+            <img src={item.img} alt={item.alt} class="gallery-photo" loading="lazy" />
+          </div>
+          <p class="gallery-caption">{item.alt}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- FAQs Accordion -->
+  <div class="wedding-faq-section card glass-card">
+    <h3 class="custom-subtitle text-center" style="margin-bottom: 35px;">{t.faqTitle}</h3>
+    
+    <div class="faq-accordion-box">
+      {t.faqs.map((faq) => (
+        <details class="faq-item" name="wedding-faq-group">
+          <summary class="faq-question">
+            <span>{faq.q}</span>
+            <span class="faq-icon-wrapper">
+              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  <!-- Final CTA Panel -->
+  <div class="wedding-final-cta card glass-card text-center">
+    <h3>{t.finalCtaTitle}</h3>
+    <p>{t.finalCtaText}</p>
+    
+    <div class="cta-actions">
+      <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-large">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="btn-icon"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.333 4.982L2 22l5.202-1.362a9.927 9.927 0 0 0 4.81 1.238h.005c5.507 0 9.99-4.478 9.99-9.984C22.007 6.478 17.518 2 12.012 2zm6.09 14.415c-.25.703-1.47 1.28-2.01 1.37-.48.08-.94.09-2.93-.73a11.83 11.83 0 0 1-5.11-4.49c-.77-1.04-1.23-2.26-1.23-3.51 0-1.42.75-2.11 1.02-2.38.21-.21.46-.26.65-.26h.46c.15 0 .35.01.5.38.17.41.6 1.48.65 1.58.05.11.09.23.01.38-.08.15-.15.25-.26.38-.11.13-.23.29-.33.39-.11.11-.23.23-.1.46.26.46.86 1.47 1.63 2.15.99.88 1.83 1.15 2.09 1.28.26.13.41.11.56-.05.15-.16.65-.75.82-1.01.17-.26.35-.22.59-.13.24.09 1.54.73 1.8.86.26.13.43.2.5.31.06.11.06.66-.19 1.36z"></path></svg>
+        {t.whatsappCta}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .wedding-officiant-explainer {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .wedding-intro-section {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .wedding-section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+  }
+
+  .wedding-section-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .wedding-accreditation-box {
+    padding: 20px;
+    background: rgba(197, 160, 89, 0.06); /* Soft gold tint */
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    border-radius: 8px;
+    width: 100%;
+  }
+
+  .accreditation-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold-color);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .accreditation-icon {
+    flex-shrink: 0;
+  }
+
+  .wedding-accreditation-box p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Subservices Cards */
+  .wedding-subservices-grid {
+    gap: 25px;
+    margin-top: 25px;
+  }
+
+  .subservice-card {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    height: 100%;
+  }
+
+  .subservice-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(var(--accent-color-rgb), 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .subservice-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: var(--primary-dark);
+  }
+
+  .subservice-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+  }
+
+  .subservice-card:hover .subservice-image {
+    transform: scale(1.05);
+  }
+
+  .subservice-number {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.25);
+    line-height: 1;
+    z-index: 2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .subservice-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+  }
+
+  .subservice-card h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .subservice-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .subservice-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--gold-color);
+    text-decoration: none;
+    margin-top: auto;
+    width: fit-content;
+    transition: transform var(--transition-normal);
+  }
+
+  .subservice-link:hover {
+    color: var(--gold-dark);
+  }
+
+  .subservice-link:hover .link-arrow {
+    transform: translateX(4px);
+  }
+
+  .link-arrow {
+    transition: transform var(--transition-normal);
+  }
+
+  /* Benefits Grid */
+  .benefits-grid {
+    gap: 20px;
+    margin-top: 25px;
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+  }
+
+  .benefit-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #e8fbee;
+    color: #2cba59;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .custom-subtitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+
+  /* Timeline */
+  .process-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .process-step-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .step-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px rgba(11, 34, 64, 0.1);
+  }
+
+  .step-card {
+    padding: 24px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .step-card h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+  }
+
+  .step-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Docs grid */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  @media (min-width: 640px) {
+    .docs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .doc-checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+  }
+
+  .bullet-checkbox {
+    color: var(--gold-color);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .docs-notice-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-light);
+    padding-top: 15px;
+    margin-top: 10px;
+  }
+
+  /* Gallery Grid */
+  .gallery-grid {
+    gap: 20px;
+  }
+
+  .gallery-photo-card {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gallery-photo-wrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .gallery-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+  }
+
+  .gallery-photo-card:hover .gallery-photo {
+    transform: scale(1.05);
+  }
+
+  .gallery-caption {
+    font-size: 0.9rem;
+    padding: 15px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+    background: #fdfdfd;
+    border-top: 1px solid var(--border-light);
+    font-weight: 500;
+  }
+
+  /* FAQ Accordion */
+  .faq-accordion-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .faq-item {
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    background: #ffffff;
+    transition: border-color var(--transition-normal);
+  }
+
+  .faq-item[open] {
+    border-color: var(--primary-light);
+  }
+
+  .faq-question {
+    padding: 18px 24px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-normal);
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+    color: var(--gold-color);
+  }
+
+  .faq-chevron {
+    color: var(--text-muted);
+    transition: transform var(--transition-normal), color var(--transition-normal);
+  }
+
+  .faq-answer {
+    padding: 0 24px 20px 24px;
+    border-top: 1px dashed var(--border-light);
+    background: rgba(11, 34, 64, 0.01);
+  }
+
+  .faq-answer p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 20px 0 0 0;
+  }
+
+  /* Final CTA Panel */
+  .wedding-final-cta {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    border-color: rgba(var(--accent-color-rgb), 0.1);
+  }
+
+  .wedding-final-cta h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+  }
+
+  .wedding-final-cta p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 600px;
+  }
+
+  .wedding-final-cta .cta-actions {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+</style>

@@ -1,0 +1,217 @@
+---
+const { lang = 'es' } = Astro.props;
+
+const content = {
+  es: {
+    assetsTitle: "Protección de Activos Empresariales",
+    assetsText: "Registrar una LLC o Corporación es el primer paso de tu negocio, pero proteger sus operaciones es igual de crítico. Trabajamos con aseguradoras de primer nivel especializadas en blindar negocios de todos los tamaños en New Jersey contra reclamaciones, accidentes de empleados, incendios o pérdida de ingresos comerciales.",
+    partnersTitle: "Compañías Respaldadoras y Coberturas Especiales",
+    partnersText: "Colaboramos con firmas líderes con altas calificaciones de solvencia y especialización en diversos productos comerciales:",
+    ethosTitle: "ETHOS Life Insurance",
+    ethosDesc: "Expertos en estructurar seguros de vida comerciales para dueños de negocios y pólizas de persona clave (Key Person Insurance).",
+    ethosTag: "Estrategias Socios & Empleados",
+    corebridgeTitle: "Corebridge Financial",
+    corebridgeDesc: "Líderes en soluciones de jubilación grupal, planes de anualidades indexadas corporativas y protección patrimonial comercial.",
+    corebridgeTag: "Planes de Jubilación & Inversión",
+    augustarTitle: "AuguStar Life & Annuities",
+    augustarDesc: "Soluciones avanzadas de acúmulo de capital corporativo, seguros de vida universales y planificación de sucesión empresarial.",
+    augustarTag: "Sucesión Comercial & Anualidades",
+    howItHelpsTitle: "¿Cómo ayuda esta cobertura a tu negocio?",
+    benefit1: "Protección de Local y Equipos: Te resguarda en caso de robo, fuego o daños naturales a tus oficinas o bodegas.",
+    benefit2: "Compensación al Trabajador: Cumple con las leyes de NJ pagando gastos médicos a tus empleados si se accidentan trabajando.",
+    benefit3: "Responsabilidad Profesional (Errores y Omisiones): Protege a consultores, contratistas y asesores ante errores en su servicio.",
+    benefit4: "Póliza BOP Combinada: Ahorra agrupando propiedad comercial y responsabilidad civil en un solo contrato."
+  },
+  en: {
+    assetsTitle: "Business Asset Protection",
+    assetsText: "Registering an LLC or Corporation is the first step for your business, but protecting its operations is just as critical. We work with top-tier insurers specializing in shielding businesses of all sizes in New Jersey against claims, employee accidents, fires, or loss of business income.",
+    partnersTitle: "Backing Companies & Special Coverages",
+    partnersText: "We collaborate with leading firms with high credit ratings and specialization in various commercial products:",
+    ethosTitle: "ETHOS Life Insurance",
+    ethosDesc: "Experts in structuring commercial life insurance for business owners and key person policies (Key Person Insurance).",
+    ethosTag: "Partners & Employees Strategies",
+    corebridgeTitle: "Corebridge Financial",
+    corebridgeDesc: "Leaders in group retirement solutions, corporate fixed indexed annuity plans, and commercial wealth protection.",
+    corebridgeTag: "Retirement Plans & Investment",
+    augustarTitle: "AuguStar Life & Annuities",
+    augustarDesc: "Advanced corporate capital accumulation solutions, universal life insurance, and business succession planning.",
+    augustarTag: "Business Succession & Annuities",
+    howItHelpsTitle: "How Does This Coverage Help Your Business?",
+    benefit1: "Property and Equipment Protection: Safeguards you in case of theft, fire, or natural damage to your offices or warehouses.",
+    benefit2: "Workers' Compensation: Complies with NJ laws by paying medical expenses for your employees if they are injured on the job.",
+    benefit3: "Professional Liability (Errors & Omissions): Protects consultants, contractors, and advisors against errors in their service.",
+    benefit4: "Combined BOP Policy: Save by bundling commercial property and general liability into a single contract."
+  },
+  pt: {
+    assetsTitle: "Proteção de Ativos Empresariais",
+    assetsText: "Registrar uma LLC ou Corporação é o primeiro passo para o seu negócio, mas proteger suas operações é igualmente crítico. Trabalhamos com seguradoras de alto nível especializadas em blindar empresas de todos os tamanhos em Nova Jersey contra processos, acidentes de trabalho, incêndios ou interrupção de receitas comerciais.",
+    partnersTitle: "Seguradoras Parceiras e Coberturas Especiais",
+    partnersText: "Colaboramos com marcas líderes com altas classificações de solidez financeira e especialização em diversos produtos comerciais:",
+    ethosTitle: "ETHOS Life Insurance",
+    ethosDesc: "Especialistas em estruturar seguros de vida comerciais para proprietários de negócios e apólices de pessoa-chave (Key Person Insurance).",
+    ethosTag: "Estratégias para Sócios & Empregados",
+    corebridgeTitle: "Corebridge Financial",
+    corebridgeDesc: "Líderes em soluções de aposentadoria em grupo, planos de anuidades indexadas corporativas e proteção patrimonial empresarial.",
+    corebridgeTag: "Planos de Aposentadoria & Investimento",
+    augustarTitle: "AuguStar Life & Annuities",
+    augustarDesc: "Soluções avançadas de acúmulo de capital corporativo, seguros de vida universais e planejamento de sucessão empresarial.",
+    augustarTag: "Sucessão Empresarial & Anuidades",
+    howItHelpsTitle: "Como essa cobertura ajuda a sua empresa?",
+    benefit1: "Proteção de Imóvel e Equipamentos: Protege em caso de roubo, incêndio ou danos climáticos em seus escritórios ou depósitos.",
+    benefit2: "Indenização Trabalhista (Workers' Comp): Cumpre a legislação de NJ cobrindo despesas médicas dos seus colaboradores em caso de acidentes de trabalho.",
+    benefit3: "Responsabilidade Profissional (Erros e Omissões): Protege consultores, prestadores de serviços e assessores contra falhas na execução do serviço.",
+    benefit4: "Apólice BOP Combinada: Economize reunindo a propriedade comercial e a responsabilidade civil geral em um único contrato."
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<div class="custom-commercial-details">
+  <h3 class="custom-subtitle">{t.assetsTitle}</h3>
+  <p>{t.assetsText}</p>
+
+  <h3 class="custom-subtitle">{t.partnersTitle}</h3>
+  <p>{t.partnersText}</p>
+
+  <div class="commercial-partners-grid">
+    <div class="commercial-partner-card card" id="ethos">
+      <div class="partner-logo-box ethos-logo">ETHOS</div>
+      <h4>{t.ethosTitle}</h4>
+      <p>{t.ethosDesc}</p>
+      <span class="utility-tag">{t.ethosTag}</span>
+    </div>
+
+    <div class="commercial-partner-card card" id="corebridge">
+      <div class="partner-logo-box corebridge-logo">Corebridge</div>
+      <h4>{t.corebridgeTitle}</h4>
+      <p>{t.corebridgeDesc}</p>
+      <span class="utility-tag">{t.corebridgeTag}</span>
+    </div>
+
+    <div class="commercial-partner-card card" id="augustar">
+      <div class="partner-logo-box augustar-logo">AuguStar</div>
+      <h4>{t.augustarTitle}</h4>
+      <p>{t.augustarDesc}</p>
+      <span class="utility-tag">{t.augustarTag}</span>
+    </div>
+  </div>
+
+  <h3 class="custom-subtitle">{t.howItHelpsTitle}</h3>
+  <ul class="custom-checklist">
+    <li><strong>{t.benefit1.split(':')[0]}:</strong> {t.benefit1.split(':').slice(1).join(':')}</li>
+    <li><strong>{t.benefit2.split(':')[0]}:</strong> {t.benefit2.split(':').slice(1).join(':')}</li>
+    <li><strong>{t.benefit3.split(':')[0]}:</strong> {t.benefit3.split(':').slice(1).join(':')}</li>
+    <li><strong>{t.benefit4.split(':')[0]}:</strong> {t.benefit4.split(':').slice(1).join(':')}</li>
+  </ul>
+</div>
+
+<style>
+  .custom-subtitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    margin-top: 28px;
+  }
+
+  .custom-subtitle:first-of-type {
+    margin-top: 0;
+  }
+
+  .commercial-partners-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin: 32px 0;
+  }
+
+  @media (min-width: 640px) {
+    .commercial-partners-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .commercial-partners-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .commercial-partner-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+  }
+
+  .partner-logo-box {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+    padding: 6px 16px;
+    border-radius: var(--border-radius-sm);
+    background: var(--bg-secondary);
+    width: 100%;
+    text-align: center;
+    border: 1px dashed var(--border-color);
+  }
+
+  .ethos-logo { color: #4F46E5; }
+  .corebridge-logo { color: #0284C7; }
+  .augustar-logo { color: #D4AF37; }
+
+  .commercial-partner-card h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+  }
+
+  .commercial-partner-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    flex-grow: 1;
+  }
+
+  .utility-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: var(--accent-light);
+    color: var(--accent-color);
+    padding: 4px 10px;
+    border-radius: 9999px;
+  }
+
+  .custom-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    padding-left: 0;
+  }
+
+  .custom-checklist li {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .custom-checklist li::before {
+    content: '✓';
+    color: var(--gold-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+</style>

@@ -1,0 +1,398 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { locations } from '../../data/locations';
+import { translations } from '../../data/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'pt' } }
+  ];
+}
+
+const { lang = 'es' } = Astro.params;
+const t = translations[lang] || translations.es;
+
+const countyKeys = {
+  es: [
+    { name: "Condado de Essex", search: "Condado de Essex", desc: "Servicios financieros y notaría presencial en nuestra oficina principal en Newark y zonas aledañas." },
+    { name: "Condado de Hudson", search: "Condado de Hudson", desc: "Notarizaciones móviles rápidas, formularios de inmigración y seguros en Harrison, Jersey City y alrededores." },
+    { name: "Condado de Union", search: "Condado de Union", desc: "Preparación de impuestos, seguros médicos Obamacare y seguros comerciales locales en Elizabeth." },
+    { name: "Condado de Passaic", search: "Condado de Passaic", desc: "Planificación de retiro, contabilidad mensual y reparación de crédito en Paterson y Clifton." }
+  ],
+  en: [
+    { name: "Essex County", search: "Essex County", desc: "Financial services and in-person notary at our main office in Newark and surrounding areas." },
+    { name: "Hudson County", search: "Hudson County", desc: "Quick mobile notarizations, immigration forms, and insurance in Harrison, Jersey City, and nearby." },
+    { name: "Union County", search: "Union County", desc: "Tax preparation, Obamacare health insurance, and local commercial insurance in Elizabeth." },
+    { name: "Passaic County", search: "Passaic County", desc: "Retirement planning, monthly bookkeeping, and credit repair in Paterson and Clifton." }
+  ],
+  pt: [
+    { name: "Condado de Essex", search: "Condado de Essex", desc: "Serviços financeiros e cartório presencial em nosso escritório principal em Newark e arredores." },
+    { name: "Condado de Hudson", search: "Condado de Hudson", desc: "Notações móveis rápidas, formulários de imigração e seguros em Harrison, Jersey City e arredores." },
+    { name: "Condado de Union", search: "Condado de Union", desc: "Preparação de impostos, seguro de saúde Obamacare e seguros comerciais locais em Elizabeth." },
+    { name: "Condado de Passaic", search: "Condado de Passaic", desc: "Planejamento de aposentadoria, contabilidade mensal e recuperação de crédito em Paterson e Clifton." }
+  ]
+};
+
+const countyGroups = (countyKeys[lang] || countyKeys.es).map(group => ({
+  name: group.name,
+  description: group.desc,
+  cities: (locations[lang] || locations.es).filter(l => l.county === group.search)
+}));
+
+const ctaTitle = {
+  es: "¿Estás fuera de la zona de Newark?",
+  en: "Are you outside the Newark area?",
+  pt: "Está fora da região de Newark?"
+};
+
+const ctaDesc = {
+  es: "No te preocupes. Escríbenos por WhatsApp con tu código postal en New Jersey y te confirmaremos disponibilidad de notaría móvil o coordinaremos una videollamada.",
+  en: "Don't worry. Write to us on WhatsApp with your New Jersey zip code and we will confirm the availability of a mobile notary or coordinate a video call.",
+  pt: "Não se preocupe. Escreva-nos pelo WhatsApp com o seu código postal em Nova Jersey e confirmaremos a disponibilidade de um tabelião móvel ou coordenaremos uma videochamada."
+};
+
+const ctaBtn = {
+  es: "Consultar cobertura en WhatsApp",
+  en: "Check coverage on WhatsApp",
+  pt: "Verificar cobertura no WhatsApp"
+};
+---
+
+<MainLayout
+  title={`${t.areas.heroTitle} | Newark | New Jersey | Enterprises Capital LLC`}
+  description={t.areas.heroDesc}
+  lang={lang}
+>
+  <!-- Area Hero -->
+  <section class="areas-hero">
+    <div class="container text-center">
+      <span class="badge badge-gold">{t.areas.badgeCoverage}</span>
+      <h1 class="areas-hero-title">{t.areas.heroTitle}</h1>
+      <p class="areas-hero-desc">
+        {t.areas.heroDesc}
+      </p>
+    </div>
+  </section>
+
+  <!-- Service Locations Details -->
+  <section class="section">
+    <div class="container grid grid-2 map-and-content">
+      
+      <!-- Content Column -->
+      <div class="coverage-content">
+        <span class="badge badge-primary">{t.areas.badgeCoverage}</span>
+        <h2 class="coverage-title">{t.areas.coverageTitle}</h2>
+        <p class="coverage-desc">
+          {t.areas.coverageDesc}
+        </p>
+        
+        <div class="location-group">
+          <h3>{t.areas.countiesTitle}</h3>
+          <p class="location-group-intro">{t.areas.countiesSubtitle}</p>
+          
+          <div class="counties-grid">
+            {countyGroups.map(county => (
+              <div class="county-card card">
+                <h4 class="county-name">{county.name}</h4>
+                <p class="county-desc">{county.description}</p>
+                <div class="county-cities-links">
+                  {county.cities.map(city => (
+                    <a href={`/${lang}/areas-de-servicio/${city.slug}`} class="city-link">
+                      <span>{city.name}</span>
+                      {city.slug === "newark" && <span class="badge-main-office">{t.areas.countyOfficeBadge}</span>}
+                      <span class="link-arrow-small">&rarr;</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="modality-box card">
+          <h3>{t.areas.modalitiesTitle}</h3>
+          <div class="modalities">
+            <div class="modality-item">
+              <strong>{t.areas.modality1Title}</strong>
+              <p>{t.areas.modality1Text}</p>
+            </div>
+            <div class="modality-item">
+              <strong>{t.areas.modality2Title}</strong>
+              <p>{t.areas.modality2Text}</p>
+            </div>
+            <div class="modality-item">
+              <strong>{t.areas.modality3Title}</strong>
+              <p>{t.areas.modality3Text}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Column -->
+      <div class="map-col">
+        <div class="map-wrapper card">
+          <div class="map-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <strong>{t.areas.mapTitle}</strong>
+            <span>20 Bloomfield Place, Newark, NJ 07104</span>
+          </div>
+          
+          <!-- Embedded Google Maps - Newark, NJ -->
+          <iframe 
+            src="https://maps.google.com/maps?q=20+Bloomfield+Place,+Newark,+NJ+07104&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            width="100%" 
+            height="380" 
+            style="border:0; display:block;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title={t.areas.mapIframeTitle}
+          ></iframe>
+          
+          <div class="map-footer text-center">
+            <a href="https://maps.google.com/?q=20+Bloomfield+Place,+Newark,+NJ+07104" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-large">
+              {t.areas.mapDirections}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Coverage Action -->
+  <section class="section section-secondary text-center">
+    <div class="container cta-mini">
+      <h2>{ctaTitle[lang] || ctaTitle.es}</h2>
+      <p>
+        {ctaDesc[lang] || ctaDesc.es}
+      </p>
+      <div class="cta-mini-actions">
+        <a href="https://wa.me/19738203353" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-large">
+          {ctaBtn[lang] || ctaBtn.es}
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Hero */
+  .areas-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    padding: 160px 0 80px 0;
+    color: var(--text-white);
+  }
+
+  .areas-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    color: var(--text-white);
+  }
+
+  .areas-hero-desc {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* Grid details */
+  .map-and-content {
+    align-items: flex-start;
+    gap: 60px;
+  }
+
+  .coverage-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .coverage-desc {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  .location-group {
+    margin-bottom: 30px;
+  }
+
+  .location-group h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .location-group-intro {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .counties-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  @media (min-width: 640px) {
+    .counties-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .county-card {
+    padding: 24px !important;
+    border-color: rgba(11, 34, 64, 0.08);
+  }
+
+  .county-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 6px;
+  }
+
+  .county-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  .county-cities-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .city-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  .city-link:hover {
+    transform: translateX(4px);
+    border-color: var(--accent-color);
+    background-color: var(--bg-primary);
+  }
+
+  .badge-main-office {
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: #fef3c7;
+    color: #d97706;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 8px;
+    margin-right: auto;
+  }
+
+  .link-arrow-small {
+    color: var(--text-muted);
+    transition: transform var(--transition-fast), color var(--transition-fast);
+  }
+
+  .city-link:hover .link-arrow-small {
+    transform: translateX(2px);
+    color: var(--accent-color);
+  }
+
+  .modality-box {
+    padding: 24px;
+    border-color: rgba(11, 34, 64, 0.1);
+  }
+
+  .modality-box h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+
+  .modalities {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .modality-item strong {
+    font-size: 0.95rem;
+    color: var(--primary-color);
+  }
+
+  .modality-item p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Map column */
+  .map-col {
+    position: sticky;
+    top: 120px;
+  }
+
+  .map-wrapper {
+    padding: 0;
+    overflow: hidden;
+    border-color: var(--border-color);
+  }
+
+  .map-header {
+    background: var(--primary-color);
+    color: var(--text-white);
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+
+  .map-header svg {
+    color: var(--gold-color);
+  }
+
+  .map-footer {
+    padding: 20px;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .map-footer .btn {
+    width: 100%;
+  }
+
+  /* CTA Mini */
+  .cta-mini h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .cta-mini p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+  }
+
+  .cta-mini-actions {
+    display: flex;
+    justify-content: center;
+  }
+</style>

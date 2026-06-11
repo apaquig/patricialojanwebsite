@@ -1,0 +1,170 @@
+---
+// BlogCard.astro
+import { translations } from '../data/translations.js';
+
+interface Props {
+  slug: string;
+  title: string;
+  category: string;
+  date: string;
+  readTime: string;
+  excerpt: string;
+  image: string;
+  objectPosition?: string;
+  lang?: 'es' | 'en' | 'pt';
+}
+
+const { slug, title, category, date, readTime, excerpt, image, objectPosition = 'center center', lang = 'es' } = Astro.props;
+
+const t = translations[lang] || translations.es;
+
+const readTimeLabels = {
+  es: "de lectura",
+  en: "read",
+  pt: "de leitura"
+};
+const readTimeLabel = readTimeLabels[lang] || readTimeLabels.es;
+---
+
+<article class="blog-card card">
+  <div class="blog-cover">
+    <img src={image} alt={title} class="blog-cover-img" style={`object-position: ${objectPosition};`} />
+    <div class="blog-cover-overlay"></div>
+    <span class="blog-category-badge">{category}</span>
+  </div>
+  
+  <div class="blog-meta">
+    <span class="blog-date">{date}</span>
+    <span class="meta-separator">&bull;</span>
+    <span class="blog-readtime">{readTime} {readTimeLabel}</span>
+  </div>
+
+  <h3 class="blog-title">
+    <a href={`/${lang}/blog/${slug}`}>{title}</a>
+  </h3>
+  
+  <p class="blog-excerpt">{excerpt}</p>
+
+  <a href={`/${lang}/blog/${slug}`} class="blog-more-link">
+    {t.blog.readMore}
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="link-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+  </a>
+</article>
+
+<style>
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .blog-cover {
+    height: 200px; /* Slightly taller for better image framing */
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .blog-cover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+  }
+
+  .blog-card:hover .blog-cover-img {
+    transform: scale(1.05);
+  }
+
+  .blog-cover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(11, 34, 64, 0.05) 0%, rgba(11, 34, 64, 0.35) 100%);
+    z-index: 1;
+  }
+
+  .blog-category-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--primary-color);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    padding: 24px 24px 0 24px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .meta-separator {
+    margin: 0 8px;
+    color: var(--border-color);
+  }
+
+  .blog-title {
+    padding: 12px 24px 8px 24px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .blog-title a {
+    color: var(--primary-color);
+  }
+
+  .blog-title a:hover {
+    color: var(--accent-color);
+  }
+
+  .blog-excerpt {
+    padding: 0 24px 24px 24px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    flex-grow: 1;
+  }
+
+  .blog-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px 24px 24px;
+    font-family: var(--font-family-heading);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: auto;
+  }
+
+  .blog-more-link:hover {
+    color: var(--accent-color);
+  }
+
+  .link-arrow {
+    transition: transform var(--transition-fast);
+  }
+
+  .blog-more-link:hover .link-arrow {
+    transform: translateX(4px);
+  }
+</style>

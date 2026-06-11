@@ -1,0 +1,301 @@
+---
+// Hero.astro
+import { translations } from '../data/translations.js';
+
+interface Props {
+  lang?: 'es' | 'en' | 'pt';
+}
+
+const { lang = 'es' } = Astro.props;
+const t = translations[lang] || translations.es;
+const h = t.hero;
+---
+
+<section class="hero-section">
+  <!-- Video Background (Supports looping MP4 or fallback abstract gradient) -->
+  <div class="hero-video-wrapper">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="container hero-container">
+    <div class="hero-content-col fade-in">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        {h.badge}
+      </div>
+      <h1 class="hero-title" set:html={h.title}>
+      </h1>
+      <p class="hero-subtitle">
+        {h.subtitle}
+      </p>
+      
+      <div class="hero-actions">
+        <a href={`/${lang}/contacto`} class="btn btn-accent btn-large">
+          {h.ctaBook}
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="btn-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-image-col fade-in">
+      <div class="hero-image-wrapper">
+        <div class="hero-image-glow"></div>
+        <img src="/assets/images/patricia-lojan-cutout.png" alt="Patricia Lojan" class="hero-profile-img" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: calc(var(--header-height) + 40px);
+    padding-bottom: 80px;
+    background-color: var(--primary-dark);
+    overflow: hidden;
+  }
+
+
+
+  /* Video Background */
+  .hero-video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Dark Navy Blue and Tech blue Gradient Overlay */
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba(26, 86, 219, 0.2) 0%, rgba(11, 34, 64, 0.96) 60%, var(--primary-dark) 100%);
+    z-index: 2;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-container {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-container {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+  }
+
+  .hero-content-col {
+    width: 100%;
+  }
+
+  /* Badge styling */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 9999px;
+    color: var(--text-white);
+    font-family: var(--font-family-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
+    backdrop-filter: blur(4px);
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--gold-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--gold-color);
+    animation: pulse 2s infinite;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-white);
+    line-height: 1.2;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 3.5rem;
+    }
+  }
+
+  .highlight-text {
+    position: relative;
+    color: var(--gold-color);
+    /* Subtle glow for tech feel */
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  @media (min-width: 768px) {
+    .hero-subtitle {
+      font-size: 1.3rem;
+    }
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .hero-btn-secondary {
+    color: var(--text-white);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .hero-btn-secondary:hover {
+    border-color: var(--text-white);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-icon {
+    margin-left: 8px;
+    transition: transform var(--transition-fast);
+  }
+
+  .btn-accent:hover .btn-icon {
+    transform: translateX(4px);
+  }
+
+  .btn-whatsapp .btn-icon {
+    margin-left: 0;
+    margin-right: 8px;
+  }
+
+  /* Image Column styling */
+  .hero-image-col {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .hero-image-col {
+      margin-top: 0;
+      justify-content: center;
+      align-self: start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-image-col {
+      margin-top: 0;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-image-col {
+      margin-top: 0;
+    }
+  }
+
+  .hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 410px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  @media (min-width: 768px) {
+    .hero-image-wrapper {
+      max-width: 550px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-image-wrapper {
+      max-width: 650px;
+    }
+  }
+
+  .hero-profile-img {
+    width: 100%;
+    height: auto;
+    max-height: 670px;
+    object-fit: contain;
+    z-index: 2;
+    position: relative;
+    /* Soft blend mask for bottom of blazer */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+    filter: drop-shadow(0 15px 30px rgba(11, 34, 64, 0.4));
+  }
+
+  .hero-image-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.16) 0%, rgba(26, 86, 219, 0.12) 45%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(12px);
+  }
+
+  @media (max-width: 640px) {
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .hero-actions .btn {
+      width: 100%;
+    }
+  }
+</style>
